@@ -16,24 +16,35 @@
 #  limitations under the License.
 
 import sys
-import json
+import cmd
 from optparse import OptionParser
 
+class SeedShell(cmd.Cmd):
+    prompt = '>> '
+    intro = "SEED command processor"
+
+    def do_greet(self, line):
+        print "hello"
+
+    def do_exit(self, line):
+        return True
+
 def main():  
-    usage = "usage: %prog [options] arg"  
-    parser = OptionParser(usage)  
-    parser.add_option("-f", "--file", dest="filename",  
-                      help="read data from FILENAME")  
-    parser.add_option("-v", "--verbose",  
-                      action="store_true", dest="verbose")  
-    parser.add_option("-q", "--quiet",  
-                      action="store_false", dest="verbose")  
+    usage = "usage: %prog [options] arg"
+    parser = OptionParser(usage)
+    parser.add_option("-d", "--daemon", action="store", dest="daemonport",
+                      default="10001",
+                      help="start daemon on specified port.")
+    parser.add_option("-s", "--shell", action="store", dest="shellhost",
+                      help="start shell on specified [host:port].")
 
     (options, args) = parser.parse_args()  
-    if len(args) != 1:  
-        parser.error("incorrect number of arguments")  
-    if options.verbose:  
-        print "reading %s..." % options.filename  
-  
+
+    if options.shellhost:
+        print "connecting to host: %s..." % options.shellhost
+        SeedShell().cmdloop()
+    else:
+        print "starting daemon on port: %s..." % options.daemonport
+
 if __name__ == "__main__":  
     main()
