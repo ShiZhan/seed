@@ -4,9 +4,9 @@ SEED
 *concept*
 ---------
 
-Storage of Extemporal Ensemble Device
+Storage of **Extemporal Ensemble Device**
 
-Organize commodity storage devices to build a loose-coupled system, which features dynamic metadata manager and data storage nodes.
+Organize commodity storage devices with minimum effort/spend to build a loose-coupled system, which features dynamic metadata manager and data storage nodes.
 
 *design*
 --------
