@@ -6,12 +6,19 @@ SEED
 
 Storage of **Extemporal Ensemble Device**
 
-Organize commodity storage devices with minimum effort/spend to build a loose-coupled system, which features dynamic metadata manager and data storage nodes.
+Organize commodity storage devices with minimum effort/spend to build a loose-coupled system, which features dynamic metadata-manager/storage-server/client nodes, and fast deployment.
 
 *design*
 --------
 
-All modules and roles in one excutable.
+All modules in one excutable, the depenencies are listed in requirements_.
+
+_`requirements`
+---------------
+
+* tornado_ web server
+
+.. _tornado: http://www.tornadoweb.org/
 
 *related work*
 --------------

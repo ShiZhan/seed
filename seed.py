@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #coding=utf-8
-
+#
 #  Copyright 2012 Shi.Zhan
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,12 +25,12 @@ def main():
 
   usage = "usage: %prog [options] arg"
   parser = OptionParser(usage)
-
+  # the default option is 'daemon', more options must be explicitly given.
   parser.add_option("-d", "--daemon", action="store", dest="daemonport",
                     default="10001",
-                    help="start daemon on specified port.")
+                    help="start daemon on specified port")
   parser.add_option("-s", "--shell", action="store", dest="shellhost",
-                    help="start shell on specified [host:port].")
+                    help="start shell on specified [host:port]")
 
   (options, args) = parser.parse_args()
 
@@ -41,9 +41,7 @@ def main():
       print "connecting to host: %s..." % options.shellhost
 
       # run the shell with host specified
-      shell = SeedShell()
-      shell.host = options.shellhost
-      shell.cmdloop()
+      SeedShell(options.shellhost).cmdloop()
     else:
       # host invalid, do nothing
       print "invalid parameter: '%s', must be 'IP:port' as '127.0.0.1:10001'." % options.shellhost
