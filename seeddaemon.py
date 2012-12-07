@@ -1,7 +1,9 @@
 #coding=utf-8
+"""SeedDaemon -- Daemon program for SEED storage, 
+client, name server and data server all-in-one. """
 
 class SeedDaemon(object):
-    """docstring for SeedDaemon"""
+    """SeedDaemon"""
     def __init__(self, arg):
         super(SeedDaemon, self).__init__()
         self.arg = arg
