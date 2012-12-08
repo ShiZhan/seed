@@ -6,7 +6,7 @@ SEED
 
 Storage of **Extemporal Ensemble Device**
 
-Organize commodity storage devices with minimum effort/spend to build a loose-coupled system, which features dynamic metadata-manager/storage-server/client nodes, and fast deployment.
+Organize commodity storage devices with minimum cost to build a loose-coupled system, which features dynamic metadata-manager/storage-server/client nodes, and fast deployment.
 
 *design*
 --------
@@ -34,4 +34,4 @@ Various Distributed File Systems: GFS_, HDFS_, Ceph_, `Tahoe-LAFS`_, `Storage@ho
 Author
 ======
 
-`ShiZhan <http://shizhan.github.com/>`_
+`ShiZhan <http://shizhan.github.com/>`_ (c) 2012

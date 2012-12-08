@@ -6,9 +6,9 @@ import cmd
 class SeedShell(cmd.Cmd):
     """SeedShell"""
     intro = "SEED command processor"
-    doc_header = 'command usage'
+    doc_header = 'available commands'
     misc_header = 'misc help'
-    undoc_header = 'available commands'
+    undoc_header = 'getting help'
     ruler = '-'
 
     def __init__(self, shellhost):
@@ -16,9 +16,25 @@ class SeedShell(cmd.Cmd):
         self.host = shellhost
         self.prompt = '[' + shellhost + ']>> '
 
-    def do_greet(self, line):
-        """greet testing command"""
-        print "hello", line
+    def do_ls(self, line):
+        """list objects"""
+        print "objects: ", line
+
+    def do_put(self, line):
+        """put objects"""
+        print "objects: ", line
+
+    def do_get(self, line):
+        """get objects"""
+        print "objects: ", line
+
+    def do_post(self, line):
+        """post object"""
+        print "objects: ", line
+
+    def do_delete(self, line):
+        """delete objects"""
+        print "objects: ", line
 
     def do_version(self, line):
         """show SEED version"""

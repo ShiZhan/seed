@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-"""SEED -- A storage system based on "Extemporal Ensemble" Devices
+"""SEED -- A storage system based on 'Extemporal Ensemble' Devices
 
 Program aims at minimum deployment effort and dependencies, easy to manage
 and scale. """
@@ -67,11 +67,12 @@ def main():
     else:
         # check valid port
         if re.search('^\d+$', options.daemonport):
-            if int(options.daemonport) > 1000 and int(options.daemonport) < 32767:
+            daemonport = int(options.daemonport)
+            if daemonport > 1000 and daemonport < 32767:
                 print 'starting daemon on port: %s...' % options.daemonport
 
                 # run the daemon on specified port
-                SeedDaemon(int(options.daemonport)).run()
+                SeedDaemon(daemonport).run()
             else:
                 print "suggested port num between 1000 and 32767."
         else:
