@@ -21,18 +21,17 @@ and scale. """
 #  limitations under the License.
 
 import re
-from optparse import OptionParser  # in python >= 2.7, use argparser instead.
+import argparse
 from seedshell import SeedShell
 from seeddaemon import SeedDaemon
 
 def main():
     """SEED main program"""
 
-    usage = 'usage: %prog [options] arg'
-    parser = OptionParser(usage)
+    parser = argparse.ArgumentParser()
 
     # the default option is 'daemon', more options must be explicitly given.
-    parser.add_option(
+    parser.add_argument(
         '-d', '--daemon',
         action='store',
         dest='daemonport',
@@ -40,14 +39,19 @@ def main():
         help='start daemon on specified port',
         )
 
-    parser.add_option(
+    parser.add_argument(
         '-s', '--shell',
         action='store',
         dest='shellhost',
         help='start shell on specified [host:port]'
         )
 
-    (options, args) = parser.parse_args()
+    parser.add_argument(
+        '-v', '--version',
+        action='version',
+        version='%(prog)s 1.0')
+
+    options = parser.parse_args()
 
     if options.shellhost:
         # check valid IP
