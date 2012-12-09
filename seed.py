@@ -68,13 +68,13 @@ def main():
         # check valid port
         if re.search('^\d+$', options.daemonport):
             daemonport = int(options.daemonport)
-            if daemonport > 1000 and daemonport < 32767:
+            if daemonport > 1000 and daemonport < 65535:
                 print 'starting daemon on port: %s...' % options.daemonport
 
                 # run the daemon on specified port
                 SeedDaemon(daemonport).run()
             else:
-                print "suggested port num between 1000 and 32767."
+                print "suggested port num between 1000 and 65535."
         else:
             print "port is number."
 

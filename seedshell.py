@@ -2,6 +2,7 @@
 """SeedShell -- Shell program for SEED storage, 
 for accessing storage manually, through command line interface. """
 import cmd
+import tornado.simple_httpclient
 
 class SeedShell(cmd.Cmd):
     """SeedShell"""
@@ -13,7 +14,7 @@ class SeedShell(cmd.Cmd):
 
     def __init__(self, shellhost):
         cmd.Cmd.__init__(self)
-        self.host = shellhost
+        self.host = 'http://' + shellhost + '/'
         self.prompt = '[' + shellhost + ']>> '
 
     def do_ls(self, line):
