@@ -2,7 +2,10 @@
 """SeedShell -- Shell program for SEED storage, 
 for accessing storage manually, through command line interface. """
 import cmd
-from tornado import httpclient
+import os
+from tornado.httpclient import HTTPClient
+# For running HTTP requests in cmd, rather than AsyncHTTPClient,
+# sync method seems to be better.
 
 class SeedShell(cmd.Cmd):
     """SeedShell"""
@@ -16,14 +19,22 @@ class SeedShell(cmd.Cmd):
         cmd.Cmd.__init__(self)
         self.host = 'http://' + shellhost + '/'
         self.prompt = '[' + shellhost + ']>> '
-        self.http_client = httpclient.HTTPClient()
+        self.http_client = HTTPClient()
 
     def __del__(self):
         self.http_client.close()
         cmd.Cmd.__del__(self)
 
+    def do_shell(self, line):
+        """Run a shell command"""
+        print "running shell command:", line
+        # beware of the decode/encode pair, since 'output' may vary between OSes.
+        output = os.popen(line).read()
+        print output
+
     def do_ls(self, line):
         """list objects"""
+        # for long help, implement 'def help_greet(self):' instead.
         print "objects: ", line
 
     def do_put(self, line):
@@ -43,7 +54,7 @@ class SeedShell(cmd.Cmd):
         print "objects: ", line
 
     def do_version(self, line):
-        """show SEED version"""
+        """show SEED remote server version"""
         print "WIP"
 
     def do_status(self, line):
