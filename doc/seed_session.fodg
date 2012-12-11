@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <office:document xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0" xmlns:number="urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0" xmlns:presentation="urn:oasis:names:tc:opendocument:xmlns:presentation:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:chart="urn:oasis:names:tc:opendocument:xmlns:chart:1.0" xmlns:dr3d="urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0" xmlns:math="http://www.w3.org/1998/Math/MathML" xmlns:form="urn:oasis:names:tc:opendocument:xmlns:form:1.0" xmlns:script="urn:oasis:names:tc:opendocument:xmlns:script:1.0" xmlns:config="urn:oasis:names:tc:opendocument:xmlns:config:1.0" xmlns:ooo="http://openoffice.org/2004/office" xmlns:ooow="http://openoffice.org/2004/writer" xmlns:oooc="http://openoffice.org/2004/calc" xmlns:dom="http://www.w3.org/2001/xml-events" xmlns:xforms="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:smil="urn:oasis:names:tc:opendocument:xmlns:smil-compatible:1.0" xmlns:anim="urn:oasis:names:tc:opendocument:xmlns:animation:1.0" xmlns:rpt="http://openoffice.org/2005/report" xmlns:of="urn:oasis:names:tc:opendocument:xmlns:of:1.2" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:grddl="http://www.w3.org/2003/g/data-view#" xmlns:officeooo="http://openoffice.org/2009/office" xmlns:tableooo="http://openoffice.org/2009/table" xmlns:drawooo="http://openoffice.org/2010/draw" xmlns:calcext="urn:org:documentfoundation:names:experimental:calc:xmlns:calcext:1.0" xmlns:field="urn:openoffice:names:experimental:ooo-ms-interop:xmlns:field:1.0" xmlns:formx="urn:openoffice:names:experimental:ooxml-odf-interop:xmlns:form:1.0" xmlns:css3t="http://www.w3.org/TR/css3-text/" office:version="1.2" office:mimetype="application/vnd.oasis.opendocument.graphics">
- <office:meta><meta:creation-date>2012-12-07T14:55:53.30</meta:creation-date><dc:date>2012-12-07T15:22:21.41</dc:date><meta:editing-duration>PT6M56S</meta:editing-duration><meta:editing-cycles>3</meta:editing-cycles><meta:generator>LibreOffice/3.6$Windows_x86 LibreOffice_project/e29a214-2bbed72-0621de6-a97528c-8f066d</meta:generator><meta:document-statistic meta:object-count="38"/></office:meta>
+ <office:meta><meta:creation-date>2012-12-07T14:55:53.30</meta:creation-date><dc:date>2012-12-07T15:22:21.41</dc:date><meta:editing-duration>PT6M56S</meta:editing-duration><meta:editing-cycles>3</meta:editing-cycles><meta:generator>LibreOffice/3.6$Windows_x86 LibreOffice_project/e29a214-2bbed72-0621de6-a97528c-8f066d</meta:generator><meta:document-statistic meta:object-count="40"/></office:meta>
  <office:settings>
   <config:config-item-set config:name="ooo:view-settings">
    <config:config-item config:name="VisibleAreaTop" config:type="int">-301</config:config-item>
    <config:config-item config:name="VisibleAreaLeft" config:type="int">-3848</config:config-item>
-   <config:config-item config:name="VisibleAreaWidth" config:type="int">37433</config:config-item>
-   <config:config-item config:name="VisibleAreaHeight" config:type="int">21648</config:config-item>
+   <config:config-item config:name="VisibleAreaWidth" config:type="int">37432</config:config-item>
+   <config:config-item config:name="VisibleAreaHeight" config:type="int">21647</config:config-item>
    <config:config-item-map-indexed config:name="Views">
     <config:config-item-map-entry>
      <config:config-item config:name="ViewId" config:type="string">view1</config:config-item>
@@ -261,13 +261,13 @@
    <style:graphic-properties draw:stroke="none" svg:stroke-color="#000000" draw:fill="none" draw:fill-color="#ffffff" fo:min-height="0.75cm" draw:shadow="hidden"/>
   </style:style>
   <style:style style:name="gr8" style:family="graphic" style:parent-style-name="standard">
-   <style:graphic-properties draw:stroke="none" svg:stroke-color="#000000" draw:fill="none" draw:fill-color="#ffffff" fo:min-height="0.35cm" draw:shadow="hidden"/>
+   <style:graphic-properties draw:stroke="none" svg:stroke-color="#000000" draw:fill="none" draw:fill-color="#ffffff" fo:min-height="0.944cm" draw:shadow="hidden"/>
   </style:style>
   <style:style style:name="gr9" style:family="graphic" style:parent-style-name="standard">
    <style:graphic-properties svg:stroke-opacity="40%" draw:opacity="40%" draw:textarea-horizontal-align="justify" draw:textarea-vertical-align="middle" draw:auto-grow-height="false" draw:shadow-opacity="40%"/>
   </style:style>
   <style:style style:name="gr10" style:family="graphic" style:parent-style-name="standard">
-   <style:graphic-properties draw:stroke="none" svg:stroke-color="#000000" draw:fill="none" draw:fill-color="#ffffff" fo:min-height="0.619cm"/>
+   <style:graphic-properties draw:stroke="none" svg:stroke-color="#000000" draw:fill="none" draw:fill-color="#ffffff" fo:min-height="1.237cm"/>
   </style:style>
   <style:style style:name="gr11" style:family="graphic" style:parent-style-name="standard">
    <style:graphic-properties draw:stroke="none" svg:stroke-color="#000000" draw:fill="none" draw:fill-color="#ffffff" fo:min-height="0.75cm"/>
@@ -295,36 +295,25 @@
   </style:style>
   <style:style style:name="P5" style:family="paragraph">
    <style:paragraph-properties fo:text-align="center"/>
-   <style:text-properties fo:font-size="15pt" style:font-size-asian="15pt" style:font-size-complex="15pt"/>
+   <style:text-properties fo:font-family="Consolas" style:font-family-generic="swiss" style:font-pitch="variable" fo:font-size="15pt" style:font-size-asian="15pt" style:font-size-complex="15pt"/>
   </style:style>
   <style:style style:name="P6" style:family="paragraph">
-   <style:paragraph-properties fo:text-align="center"/>
-   <style:text-properties fo:font-family="Consolas" style:font-family-generic="swiss" style:font-pitch="variable" fo:font-size="15pt" style:font-size-asian="15pt" style:font-size-complex="15pt"/>
+   <style:text-properties fo:font-family="Consolas" style:font-family-generic="swiss" style:font-pitch="variable" fo:font-style="italic" fo:font-weight="bold" style:font-style-asian="italic" style:font-weight-asian="bold" style:font-style-complex="italic" style:font-weight-complex="bold"/>
   </style:style>
   <style:style style:name="P7" style:family="paragraph">
    <style:paragraph-properties fo:text-align="center"/>
-   <style:text-properties fo:font-family="Consolas" style:font-family-generic="swiss" style:font-pitch="variable" fo:font-size="15pt" style:font-size-asian="15pt" style:font-size-complex="15pt"/>
+   <style:text-properties fo:color="#b3b3b3" fo:font-family="Consolas" style:font-family-generic="swiss" style:font-pitch="variable" fo:font-size="15pt" style:font-size-asian="15pt" style:font-size-complex="15pt"/>
   </style:style>
   <style:style style:name="P8" style:family="paragraph">
-   <style:text-properties fo:font-family="Consolas" style:font-family-generic="swiss" style:font-pitch="variable" fo:font-style="italic" fo:font-weight="bold" style:font-style-asian="italic" style:font-weight-asian="bold" style:font-style-complex="italic" style:font-weight-complex="bold"/>
+   <style:text-properties fo:font-family="Consolas" style:font-family-generic="swiss" style:font-pitch="variable" fo:font-size="15pt" fo:font-style="italic" fo:font-weight="normal" style:font-family-asian="文泉驿等宽微米黑" style:font-style-name-asian="标准" style:font-family-generic-asian="swiss" style:font-pitch-asian="variable" style:font-size-asian="15pt" style:font-style-asian="italic" style:font-weight-asian="normal" style:font-size-complex="15pt" style:font-style-complex="italic" style:font-weight-complex="normal"/>
   </style:style>
   <style:style style:name="P9" style:family="paragraph">
    <style:paragraph-properties fo:text-align="center"/>
-   <style:text-properties fo:font-family="Consolas" style:font-family-generic="swiss" style:font-pitch="variable" fo:font-size="15pt" style:font-size-asian="15pt" style:font-size-complex="15pt"/>
+   <style:text-properties fo:font-family="Consolas" style:font-family-generic="swiss" style:font-pitch="variable"/>
   </style:style>
   <style:style style:name="P10" style:family="paragraph">
    <style:paragraph-properties fo:text-align="center"/>
-   <style:text-properties fo:color="#b3b3b3" fo:font-family="Consolas" style:font-family-generic="swiss" style:font-pitch="variable" fo:font-size="15pt" style:font-size-asian="15pt" style:font-size-complex="15pt"/>
-  </style:style>
-  <style:style style:name="P11" style:family="paragraph">
-   <style:text-properties fo:font-weight="normal" style:font-weight-asian="normal" style:font-weight-complex="normal"/>
-  </style:style>
-  <style:style style:name="P12" style:family="paragraph">
-   <style:text-properties fo:font-family="Consolas" style:font-family-generic="swiss" style:font-pitch="variable" fo:font-size="15pt" fo:font-style="italic" fo:font-weight="normal" style:font-family-asian="文泉驿等宽微米黑" style:font-style-name-asian="标准" style:font-family-generic-asian="swiss" style:font-pitch-asian="variable" style:font-size-asian="15pt" style:font-style-asian="italic" style:font-weight-asian="normal" style:font-size-complex="15pt" style:font-style-complex="italic" style:font-weight-complex="normal"/>
-  </style:style>
-  <style:style style:name="P13" style:family="paragraph">
-   <style:paragraph-properties fo:text-align="center"/>
-   <style:text-properties fo:font-family="Consolas" style:font-family-generic="swiss" style:font-pitch="variable"/>
+   <style:text-properties fo:font-family="Consolas" style:font-family-generic="swiss" style:font-pitch="variable" fo:font-size="15pt" style:font-size-asian="15pt" style:font-size-complex="15pt"/>
   </style:style>
   <style:style style:name="T1" style:family="text">
    <style:text-properties fo:font-family="Consolas" style:font-family-generic="modern" style:font-pitch="fixed" fo:font-size="18pt" style:font-family-asian="文泉驿等宽微米黑" style:font-style-name-asian="标准" style:font-family-generic-asian="swiss" style:font-pitch-asian="variable" style:font-size-asian="18pt" style:font-size-complex="18pt"/>
@@ -339,28 +328,22 @@
    <style:text-properties fo:font-family="Consolas" style:font-family-generic="swiss" style:font-pitch="variable" fo:font-size="15pt" style:font-size-asian="15pt" style:font-size-complex="15pt"/>
   </style:style>
   <style:style style:name="T5" style:family="text">
-   <style:text-properties fo:font-family="Consolas" style:font-family-generic="swiss" style:font-pitch="variable" fo:font-size="15pt" style:font-size-asian="15pt" style:font-size-complex="15pt"/>
-  </style:style>
-  <style:style style:name="T6" style:family="text">
-   <style:text-properties fo:font-family="Consolas" style:font-style-name="Regular" style:font-family-generic="swiss" style:font-pitch="fixed" fo:font-weight="bold" style:font-family-asian="Consolas" style:font-style-name-asian="Regular" style:font-family-generic-asian="swiss" style:font-pitch-asian="fixed" style:font-weight-asian="bold" style:font-family-complex="Consolas" style:font-style-name-complex="Regular" style:font-family-generic-complex="swiss" style:font-pitch-complex="fixed" style:font-weight-complex="bold"/>
-  </style:style>
-  <style:style style:name="T7" style:family="text">
    <style:text-properties fo:font-family="Consolas" style:font-style-name="Regular" style:font-family-generic="swiss" style:font-pitch="fixed" fo:font-style="italic" fo:font-weight="bold" style:font-family-asian="Consolas" style:font-style-name-asian="Regular" style:font-family-generic-asian="swiss" style:font-pitch-asian="fixed" style:font-style-asian="italic" style:font-weight-asian="bold" style:font-family-complex="Consolas" style:font-style-name-complex="Regular" style:font-family-generic-complex="swiss" style:font-pitch-complex="fixed" style:font-style-complex="italic" style:font-weight-complex="bold"/>
   </style:style>
+  <style:style style:name="T6" style:family="text">
+   <style:text-properties style:text-position="sub 58%" fo:font-family="Consolas" style:font-style-name="Regular" style:font-family-generic="swiss" style:font-pitch="fixed" fo:font-size="18pt" fo:font-style="italic" fo:font-weight="bold" style:font-family-asian="Consolas" style:font-style-name-asian="Regular" style:font-family-generic-asian="swiss" style:font-pitch-asian="fixed" style:font-size-asian="18pt" style:font-style-asian="italic" style:font-weight-asian="bold" style:font-family-complex="Consolas" style:font-style-name-complex="Regular" style:font-family-generic-complex="swiss" style:font-pitch-complex="fixed" style:font-size-complex="18pt" style:font-style-complex="italic" style:font-weight-complex="bold"/>
+  </style:style>
+  <style:style style:name="T7" style:family="text">
+   <style:text-properties fo:color="#b3b3b3" fo:font-family="Consolas" style:font-family-generic="swiss" style:font-pitch="variable" fo:font-size="15pt" style:font-size-asian="15pt" style:font-size-complex="15pt"/>
+  </style:style>
   <style:style style:name="T8" style:family="text">
-   <style:text-properties style:text-position="sub 58%" fo:font-family="Consolas" style:font-style-name="Regular" style:font-family-generic="swiss" style:font-pitch="fixed" fo:font-size="18pt" fo:font-style="italic" fo:font-weight="bold" style:font-family-asian="Consolas" style:font-style-name-asian="Regular" style:font-family-generic-asian="swiss" style:font-pitch-asian="fixed" style:font-size-asian="18pt" style:font-style-asian="italic" style:font-weight-asian="bold" style:font-family-complex="Consolas" style:font-style-name-complex="Regular" style:font-family-generic-complex="swiss" style:font-pitch-complex="fixed" style:font-size-complex="18pt" style:font-style-complex="italic" style:font-weight-complex="bold"/>
-  </style:style>
-  <style:style style:name="T9" style:family="text">
-   <style:text-properties fo:font-family="Consolas" style:font-family-generic="swiss" style:font-pitch="variable" fo:font-size="15pt" style:font-size-asian="15pt" style:font-size-complex="15pt"/>
-  </style:style>
-  <style:style style:name="T10" style:family="text">
-   <style:text-properties style:text-position="sub 58%" fo:font-family="Consolas" style:font-style-name="Regular" style:font-family-generic="swiss" style:font-pitch="fixed" fo:font-size="18pt" fo:font-style="italic" fo:font-weight="bold" style:font-family-asian="Consolas" style:font-style-name-asian="Regular" style:font-family-generic-asian="swiss" style:font-pitch-asian="fixed" style:font-size-asian="18pt" style:font-style-asian="italic" style:font-weight-asian="bold" style:font-family-complex="Consolas" style:font-style-name-complex="Regular" style:font-family-generic-complex="swiss" style:font-pitch-complex="fixed" style:font-size-complex="18pt" style:font-style-complex="italic" style:font-weight-complex="bold"/>
-  </style:style>
-  <style:style style:name="T11" style:family="text">
    <style:text-properties fo:font-family="Consolas" style:font-family-generic="swiss" style:font-pitch="variable" fo:font-size="15pt" fo:font-style="italic" fo:font-weight="normal" style:font-family-asian="文泉驿等宽微米黑" style:font-style-name-asian="标准" style:font-family-generic-asian="swiss" style:font-pitch-asian="variable" style:font-size-asian="15pt" style:font-style-asian="italic" style:font-weight-asian="normal" style:font-size-complex="15pt" style:font-style-complex="italic" style:font-weight-complex="normal"/>
   </style:style>
-  <style:style style:name="T12" style:family="text">
+  <style:style style:name="T9" style:family="text">
    <style:text-properties fo:font-family="Consolas" style:font-family-generic="swiss" style:font-pitch="variable"/>
+  </style:style>
+  <style:style style:name="T10" style:family="text">
+   <style:text-properties fo:font-family="Consolas" style:font-family-generic="swiss" style:font-pitch="variable" fo:font-size="15pt" style:font-size-asian="15pt" style:font-size-complex="15pt"/>
   </style:style>
   <text:list-style style:name="L1">
    <text:list-level-style-bullet text:level="1" text:bullet-char="●">
@@ -418,7 +401,7 @@
  <office:body>
   <office:drawing>
    <draw:page draw:name="page1" draw:style-name="dp2" draw:master-page-name="默认">
-    <draw:custom-shape draw:style-name="gr1" draw:text-style-name="P2" xml:id="id1" draw:id="id1" draw:layer="controls" svg:width="8cm" svg:height="3cm" svg:x="11cm" svg:y="2cm">
+    <draw:custom-shape draw:style-name="gr1" draw:text-style-name="P2" xml:id="id1" draw:id="id1" draw:layer="controls" svg:width="8cm" svg:height="3.3cm" svg:x="11cm" svg:y="2cm">
      <text:p text:style-name="P1"><text:span text:style-name="T1">Client</text:span></text:p>
      <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:type="rectangle" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
     </draw:custom-shape>
@@ -450,22 +433,22 @@
      <text:p text:style-name="P1"><text:span text:style-name="T3">Storage</text:span></text:p>
      <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:glue-points="10800 0 0 10800 10800 19890 21600 10800" draw:text-areas="0 3600 18600 18009" draw:type="flowchart-multidocument" draw:enhanced-path="M 0 3600 L 1500 3600 1500 1800 3000 1800 3000 0 21600 0 21600 14409 20100 14409 20100 16209 18600 16209 18600 18009 C 11610 17893 11472 20839 4833 21528 2450 21113 1591 20781 0 20300 Z N M 1500 3600 F L 18600 3600 18600 16209 N M 3000 1800 F L 20100 1800 20100 14409 N"/>
     </draw:custom-shape>
-    <draw:custom-shape draw:style-name="gr2" draw:text-style-name="P6" draw:layer="controls" svg:width="3.6cm" svg:height="0.8cm" svg:x="11.3cm" svg:y="3.5cm">
-     <text:p text:style-name="P5"><text:span text:style-name="T4">REST API</text:span></text:p>
+    <draw:custom-shape draw:style-name="gr2" draw:text-style-name="P5" draw:layer="controls" svg:width="3.1cm" svg:height="1cm" svg:x="11.6cm" svg:y="3cm">
+     <text:p text:style-name="P1"><text:span text:style-name="T4">REST API</text:span></text:p>
      <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:text-areas="2540 0 19060 21600" draw:type="flowchart-predefined-process" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 Z N M 2540 0 L 2540 21600 N M 19060 0 L 19060 21600 N"/>
     </draw:custom-shape>
-    <draw:custom-shape draw:style-name="gr2" draw:text-style-name="P6" draw:layer="controls" svg:width="4.3cm" svg:height="0.8cm" svg:x="23.2cm" svg:y="10.9cm">
+    <draw:custom-shape draw:style-name="gr2" draw:text-style-name="P5" draw:layer="controls" svg:width="4.3cm" svg:height="0.8cm" svg:x="23.2cm" svg:y="10.9cm">
      <text:p text:style-name="P1"><text:span text:style-name="T4">Replication</text:span></text:p>
      <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:text-areas="4230 4230 21600 21600" draw:type="flowchart-internal-storage" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 Z N M 4230 0 L 4230 21600 N M 0 4230 L 21600 4230 N"/>
     </draw:custom-shape>
-    <draw:custom-shape draw:style-name="gr2" draw:text-style-name="P6" draw:layer="controls" svg:width="4.3cm" svg:height="0.8cm" svg:x="6.2cm" svg:y="10.7cm">
+    <draw:custom-shape draw:style-name="gr2" draw:text-style-name="P5" draw:layer="controls" svg:width="4.3cm" svg:height="0.8cm" svg:x="6.2cm" svg:y="10.4cm">
      <text:p text:style-name="P1"><text:span text:style-name="T4">Indexing</text:span></text:p>
      <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:text-areas="4230 4230 21600 21600" draw:type="flowchart-internal-storage" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 Z N M 4230 0 L 4230 21600 N M 0 4230 L 21600 4230 N"/>
     </draw:custom-shape>
-    <draw:connector draw:style-name="gr3" draw:text-style-name="P4" draw:layer="controls" draw:type="curve" svg:x1="19cm" svg:y1="3.5cm" svg:x2="23.5cm" svg:y2="8cm" draw:start-shape="id1" draw:start-glue-point="1" draw:end-shape="id2" draw:end-glue-point="0" svg:d="m19000 3500c3000 0 4500 1500 4500 4500">
+    <draw:connector draw:style-name="gr3" draw:text-style-name="P4" draw:layer="controls" draw:type="curve" svg:x1="19cm" svg:y1="3.65cm" svg:x2="23.5cm" svg:y2="8cm" draw:start-shape="id1" draw:start-glue-point="1" draw:end-shape="id2" draw:end-glue-point="0" svg:d="m19000 3650c3000 0 4500 1450 4500 4350">
      <text:p text:style-name="P1"><text:span text:style-name="T3">Data Access</text:span></text:p>
     </draw:connector>
-    <draw:connector draw:style-name="gr4" draw:text-style-name="P4" draw:layer="controls" draw:type="curve" svg:x1="11cm" svg:y1="3.5cm" svg:x2="6.5cm" svg:y2="8cm" draw:start-shape="id1" draw:start-glue-point="3" draw:end-shape="id3" svg:d="m11000 3500c-3000 0-4500 1500-4500 4500">
+    <draw:connector draw:style-name="gr4" draw:text-style-name="P4" draw:layer="controls" draw:type="curve" svg:x1="11cm" svg:y1="3.65cm" svg:x2="6.5cm" svg:y2="8cm" draw:start-shape="id1" draw:start-glue-point="3" draw:end-shape="id3" svg:d="m11000 3650c-3000 0-4500 1450-4500 4350">
      <text:p text:style-name="P1"><text:span text:style-name="T3">Metadata Query</text:span></text:p>
     </draw:connector>
     <draw:connector draw:style-name="gr5" draw:text-style-name="P4" draw:layer="controls" draw:type="curve" svg:x1="19cm" svg:y1="10cm" svg:x2="11cm" svg:y2="10cm" draw:start-shape="id2" draw:start-glue-point="3" draw:end-shape="id3" draw:end-glue-point="1" svg:d="m19000 10000h-8000">
@@ -490,7 +473,7 @@
      <text:p text:style-name="P1"><text:span text:style-name="T3">Storage</text:span></text:p>
      <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:glue-points="10800 0 0 10800 10800 19890 21600 10800" draw:text-areas="0 3600 18600 18009" draw:type="flowchart-multidocument" draw:enhanced-path="M 0 3600 L 1500 3600 1500 1800 3000 1800 3000 0 21600 0 21600 14409 20100 14409 20100 16209 18600 16209 18600 18009 C 11610 17893 11472 20839 4833 21528 2450 21113 1591 20781 0 20300 Z N M 1500 3600 F L 18600 3600 18600 16209 N M 3000 1800 F L 20100 1800 20100 14409 N"/>
     </draw:custom-shape>
-    <draw:custom-shape draw:style-name="gr2" draw:text-style-name="P6" draw:layer="controls" svg:width="4.3cm" svg:height="0.8cm" svg:x="6.2cm" svg:y="17.7cm">
+    <draw:custom-shape draw:style-name="gr2" draw:text-style-name="P5" draw:layer="controls" svg:width="4.3cm" svg:height="0.8cm" svg:x="6.2cm" svg:y="17.4cm">
      <text:p text:style-name="P1"><text:span text:style-name="T4">Indexing</text:span></text:p>
      <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:text-areas="4230 4230 21600 21600" draw:type="flowchart-internal-storage" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 Z N M 4230 0 L 4230 21600 N M 0 4230 L 21600 4230 N"/>
     </draw:custom-shape>
@@ -517,86 +500,94 @@
       <draw:handle draw:handle-position="?f7 $0" draw:handle-range-y-minimum="0" draw:handle-range-y-maximum="10800"/>
      </draw:enhanced-geometry>
     </draw:custom-shape>
-    <draw:custom-shape draw:style-name="gr2" draw:text-style-name="P6" draw:layer="controls" svg:width="4.3cm" svg:height="0.8cm" svg:x="23.2cm" svg:y="17.9cm">
+    <draw:custom-shape draw:style-name="gr2" draw:text-style-name="P5" draw:layer="controls" svg:width="4.3cm" svg:height="0.8cm" svg:x="23.2cm" svg:y="17.9cm">
      <text:p text:style-name="P1"><text:span text:style-name="T4">Replication</text:span></text:p>
      <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:text-areas="4230 4230 21600 21600" draw:type="flowchart-internal-storage" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 Z N M 4230 0 L 4230 21600 N M 0 4230 L 21600 4230 N"/>
     </draw:custom-shape>
-    <draw:custom-shape draw:style-name="gr2" draw:text-style-name="P7" draw:layer="controls" svg:width="3.6cm" svg:height="0.8cm" svg:x="15.1cm" svg:y="3.5cm">
-     <text:p text:style-name="P7"><text:span text:style-name="T5">Cache</text:span></text:p>
-     <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:text-areas="2540 0 19060 21600" draw:type="flowchart-predefined-process" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 Z N M 2540 0 L 2540 21600 N M 19060 0 L 19060 21600 N"/>
-    </draw:custom-shape>
-    <draw:frame draw:style-name="gr7" draw:text-style-name="P8" draw:layer="layout" svg:width="1cm" svg:height="1cm" svg:x="7cm" svg:y="3cm">
+    <draw:frame draw:style-name="gr7" draw:text-style-name="P6" draw:layer="layout" svg:width="1cm" svg:height="1cm" svg:x="7cm" svg:y="3cm">
      <draw:text-box>
-      <text:p text:style-name="P8"><text:span text:style-name="T6">1</text:span></text:p>
+      <text:p><text:span text:style-name="T5">1</text:span></text:p>
      </draw:text-box>
     </draw:frame>
-    <draw:frame draw:style-name="gr7" draw:text-style-name="P8" draw:layer="layout" svg:width="1cm" svg:height="1cm" svg:x="23cm" svg:y="3cm">
+    <draw:frame draw:style-name="gr7" draw:text-style-name="P6" draw:layer="layout" svg:width="1cm" svg:height="1cm" svg:x="23cm" svg:y="3cm">
      <draw:text-box>
-      <text:p text:style-name="P8"><text:span text:style-name="T7">2</text:span></text:p>
+      <text:p><text:span text:style-name="T5">2</text:span></text:p>
      </draw:text-box>
     </draw:frame>
-    <draw:frame draw:style-name="gr8" draw:text-style-name="P8" draw:layer="layout" svg:width="2cm" svg:height="1.194cm" svg:x="16cm" svg:y="8.806cm">
+    <draw:frame draw:style-name="gr8" draw:text-style-name="P6" draw:layer="layout" svg:width="2cm" svg:height="1.194cm" svg:x="16cm" svg:y="8.806cm">
      <draw:text-box>
-      <text:p text:style-name="P8"><text:span text:style-name="T7">3</text:span><text:span text:style-name="T8"> 1-1</text:span></text:p>
+      <text:p><text:span text:style-name="T5">3</text:span><text:span text:style-name="T6"> 1-1</text:span></text:p>
      </draw:text-box>
     </draw:frame>
-    <draw:custom-shape draw:style-name="gr2" draw:text-style-name="P6" draw:layer="controls" svg:width="4.3cm" svg:height="0.8cm" svg:x="23.2cm" svg:y="10cm">
-     <text:p text:style-name="P9"><text:span text:style-name="T9">striping</text:span></text:p>
+    <draw:custom-shape draw:style-name="gr2" draw:text-style-name="P5" draw:layer="controls" svg:width="4.3cm" svg:height="0.8cm" svg:x="23.2cm" svg:y="10cm">
+     <text:p text:style-name="P1"><text:span text:style-name="T4">striping</text:span></text:p>
      <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:text-areas="4230 4230 21600 21600" draw:type="flowchart-internal-storage" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 Z N M 4230 0 L 4230 21600 N M 0 4230 L 21600 4230 N"/>
     </draw:custom-shape>
-    <draw:custom-shape draw:style-name="gr2" draw:text-style-name="P6" draw:layer="controls" svg:width="4.3cm" svg:height="0.8cm" svg:x="23.2cm" svg:y="9.1cm">
-     <text:p text:style-name="P9"><text:span text:style-name="T9">queuing</text:span></text:p>
+    <draw:custom-shape draw:style-name="gr2" draw:text-style-name="P5" draw:layer="controls" svg:width="4.3cm" svg:height="0.8cm" svg:x="23.2cm" svg:y="9.1cm">
+     <text:p text:style-name="P1"><text:span text:style-name="T4">queuing</text:span></text:p>
      <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:text-areas="4230 4230 21600 21600" draw:type="flowchart-internal-storage" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 Z N M 4230 0 L 4230 21600 N M 0 4230 L 21600 4230 N"/>
     </draw:custom-shape>
-    <draw:custom-shape draw:style-name="gr9" draw:text-style-name="P10" draw:layer="controls" svg:width="4.3cm" svg:height="0.8cm" svg:x="23.2cm" svg:y="16.9cm">
-     <text:p text:style-name="P10"><text:span text:style-name="T9">striping</text:span></text:p>
+    <draw:custom-shape draw:style-name="gr9" draw:text-style-name="P7" draw:layer="controls" svg:width="4.3cm" svg:height="0.8cm" svg:x="23.2cm" svg:y="16.9cm">
+     <text:p text:style-name="P1"><text:span text:style-name="T7">striping</text:span></text:p>
      <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:text-areas="4230 4230 21600 21600" draw:type="flowchart-internal-storage" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 Z N M 4230 0 L 4230 21600 N M 0 4230 L 21600 4230 N"/>
     </draw:custom-shape>
-    <draw:custom-shape draw:style-name="gr9" draw:text-style-name="P10" draw:layer="controls" svg:width="4.3cm" svg:height="0.8cm" svg:x="23.2cm" svg:y="16cm">
-     <text:p text:style-name="P10"><text:span text:style-name="T9">queuing</text:span></text:p>
+    <draw:custom-shape draw:style-name="gr9" draw:text-style-name="P7" draw:layer="controls" svg:width="4.3cm" svg:height="0.8cm" svg:x="23.2cm" svg:y="16cm">
+     <text:p text:style-name="P1"><text:span text:style-name="T7">queuing</text:span></text:p>
      <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:text-areas="4230 4230 21600 21600" draw:type="flowchart-internal-storage" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 Z N M 4230 0 L 4230 21600 N M 0 4230 L 21600 4230 N"/>
     </draw:custom-shape>
-    <draw:frame draw:style-name="gr7" draw:text-style-name="P8" draw:layer="layout" svg:width="1cm" svg:height="1cm" svg:x="5cm" svg:y="12cm">
+    <draw:frame draw:style-name="gr7" draw:text-style-name="P6" draw:layer="layout" svg:width="1cm" svg:height="1cm" svg:x="5cm" svg:y="12cm">
      <draw:text-box>
-      <text:p text:style-name="P8"><text:span text:style-name="T7">4</text:span></text:p>
+      <text:p><text:span text:style-name="T5">4</text:span></text:p>
      </draw:text-box>
     </draw:frame>
-    <draw:frame draw:style-name="gr7" draw:text-style-name="P8" draw:layer="layout" svg:width="2cm" svg:height="1.194cm" svg:x="24cm" svg:y="12cm">
+    <draw:frame draw:style-name="gr8" draw:text-style-name="P6" draw:layer="layout" svg:width="2cm" svg:height="1.194cm" svg:x="24cm" svg:y="12cm">
      <draw:text-box>
-      <text:p text:style-name="P8"><text:span text:style-name="T7">3</text:span><text:span text:style-name="T10"> 2-1</text:span></text:p>
+      <text:p><text:span text:style-name="T5">3</text:span><text:span text:style-name="T6"> 2-1</text:span></text:p>
      </draw:text-box>
     </draw:frame>
-    <draw:frame draw:style-name="gr7" draw:text-style-name="P8" draw:layer="layout" svg:width="2cm" svg:height="1.194cm" svg:x="15cm" svg:y="16cm">
+    <draw:frame draw:style-name="gr8" draw:text-style-name="P6" draw:layer="layout" svg:width="2cm" svg:height="1.194cm" svg:x="15cm" svg:y="16cm">
      <draw:text-box>
-      <text:p text:style-name="P8"><text:span text:style-name="T7">3</text:span><text:span text:style-name="T10"> 2-2</text:span></text:p>
+      <text:p><text:span text:style-name="T5">3</text:span><text:span text:style-name="T6"> 2-2</text:span></text:p>
      </draw:text-box>
     </draw:frame>
-    <draw:frame draw:style-name="gr10" draw:text-style-name="P12" draw:layer="layout" svg:width="3.9cm" svg:height="1.487cm" svg:x="11cm" svg:y="8.214cm">
+    <draw:frame draw:style-name="gr10" draw:text-style-name="P8" draw:layer="layout" svg:width="3.9cm" svg:height="1.487cm" svg:x="11cm" svg:y="8.214cm">
      <draw:text-box>
-      <text:p text:style-name="P11"><text:span text:style-name="T11">In memory</text:span></text:p>
-      <text:p text:style-name="P11"><text:span text:style-name="T11">aggregation</text:span></text:p>
+      <text:p><text:span text:style-name="T8">In memory</text:span></text:p>
+      <text:p><text:span text:style-name="T8">aggregation</text:span></text:p>
      </draw:text-box>
     </draw:frame>
-    <draw:frame draw:style-name="gr11" draw:text-style-name="P12" draw:layer="layout" svg:width="6.1cm" svg:height="1cm" svg:x="6.6cm" svg:y="14cm">
+    <draw:frame draw:style-name="gr11" draw:text-style-name="P8" draw:layer="layout" svg:width="6.1cm" svg:height="1cm" svg:x="6.6cm" svg:y="14cm">
      <draw:text-box>
-      <text:p text:style-name="P11"><text:span text:style-name="T11">Chained memory copy</text:span></text:p>
+      <text:p><text:span text:style-name="T8">Chained memory copy</text:span></text:p>
      </draw:text-box>
     </draw:frame>
-    <draw:frame draw:style-name="gr11" draw:text-style-name="P12" draw:layer="layout" svg:width="6.1cm" svg:height="1cm" svg:x="17.4cm" svg:y="14cm">
+    <draw:frame draw:style-name="gr11" draw:text-style-name="P8" draw:layer="layout" svg:width="6.1cm" svg:height="1cm" svg:x="17.4cm" svg:y="14cm">
      <draw:text-box>
-      <text:p text:style-name="P11"><text:span text:style-name="T11">Chained memory copy</text:span></text:p>
+      <text:p><text:span text:style-name="T8">Chained memory copy</text:span></text:p>
      </draw:text-box>
     </draw:frame>
     <draw:connector draw:style-name="gr5" draw:text-style-name="P4" draw:layer="controls" draw:type="curve" svg:x1="6.5cm" svg:y1="12cm" svg:x2="6.5cm" svg:y2="15cm" draw:start-shape="id3" draw:end-shape="id5" svg:d="m6500 12000v3000">
      <text:p text:style-name="P1"><text:span text:style-name="T3">Metadata logging</text:span></text:p>
     </draw:connector>
-    <draw:custom-shape draw:style-name="gr12" draw:text-style-name="P13" draw:layer="controls" svg:width="9.9cm" svg:height="12.7cm" svg:x="1.7cm" svg:y="7cm">
-     <text:p text:style-name="P13"><text:span text:style-name="T12">len()=NS_CHAIN_LENGTH</text:span></text:p>
+    <draw:custom-shape draw:style-name="gr12" draw:text-style-name="P9" draw:layer="controls" svg:width="9.9cm" svg:height="12.7cm" svg:x="1.7cm" svg:y="7cm">
+     <text:p text:style-name="P1"><text:span text:style-name="T9">len()=NS_CHAIN_LENGTH</text:span></text:p>
      <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:type="rectangle" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
     </draw:custom-shape>
-    <draw:custom-shape draw:style-name="gr13" draw:text-style-name="P13" draw:layer="controls" svg:width="9.9cm" svg:height="12.7cm" svg:x="18.7cm" svg:y="7cm">
-     <text:p text:style-name="P1"><text:span text:style-name="T12">len()=REPLICA_LIMIT</text:span></text:p>
+    <draw:custom-shape draw:style-name="gr13" draw:text-style-name="P9" draw:layer="controls" svg:width="9.9cm" svg:height="12.7cm" svg:x="18.7cm" svg:y="7cm">
+     <text:p text:style-name="P1"><text:span text:style-name="T9">len()=REPLICA_LIMIT</text:span></text:p>
      <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:type="rectangle" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
+    </draw:custom-shape>
+    <draw:custom-shape draw:style-name="gr2" draw:text-style-name="P10" draw:layer="controls" svg:width="3.1cm" svg:height="1cm" svg:x="11.6cm" svg:y="4.1cm">
+     <text:p text:style-name="P10"><text:span text:style-name="T10">Cache</text:span></text:p>
+     <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:text-areas="4230 4230 21600 21600" draw:type="flowchart-internal-storage" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 Z N M 4230 0 L 4230 21600 N M 0 4230 L 21600 4230 N"/>
+    </draw:custom-shape>
+    <draw:custom-shape draw:style-name="gr2" draw:text-style-name="P5" draw:layer="controls" svg:width="4.3cm" svg:height="0.8cm" svg:x="6.2cm" svg:y="9.4cm">
+     <text:p text:style-name="P1"><text:span text:style-name="T4">Logging</text:span></text:p>
+     <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:text-areas="4230 4230 21600 21600" draw:type="flowchart-internal-storage" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 Z N M 4230 0 L 4230 21600 N M 0 4230 L 21600 4230 N"/>
+    </draw:custom-shape>
+    <draw:custom-shape draw:style-name="gr9" draw:text-style-name="P7" draw:layer="controls" svg:width="4.3cm" svg:height="0.8cm" svg:x="6.2cm" svg:y="16.4cm">
+     <text:p text:style-name="P1"><text:span text:style-name="T7">Logging</text:span></text:p>
+     <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:text-areas="4230 4230 21600 21600" draw:type="flowchart-internal-storage" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 Z N M 4230 0 L 4230 21600 N M 0 4230 L 21600 4230 N"/>
     </draw:custom-shape>
    </draw:page>
   </office:drawing>
