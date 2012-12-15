@@ -43,7 +43,11 @@ class SeedShell(cmd.Cmd):
 
     def do_get(self, line):
         """get objects"""
-        print "objects: ", line
+        try:
+            response = self.http_client.fetch(self.host)
+            print response.body
+        except httpclient.HTTPError, e:
+            print "Error:", e
 
     def do_post(self, line):
         """post object"""
