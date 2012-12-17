@@ -13,6 +13,8 @@ Organize commodity storage devices with minimum cost to build a loose-coupled sy
 
 All modules in one excutable, the depenencies are listed in requirements_.
 
+The interface is compatible with `Amazon S3`_.
+
 _`requirements`
 ---------------
 
@@ -30,6 +32,7 @@ Various Distributed File Systems: GFS_, HDFS_, Ceph_, `Tahoe-LAFS`_, `Storage@ho
 .. _Ceph: http://ceph.com/
 .. _`Tahoe-LAFS`: https://tahoe-lafs.org/trac/tahoe-lafs
 .. _`Storage@home`: http://cs.stanford.edu/people/beberg/Storage@home2007.pdf
+.. _`Amazon S3`: http://docs.amazonwebservices.com/AmazonS3/2006-03-01/dev/Introduction.html
 
 Author
 ======

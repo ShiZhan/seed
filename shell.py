@@ -3,24 +3,26 @@
 for accessing storage manually, through command line interface. """
 import cmd
 import os
-# from tornado.httpclient import HTTPClient
-# For running HTTP requests in cmd, rather than AsyncHTTPClient,
-# sync method seems better.
 import client
 
 class Shell(cmd.Cmd):
     """Seed.Shell"""
+    # cmd internal settings
     intro = "SEED command processor"
     doc_header = 'available commands'
     misc_header = 'misc help'
     undoc_header = 'getting help'
     ruler = '-'
 
+    # command parameters
+    parameters = []
+
     def __init__(self, server="127.0.0.1", port=10001):
         cmd.Cmd.__init__(self)
         self.prompt = '[' + server + ':' + str(port) + ']>> '
         self.connection = client.AWSAuthConnection(
             "", "", server=server, port=port, is_secure=False)
+        print self.connection, " connected\n", 
 
     def __del__(self):
         self.connection.__del__()
@@ -40,15 +42,31 @@ class Shell(cmd.Cmd):
 
     def do_put(self, line):
         """put objects"""
-        print "objects: ", line
+        parameters = line.split()
+        if len(parameters) < 3:
+            print "parameter not enough, need '[bucket] [key] [value]'."
+        else:
+            self.connection.put(parameters[0], parameters[1], parameters[2])
+            print "put %s=%s into %s" % (parameters[1], parameters[2], parameters[0])
 
     def do_get(self, line):
         """get objects"""
-        print "objects: ", line
+        parameters = line.split()
+        if len(parameters) < 2:
+            print "parameter not enough, need '[bucket] [key]'."
+        else:
+            item = self.connection.get(parameters[0], parameters[1])
+            print "get [bucket: %s], [key: %s]" % (parameters[0], parameters[1])
+            print item.body
 
-    def do_post(self, line):
-        """post object"""
-        print "objects: ", line
+    def do_create(self, line):
+        """create bucket"""
+        parameters = line.split()
+        if len(parameters) < 1:
+            print "parameter not enough, need '[bucket]'."
+        else:
+            self.connection.create_bucket(parameters[0])
+            print "bucket '%s' created" % parameters[0]
 
     def do_delete(self, line):
         """delete objects"""

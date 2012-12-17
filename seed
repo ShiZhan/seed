@@ -48,7 +48,7 @@ def main():
         action='store_true',
         dest='shell',
         default=False,
-        help='start command line interface on specified server and port'
+        help='start shell on specified server and port'
         )
 
     parser.add_argument(
@@ -68,6 +68,14 @@ def main():
         help='connect/listen to specified port',
         )
 
+    parser.add_argument(
+        '-r', '--root',
+        action='store',
+        dest='root',
+        default='/cygdrive/r/s3',
+        help='connect/listen to specified port',
+        )
+
     options = parser.parse_args()
 
     # valid server, port
@@ -78,18 +86,21 @@ def main():
             )
     valid_port = (options.port > 1000 and options.port < 65535)
     if not (valid_server and valid_port):
-        print "invalid parameter, \
-            should be as '-s 127.0.0.1 -p 10001 (between 1000 and 65535)'."
+        print "invalid parameter, "\
+              "should be as '-s 127.0.0.1 -p 10001 (between 1000 and 65535)'."
         exit(1)
 
     # which way to go ... start daemon or open shell?
     if options.shell:
         # run the shell @ host
-        Shell(options.server).cmdloop()
+        Shell(options.server, options.port).cmdloop()
 
     elif options.daemon:
         # run the daemon on specified root directory, bucket depth and port
-        Daemon("/cygdrive/r/s3", 0, options.port).run()
+        Daemon(options.root, 0, options.port).run()
+
+    else:
+        print "either start daemon (-D) or enter shell (-S)."
 
 
 if __name__ == '__main__':
