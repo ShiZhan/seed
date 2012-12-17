@@ -29,19 +29,16 @@ class SeedDaemon(object):
     def __init__(self, daemonport):
         super(SeedDaemon, self).__init__()
         self.port = daemonport
+        self.root_directory = "~/r/s3"
+        self.bucket_depth = 0
 
     def run(self):
-        """run server loop"""
+        """run server loop on the given port at the given path."""
         print 'Serving HTTP on 0.0.0.0 port %d ...' % self.port
-        start(self.port)
-
-def start(port, root_directory="/tmp/s3", bucket_depth=0):
-    """Starts the mock S3 server on the given port at the given path."""
-    application = S3Application(root_directory, bucket_depth)
-    http_server = httpserver.HTTPServer(application)
-    http_server.listen(port)
-    ioloop.IOLoop.instance().start()
-
+        application = S3Application(self.root_directory, self.bucket_depth)
+        http_server = httpserver.HTTPServer(application)
+        http_server.listen(self.port)
+        ioloop.IOLoop.instance().start()
 
 class S3Application(web.Application):
     """Implementation of an S3-like storage server based on local files.
