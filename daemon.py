@@ -1,5 +1,5 @@
 #coding=utf-8
-"""SeedDaemon -- Daemon program for SEED storage, 
+"""Seed.Daemon -- Daemon program for SEED storage, 
 client, name server and data server all-in-one.
 
 S3 client with this module:
@@ -24,30 +24,14 @@ from tornado import ioloop
 from tornado import web
 from tornado.util import bytes_type
 
-class SeedDaemon(object):
-    """SeedDaemon"""
-    def __init__(self, daemonport):
-        super(SeedDaemon, self).__init__()
-        self.port = daemonport
-        self.root_directory = "/cygdrive/r/s3"
-        self.bucket_depth = 0
-
-    def run(self):
-        """run server loop on the given port at the given path."""
-        print 'Serving HTTP on 0.0.0.0 port %d ...' % self.port
-        application = S3Application(self.root_directory, self.bucket_depth)
-        http_server = httpserver.HTTPServer(application)
-        http_server.listen(self.port)
-        ioloop.IOLoop.instance().start()
-
-class S3Application(web.Application):
-    """Implementation of an S3-like storage server based on local files.
+class Daemon(web.Application):
+    """Seed.Daemon -- Providing an S3-like storage server based on local files.
 
     If bucket depth is given, we break files up into multiple directories
     to prevent hitting file system limits for number of files in each
     directories. 1 means one level of directories, 2 means 2, etc.
     """
-    def __init__(self, root_directory, bucket_depth=0):
+    def __init__(self, root_directory, bucket_depth=0, port=10001):
         web.Application.__init__(self, [
             (r"/", RootHandler),
             (r"/([^/]+)/(.+)", ObjectHandler),
@@ -57,6 +41,14 @@ class S3Application(web.Application):
         if not os.path.exists(self.directory):
             os.makedirs(self.directory)
         self.bucket_depth = bucket_depth
+        self.port = port
+
+    def run(self):
+        """run server loop on the given port at the given path."""
+        print 'Serving HTTP on 0.0.0.0 port %d ...' % self.port
+        http_server = httpserver.HTTPServer(self)
+        http_server.listen(self.port)
+        ioloop.IOLoop.instance().start()
 
 
 class BaseRequestHandler(web.RequestHandler):
