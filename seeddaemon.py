@@ -29,7 +29,7 @@ class SeedDaemon(object):
     def __init__(self, daemonport):
         super(SeedDaemon, self).__init__()
         self.port = daemonport
-        self.root_directory = "~/r/s3"
+        self.root_directory = "/cygdrive/r/s3"
         self.bucket_depth = 0
 
     def run(self):
