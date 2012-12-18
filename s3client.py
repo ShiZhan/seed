@@ -1,5 +1,5 @@
-#coding=utf-8
-"""Seed.Clent -- Client API for SEED storage"""
+#!/usr/bin/env python
+
 #  This software code is made available "AS IS" without warranties of any
 #  kind.  You may copy, display, modify and redistribute the software
 #  code either by itself or as incorporated into your code; provided that
@@ -10,13 +10,11 @@
 #  affiliates.
 
 #  modified 2012 by jacob@nephics.com
-#  modified 2012 by g.shizhan.g@gmail.com
-#    for seed project <https://github.com/ShiZhan/seed>
 
 import base64
 import hmac
 import httplib
-import sha
+import hashlib
 import tempfile
 import time
 import urllib
@@ -26,8 +24,7 @@ import xml.sax
 from cStringIO import StringIO
 
 
-# DEFAULT_HOST = 's3.amazonaws.com'
-DEFAULT_HOST = '127.0.0.1'
+DEFAULT_HOST = 's3.amazonaws.com'
 PORTS_BY_SECURITY = {True: 443, False: 80}
 METADATA_PREFIX = 'x-amz-meta-'
 AMAZON_HEADER_PREFIX = 'x-amz-'
@@ -96,7 +93,7 @@ def canonical_string(method, bucket="", key="", query_args=None, headers=None,
 # access key, optionally urlencoding the result
 def encode(aws_secret_access_key, string, urlencode=False):
     b64_hmac = base64.encodestring(hmac.new(str(aws_secret_access_key), string,
-            sha).digest()).strip()
+            hashlib.sha1).digest()).strip()
     if urlencode:
         return urllib.quote_plus(b64_hmac)
     else:
