@@ -1,11 +1,10 @@
 #coding=utf-8
 """Seed.Shell -- Shell program for SEED storage, 
 for accessing storage manually, through command line interface. """
-import cmd
-import os
-import client
+from cmd import Cmd
+from client import AWSAuthConnection, CallingFormat
 
-class Shell(cmd.Cmd):
+class Shell(Cmd):
     """Seed.Shell"""
     # cmd internal settings
     intro = "SEED command processor"
@@ -18,15 +17,16 @@ class Shell(cmd.Cmd):
     parameters = []
 
     def __init__(self, server="127.0.0.1", port=10001):
-        cmd.Cmd.__init__(self)
+        Cmd.__init__(self)
         self.prompt = '[' + server + ':' + str(port) + ']>> '
-        self.connection = client.AWSAuthConnection(
-            "", "", server=server, port=port, is_secure=False)
+        self.connection = AWSAuthConnection(
+            "", "", server=server, port=port, is_secure=False,
+            calling_format=CallingFormat.PATH)
         print self.connection, " connected\n", 
 
     def __del__(self):
         self.connection.__del__()
-        cmd.Cmd.__del__(self)
+        Cmd.__del__(self)
 
     def do_shell(self, line):
         """Run a shell command"""

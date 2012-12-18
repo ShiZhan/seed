@@ -31,17 +31,17 @@ class Daemon(web.Application):
     to prevent hitting file system limits for number of files in each
     directories. 1 means one level of directories, 2 means 2, etc.
     """
-    def __init__(self, root_directory, bucket_depth=0, port=10001):
+    def __init__(self, port=10001, root_directory='/tmp/s3', bucket_depth=0):
         web.Application.__init__(self, [
             (r"/", RootHandler),
             (r"/([^/]+)/(.+)", ObjectHandler),
             (r"/([^/]+)/", BucketHandler),
         ])
+        self.port = port
         self.directory = os.path.abspath(root_directory)
         if not os.path.exists(self.directory):
             os.makedirs(self.directory)
         self.bucket_depth = bucket_depth
-        self.port = port
 
     def run(self):
         """run server loop on the given port at the given path."""
