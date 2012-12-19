@@ -2,8 +2,6 @@
 """Seed.Shell -- Shell program for SEED storage, 
 for accessing storage manually, through command line interface. """
 from cmd import Cmd
-# curl https://raw.github.com/nephics/python-s3/master/s3/S3.py -o s3client.py
-# patch sha to hashlib, change sha to hashlib.sha1.
 from s3client import AWSAuthConnection
 from s3client import CallingFormat
 

@@ -2,7 +2,6 @@
 """Seed.Daemon -- Daemon program for SEED storage, 
 client, name server and data server all-in-one.
 """
-# curl https://raw.github.com/facebook/tornado/master/demos/s3server/s3server.py -o s3server.py
 from s3server import S3Application
 from tornado import httpserver
 from tornado import ioloop

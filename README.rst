@@ -19,6 +19,19 @@ _`requirements`
 ---------------
 
 * tornado_ web server
+* s3 server
+
+::
+
+    curl https://raw.github.com/facebook/tornado/master/demos/s3server/s3server.py -o s3server.py
+
+* s3 client
+
+::
+
+    curl https://raw.github.com/nephics/python-s3/master/s3/S3.py -o s3client.py
+
+The hashlib module deprecates the separate md5 and sha modules, so the sha should be change to hashlib.sha1.
 
 .. _tornado: http://www.tornadoweb.org/
 
