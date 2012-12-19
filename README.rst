@@ -1,25 +1,29 @@
+
+
+.. -*- coding: utf-8 -*-
+
 SEED
 ====
 
-*concept*
----------
+Concept
+-------
 
 Storage of **Extemporal Ensemble Device**
 
 Organize commodity storage devices with minimum cost to build a loose-coupled system, which features dynamic metadata-manager/storage-server/client nodes, and fast deployment.
 
-*design*
---------
+Design
+------
 
-All modules in one excutable, the depenencies are listed in requirements_.
+All modules in one excutable, the depenencies are listed in Requirements_.
 
 The interface is compatible with `Amazon S3`_.
 
-_`requirements`
+_`Requirements`
 ---------------
 
 * tornado_ web server
-* s3 server
+* s3 server (tornado_ demo)
 
 ::
 
@@ -33,10 +37,12 @@ _`requirements`
 
 The hashlib module deprecates the separate md5 and sha modules, so the sha should be change to hashlib.sha1.
 
+The `link <http://aws.amazon.com/code/134>`_ to original version seems to be broken.
+
 .. _tornado: http://www.tornadoweb.org/
 
-*related work*
---------------
+Related Work
+------------
 
 Various Distributed File Systems: GFS_, HDFS_, Ceph_, `Tahoe-LAFS`_, `Storage@home`_
 

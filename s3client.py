@@ -11,6 +11,9 @@
 
 #  modified 2012 by jacob@nephics.com
 
+#  modified 2012 by g.shizhan.g@gmail.com
+#  change sha to hashlib.sha1
+
 import base64
 import hmac
 import httplib
