@@ -39,21 +39,20 @@ The hashlib module deprecates the separate md5 and sha modules, so the sha shoul
 
 The `link <http://aws.amazon.com/code/134>`_ to original version seems to be broken.
 
-.. _tornado: http://www.tornadoweb.org/
-
 Related Work
 ------------
 
 Various Distributed File Systems: GFS_, HDFS_, Ceph_, `Tahoe-LAFS`_, `Storage@home`_
 
+Author
+======
+
+`ShiZhan <http://shizhan.github.com/>`_ (c) 2012
+
+.. _`Amazon S3`: http://docs.amazonwebservices.com/AmazonS3/2006-03-01/dev/Introduction.html
+.. _tornado: http://www.tornadoweb.org/
 .. _GFS: http://labs.google.com/papers/gfs.html
 .. _HDFS: http://hadoop.apache.org/index.html
 .. _Ceph: http://ceph.com/
 .. _`Tahoe-LAFS`: https://tahoe-lafs.org/trac/tahoe-lafs
 .. _`Storage@home`: http://cs.stanford.edu/people/beberg/Storage@home2007.pdf
-.. _`Amazon S3`: http://docs.amazonwebservices.com/AmazonS3/2006-03-01/dev/Introduction.html
-
-Author
-======
-
-`ShiZhan <http://shizhan.github.com/>`_ (c) 2012

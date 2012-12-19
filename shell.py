@@ -25,10 +25,11 @@ class Shell(Cmd):
             calling_format=CallingFormat.PATH)
         print self.connection, " connected\n", 
 
-    def __del__(self):
-        self.connection.__del__()
-        Cmd.__del__(self)
+    # def __del__(self):
+    #     self.connection.__del__()
+    #     Cmd.__del__(self)
 
+    # for long help, implement 'def help_greet(self):' instead.
     def do_shell(self, line):
         """Run a shell command"""
         print "running shell command:", line
@@ -38,8 +39,19 @@ class Shell(Cmd):
 
     def do_ls(self, line):
         """list objects"""
-        # for long help, implement 'def help_greet(self):' instead.
-        print "objects: ", line
+        if "" == line:
+            bucket_list = self.connection.list_all_my_buckets()
+            print bucket_list.body
+        else:
+            parameters = line.split()
+            if 1 == len(parameters):
+                item_list = self.connection.list_bucket(parameters[0])
+                print item_list.body
+            elif 2 == len(parameters):
+                item_head = self.connection.head(parameters[0], parameters[1])
+                print item_head.body
+            else:
+                print "parameter exceeded, need '[bucket] [key]'."
 
     def do_put(self, line):
         """put objects"""
