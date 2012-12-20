@@ -83,7 +83,18 @@ class Shell(Cmd):
 
     def do_delete(self, line):
         """delete objects"""
-        print "objects: ", line
+        if "" == line:
+            print "lack of parameter, need '[bucket] [key]'."
+        else:
+            parameters = line.split()
+            if 1 == len(parameters):
+                item_list = self.connection.delete_bucket(parameters[0])
+                print item_list.body
+            elif 2 == len(parameters):
+                item_head = self.connection.delete(parameters[0], parameters[1])
+                print item_head.body
+            else:
+                print "parameter exceeded, need '[bucket] [key]'."
 
     def do_version(self, line):
         """show SEED remote server version"""
@@ -91,7 +102,7 @@ class Shell(Cmd):
 
     def do_status(self, line):
         """show SEED status"""
-        print "status: ", line
+        print "WIP"
 
     def do_exit(self, line):
         """exit from shell"""
