@@ -84,7 +84,7 @@ class Shell(Cmd):
     def do_delete(self, line):
         """delete objects"""
         if "" == line:
-            print "lack of parameter, need '[bucket] [key]'."
+            print "parameter not enough, need '[bucket] [key]'."
         else:
             parameters = line.split()
             if 1 == len(parameters):
