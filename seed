@@ -101,7 +101,8 @@ def main():
         Daemon(options.port, options.root, 0).run()
 
     else:
-        print "either start daemon (-D) or enter shell (-S)."
+        print "either start daemon (-D) or enter shell (-S), "\
+              " or use -h to access help."
 
 if __name__ == '__main__':
     main()

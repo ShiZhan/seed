@@ -23,7 +23,7 @@ class Shell(Cmd):
         self.connection = AWSAuthConnection(
             "", "", server=server, port=port, is_secure=False,
             calling_format=CallingFormat.PATH)
-        print self.connection, " connected\n", 
+        print self.connection, " initialized\n"
 
     # def __del__(self):
     #     self.connection.__del__()
