@@ -74,7 +74,7 @@ def main():
         action='store',
         dest='root',
         default='/tmp/s3',
-        help='initialize server root specified directory',
+        help='initialize server root on specified directory',
         )
 
     options = parser.parse_args()
