@@ -23,7 +23,7 @@ _`Requirements`
 ---------------
 
 * tornado_ web server
-* s3 server (tornado_ demo)
+* s3 server (in tornado_ demo)
 
 ::
 

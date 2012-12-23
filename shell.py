@@ -1,6 +1,7 @@
 #coding=utf-8
 """Seed.Shell -- Shell program for SEED storage, 
 for accessing storage manually, through command line interface. """
+import os
 from cmd import Cmd
 from s3client import AWSAuthConnection
 from s3client import CallingFormat
@@ -23,7 +24,8 @@ class Shell(Cmd):
         self.connection = AWSAuthConnection(
             "", "", server=server, port=port, is_secure=False,
             calling_format=CallingFormat.PATH)
-        print self.connection, " initialized\n"
+        self.connection.check_bucket_exists('.seed')
+        print self.connection, " initialized"
 
     # def __del__(self):
     #     self.connection.__del__()

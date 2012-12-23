@@ -12,6 +12,8 @@ class Daemon(S3Application):
     def __init__(self, port=10001, root_directory='/tmp/s3', bucket_depth=0):
         S3Application.__init__(self, root_directory, bucket_depth)
         self.port = port
+        # setup/update version in self.directory+'.seed/version'
+        # setup/update status in self.directory+'.seed/status'
 
     def run(self):
         """run server loop on the given port at the given path."""
