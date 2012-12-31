@@ -23,6 +23,7 @@ import re
 import argparse
 from shell import Shell
 from daemon import Daemon
+from utils import Version
 
 def main():
     """SEED main program"""
@@ -53,6 +54,14 @@ def main():
         )
 
     parser.add_argument(
+        '-i', '--initialize',
+        action='store_true',
+        dest='initialize',
+        default=False,
+        help='initialize root on specified directory'
+        )
+
+    parser.add_argument(
         '-s', '--server',
         action='store',
         dest='server',
@@ -74,7 +83,7 @@ def main():
         action='store',
         dest='root',
         default='/tmp/s3',
-        help='initialize server root on specified directory',
+        help='load server on specified directory as root',
         )
 
     options = parser.parse_args()
@@ -92,7 +101,12 @@ def main():
         exit(1)
 
     # which way to go ... start daemon or open shell?
-    if options.shell:
+    if options.initialize:
+        # run the shell @ host
+        # setup/update version in self.directory+'.seed/version'
+        print Version().version
+
+    elif options.shell:
         # run the shell @ host
         Shell(options.server, options.port).cmdloop()
 
