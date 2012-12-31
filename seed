@@ -23,7 +23,7 @@ import re
 import argparse
 from shell import Shell
 from daemon import Daemon
-from utils import Version
+from utils import Initialize
 
 def main():
     """SEED main program"""
@@ -103,8 +103,7 @@ def main():
     # which way to go ... start daemon or open shell?
     if options.initialize:
         # run the shell @ host
-        # setup/update version in self.directory+'.seed/version'
-        print Version().version
+        Initialize(options.root)
 
     elif options.shell:
         # run the shell @ host
