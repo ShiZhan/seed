@@ -21,12 +21,31 @@ and scale. """
 
 import re
 import argparse
+import logging
+
 from shell import Shell
 from daemon import Daemon
 from utils import Initialize
 
 def main():
     """SEED main program"""
+
+    # create logger
+    logger = logging.getLogger('SEED logger')
+    logger.setLevel(logging.DEBUG)
+
+    # create console handler and set level to debug
+    ch = logging.StreamHandler()
+    ch.setLevel(logging.DEBUG)
+
+    # create formatter
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+    # add formatter to ch
+    ch.setFormatter(formatter)
+
+    # add ch to logger
+    logger.addHandler(ch)
 
     parser = argparse.ArgumentParser(
         description='Storage based on "Extemporal Ensemble" Devices'
@@ -54,7 +73,7 @@ def main():
         )
 
     parser.add_argument(
-        '-i', '--initialize',
+        '-i', '--init',
         action='store_true',
         dest='initialize',
         default=False,
@@ -96,8 +115,8 @@ def main():
             )
     valid_port = (options.port > 1000 and options.port < 65535)
     if not (valid_server and valid_port):
-        print "invalid parameter, "\
-              "should be as '-s 127.0.0.1 -p 10001 (between 1000 and 65535)'."
+        logger.warn("invalid parameter, "\
+                    "should be as '-s 127.0.0.1 -p 10001 (between 1000 and 65535)'.")
         exit(1)
 
     # which way to go ... start daemon or open shell?
@@ -107,15 +126,17 @@ def main():
 
     elif options.shell:
         # run the shell @ host
+        logger.info('Opening shell on host %s port %d ...' % (options.server, options.port))
         Shell(options.server, options.port).cmdloop()
 
     elif options.daemon:
         # run the daemon on specified root directory, bucket depth and port
+        logger.info('Serving HTTP on 0.0.0.0 port %d ...', options.port)
         Daemon(options.port, options.root, 0).run()
 
     else:
-        print "either start daemon (-D) or enter shell (-S), "\
-              " or use -h to access help."
+        logger.info("either start daemon (-D) or enter shell (-S), "\
+                    " or use -h to access help.")
 
 if __name__ == '__main__':
     main()
