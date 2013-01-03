@@ -114,6 +114,7 @@ def main():
             options.server
             )
     valid_port = (options.port > 1000 and options.port < 65535)
+
     if not (valid_server and valid_port):
         logger.warn("invalid parameter, "\
                     "should be as '-s 127.0.0.1 -p 10001 (between 1000 and 65535)'.")
@@ -137,6 +138,7 @@ def main():
     else:
         logger.info("either start daemon (-D) or enter shell (-S), "\
                     " or use -h to access help.")
+
 
 if __name__ == '__main__':
     main()

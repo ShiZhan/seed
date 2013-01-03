@@ -100,11 +100,13 @@ class Shell(Cmd):
 
     def do_version(self, line):
         """show SEED remote server version"""
-        print "WIP"
+        version = self.connection.get('.seed', 'version')
+        print version.body
 
     def do_status(self, line):
         """show SEED status"""
-        print "WIP"
+        status = self.connection.get('.seed', 'status')
+        print status.body
 
     def do_exit(self, line):
         """exit from shell"""

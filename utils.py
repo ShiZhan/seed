@@ -2,6 +2,7 @@
 """SEED program utility helper classes and functions
 
 Version: Check code version from local repository
+Initialize: Initialize '.seed' bucket for holding meta data
 """
 import os
 import time
