@@ -139,7 +139,7 @@ def main():
     elif options.daemon:
         # run the daemon on specified root directory, bucket depth and port
         logger.info('Serving HTTP on 0.0.0.0 port %d ...', options.port)
-        Daemon(options.port, options.root, 0).run()
+        Daemon(options.port, options.root).run()
 
     else:
         print "either start daemon (-D) or enter shell (-S), "\

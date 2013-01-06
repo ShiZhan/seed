@@ -3,8 +3,7 @@
 for accessing storage manually, through command line interface. """
 import os
 from cmd import Cmd
-from s3client import AWSAuthConnection
-from s3client import CallingFormat
+from client import Client
 
 class Shell(Cmd):
     """Seed.Shell"""
@@ -21,9 +20,7 @@ class Shell(Cmd):
     def __init__(self, server="127.0.0.1", port=10001):
         Cmd.__init__(self)
         self.prompt = '[' + server + ':' + str(port) + ']>> '
-        self.connection = AWSAuthConnection(
-            "", "", server=server, port=port, is_secure=False,
-            calling_format=CallingFormat.PATH)
+        self.connection = Client(server=server, port=port)
         self.connection.check_bucket_exists('.seed')
         print self.connection, " initialized"
 
