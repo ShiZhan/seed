@@ -45,10 +45,10 @@ class Shell(Cmd):
             parameters = line.split()
             if 1 == len(parameters):
                 item_list = self.connection.list_bucket(parameters[0])
-                print item_list.body.read()
+                print item_list
             elif 2 == len(parameters):
                 item_head = self.connection.head(parameters[0], parameters[1])
-                print item_head.body.read()
+                print item_head
             else:
                 print "parameter exceeded, need '[bucket] [key]'."
 
@@ -69,7 +69,7 @@ class Shell(Cmd):
         else:
             item = self.connection.get(parameters[0], parameters[1])
             print "get [bucket: %s], [key: %s]" % (parameters[0], parameters[1])
-            print item.body.read()
+            print item
 
     def do_create(self, line):
         """create bucket"""
@@ -88,22 +88,22 @@ class Shell(Cmd):
             parameters = line.split()
             if 1 == len(parameters):
                 item_list = self.connection.delete_bucket(parameters[0])
-                print item_list.body
+                print item_list
             elif 2 == len(parameters):
                 item_head = self.connection.delete(parameters[0], parameters[1])
-                print item_head.body
+                print item_head
             else:
                 print "parameter exceeded, need '[bucket] [key]'."
 
     def do_version(self, line):
         """show SEED remote server version"""
         version = self.connection.get('.seed', 'version')
-        print version.body.read()
+        print version
 
     def do_status(self, line):
         """show SEED status"""
         status = self.connection.get('.seed', 'status')
-        print status.body.read()
+        print status
 
     def do_exit(self, line):
         """exit from shell"""
