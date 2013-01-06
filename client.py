@@ -8,51 +8,61 @@ from tornado.httpclient import AsyncHTTPClient
 DEFAULT_HOST = "127.0.0.1"
 DEFAULT_PORT = 10001
 
-class Client(AsyncHTTPClient):
+class Client(object):
     """ClientApplication for accessing SEED"""
     def __init__(self, server=DEFAULT_HOST, port=DEFAULT_PORT):
-        AsyncHTTPClient.__init__(self)
+        self.http_client = AsyncHTTPClient()
         self.url_base = 'http://' + server + ':' + str(port)
 
     # private methods
-    def _request(self, response):
-        self.fetch(self.url_base,
-                   callback=(yield Callback("_to_get_key")))
+    def _request(self, body):
+        self.http_client.fetch(self.url_base,
+                               callback=(yield Callback("_to_get_key")))
         response = yield Wait("_to_get_key")
+        body = response.body
 
     # public methods
     def list_all_my_buckets(self):
-        self._request(response)
-        return response
+        body = ''
+        self._request(body)
+        return body
 
     def check_bucket_exists(self, bucket):
-        self._request(response)
-        return response
+        body = ''
+        self._request(body)
+        return body
 
     def create_bucket(self, bucket):
-        self._request(response)
-        return response
+        body = ''
+        self._request(body)
+        return body
 
     def delete_bucket(self, bucket):
-        self._request(response)
-        return response
+        body = ''
+        self._request(body)
+        return body
 
     def list_bucket(self, bucket):
-        self._request(response)
-        return response
+        body = ''
+        self._request(body)
+        return body
 
     def put(self, bucket, key):
-        self._request(response)
-        return response
+        body = ''
+        self._request(body)
+        return body
 
     def get(self, bucket, key):
-        self._request(response)
-        return response
+        body = ''
+        self._request(body)
+        return body
 
     def head(self, bucket, key):
-        self._request(response)
-        return response
+        body = ''
+        self._request(body)
+        return body
 
     def delete(self, bucket, key):
-        self._request(response)
-        return response
+        body = ''
+        self._request(body)
+        return body

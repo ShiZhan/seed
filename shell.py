@@ -40,7 +40,7 @@ class Shell(Cmd):
         """list objects"""
         if "" == line:
             bucket_list = self.connection.list_all_my_buckets()
-            print bucket_list.body.read()
+            print bucket_list
         else:
             parameters = line.split()
             if 1 == len(parameters):
