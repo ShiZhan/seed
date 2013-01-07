@@ -26,7 +26,7 @@ class RootHandler(BasicHandler):
                 "Name: " + name + " CreationDate: " +
                 datetime.datetime.utcfromtimestamp(info.st_ctime).ctime()
             )
-        self.finish('\n'.join(buckets))
+        self.finish('<br/>'.join(buckets))
 
 
 class BucketHandler(BasicHandler):

@@ -17,27 +17,10 @@ Design
 
 All modules in one excutable, the depenencies are listed in Requirements_.
 
-The interface is compatible with `Amazon S3`_.
-
 _`Requirements`
 ---------------
 
 * tornado_ web server
-* s3 server (in tornado_ demo)
-
-::
-
-    curl https://raw.github.com/facebook/tornado/master/demos/s3server/s3server.py -o s3server.py
-
-* s3 client
-
-::
-
-    curl https://raw.github.com/nephics/python-s3/master/s3/S3.py -o s3client.py
-
-The hashlib module deprecates the separate md5 and sha modules, so the sha should be change to hashlib.sha1.
-
-The `link <http://aws.amazon.com/code/134>`_ to original version seems to be broken.
 
 Related Work
 ------------

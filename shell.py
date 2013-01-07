@@ -38,17 +38,18 @@ class Shell(Cmd):
 
     def do_ls(self, line):
         """list objects"""
+        response = None
         if "" == line:
-            bucket_list = self.connection.list_all_my_buckets()
-            print bucket_list
+            response = self.connection.list_all_my_buckets()
+            print 'None' if (None == response) else response.body
         else:
             parameters = line.split()
             if 1 == len(parameters):
-                item_list = self.connection.list_bucket(parameters[0])
-                print item_list
+                response = self.connection.list_bucket(parameters[0])
+                print 'None' if (None == response) else response.body
             elif 2 == len(parameters):
-                item_head = self.connection.head(parameters[0], parameters[1])
-                print item_head
+                response = self.connection.head(parameters[0], parameters[1])
+                print 'None' if (None == response) else response.body
             else:
                 print "parameter exceeded, need '[bucket] [key]'."
 
@@ -63,13 +64,14 @@ class Shell(Cmd):
 
     def do_get(self, line):
         """get objects"""
+        response = None
         parameters = line.split()
         if len(parameters) < 2:
             print "parameter not enough, need '[bucket] [key]'."
         else:
-            item = self.connection.get(parameters[0], parameters[1])
+            response = self.connection.get(parameters[0], parameters[1])
             print "get [bucket: %s], [key: %s]" % (parameters[0], parameters[1])
-            print item
+            print 'None' if (None == response) else response.body
 
     def do_create(self, line):
         """create bucket"""
@@ -86,24 +88,25 @@ class Shell(Cmd):
             print "parameter not enough, need '[bucket] [key]'."
         else:
             parameters = line.split()
+            response = None
             if 1 == len(parameters):
-                item_list = self.connection.delete_bucket(parameters[0])
-                print item_list
+                response = self.connection.delete_bucket(parameters[0])
+                print 'None' if (None == response) else response.body
             elif 2 == len(parameters):
-                item_head = self.connection.delete(parameters[0], parameters[1])
-                print item_head
+                response = self.connection.delete(parameters[0], parameters[1])
+                print 'None' if (None == response) else response.body
             else:
                 print "parameter exceeded, need '[bucket] [key]'."
 
     def do_version(self, line):
         """show SEED remote server version"""
-        version = self.connection.get('.seed', 'version')
-        print version
+        response = self.connection.get('.seed', 'version')
+        print 'None' if (None == response) else response.body
 
     def do_status(self, line):
         """show SEED status"""
-        status = self.connection.get('.seed', 'status')
-        print status
+        response = self.connection.get('.seed', 'status')
+        print 'None' if (None == response) else response.body
 
     def do_exit(self, line):
         """exit from shell"""
