@@ -12,7 +12,7 @@ from tornado import web
 
 class BasicHandler(web.RequestHandler):
     """BasicHandler implements common functions for all handlers"""
-    SUPPORTED_METHODS = ("PUT", "GET", "DELETE")
+    SUPPORTED_METHODS = ("PUT", "GET", "DELETE", "HEAD")
 
 
 class RootHandler(BasicHandler):
@@ -63,6 +63,14 @@ class BucketHandler(BasicHandler):
         self.set_status(204)
         self.finish()
 
+    def head(self, bucket_name):
+        path = os.path.abspath(os.path.join(self.application.directory,
+                                            bucket_name))
+        if not path.startswith(self.application.directory) or \
+           not os.path.isdir(path):
+            raise web.HTTPError(404)
+        self.finish(bucket_name)
+
 
 class ObjectHandler(BasicHandler):
     def get(self, bucket, object_name):
@@ -107,6 +115,15 @@ class ObjectHandler(BasicHandler):
         os.unlink(path)
         self.set_status(204)
         self.finish()
+
+    def head(self, bucket, object_name):
+        object_name = urllib.unquote(object_name)
+        path = os.path.abspath(os.path.join(
+            self.application.directory, bucket, object_name))
+        if not path.startswith(self.application.directory) or \
+           not os.path.isfile(path):
+            raise web.HTTPError(404)
+        self.finish(object_name)
 
 
 class Daemon(web.Application):

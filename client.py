@@ -25,8 +25,6 @@ class Client(object):
         except HTTPError, e:
             print "Error:", e
 
-        return response
-
     # public methods
     def list_all_my_buckets(self):
         return self._request(self.url_base)
