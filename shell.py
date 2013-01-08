@@ -20,12 +20,14 @@ class Shell(Cmd):
     def __init__(self, server="127.0.0.1", port=10001):
         Cmd.__init__(self)
         self.prompt = '[' + server + ':' + str(port) + ']>> '
-        self.connection = Client(server=server, port=port)
-        self.connection.check_bucket_exists('.seed')
-        print self.connection, " initialized"
+        self.client = Client(server=server, port=port)
+        if 200 == self.client.check_bucket_exists('.seed'):
+            print "remote node initialized"
+        else:
+            print "remote node not initialized"
 
     # def __del__(self):
-    #     self.connection.__del__()
+    #     self.client.__del__()
     #     Cmd.__del__(self)
 
     # for long help, implement 'def help_greet(self):' instead.
@@ -38,18 +40,14 @@ class Shell(Cmd):
 
     def do_ls(self, line):
         """list objects"""
-        response = None
         if "" == line:
-            response = self.connection.list_all_my_buckets()
-            print 'None' if (None == response) else response.body
+            print self.client.list_all_my_buckets()
         else:
             parameters = line.split()
             if 1 == len(parameters):
-                response = self.connection.list_bucket(parameters[0])
-                print 'None' if (None == response) else response.body
+                print self.client.list_bucket(parameters[0])
             elif 2 == len(parameters):
-                response = self.connection.head(parameters[0], parameters[1])
-                print 'None' if (None == response) else response.body
+                print self.client.head(parameters[0], parameters[1])
             else:
                 print "parameter exceeded, need '[bucket] [key]'."
 
@@ -59,19 +57,17 @@ class Shell(Cmd):
         if len(parameters) < 3:
             print "parameter not enough, need '[bucket] [key] [value]'."
         else:
-            self.connection.put(parameters[0], parameters[1], parameters[2])
+            self.client.put(parameters[0], parameters[1], parameters[2])
             print "put %s=%s into %s" % (parameters[1], parameters[2], parameters[0])
 
     def do_get(self, line):
         """get objects"""
-        response = None
         parameters = line.split()
         if len(parameters) < 2:
             print "parameter not enough, need '[bucket] [key]'."
         else:
-            response = self.connection.get(parameters[0], parameters[1])
+            self.client.get(parameters[0], parameters[1])
             print "get [bucket: %s], [key: %s]" % (parameters[0], parameters[1])
-            print 'None' if (None == response) else response.body
 
     def do_create(self, line):
         """create bucket"""
@@ -79,7 +75,7 @@ class Shell(Cmd):
         if len(parameters) < 1:
             print "parameter not enough, need '[bucket]'."
         else:
-            self.connection.create_bucket(parameters[0])
+            self.client.create_bucket(parameters[0])
             print "bucket '%s' created" % parameters[0]
 
     def do_delete(self, line):
@@ -88,25 +84,22 @@ class Shell(Cmd):
             print "parameter not enough, need '[bucket] [key]'."
         else:
             parameters = line.split()
-            response = None
             if 1 == len(parameters):
-                response = self.connection.delete_bucket(parameters[0])
-                print 'None' if (None == response) else response.body
+                self.client.delete_bucket(parameters[0])
+                print "bucket '%s' deleted" % parameters[0]
             elif 2 == len(parameters):
-                response = self.connection.delete(parameters[0], parameters[1])
-                print 'None' if (None == response) else response.body
+                self.client.delete(parameters[0], parameters[1])
+                print "key '%s::%s' deleted" % (parameters[0], parameters[1])
             else:
                 print "parameter exceeded, need '[bucket] [key]'."
 
     def do_version(self, line):
         """show SEED remote server version"""
-        response = self.connection.get('.seed', 'version')
-        print 'None' if (None == response) else response.body
+        print self.client.version()
 
     def do_status(self, line):
         """show SEED status"""
-        response = self.connection.get('.seed', 'status')
-        print 'None' if (None == response) else response.body
+        print self.client.status()
 
     def do_exit(self, line):
         """exit from shell"""

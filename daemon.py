@@ -17,145 +17,86 @@ class Daemon(SimpleXMLRPCServer):
             os.makedirs(self.directory)
         
     def run(self):
-        self.register_function(self.is_even, "is_even")
+        self.register_function(self.list_all_my_buckets, "list_all_my_buckets")
+        self.register_function(self.check_bucket_exists, "check_bucket_exists")
+        self.register_function(self.create_bucket, "create_bucket")
+        self.register_function(self.delete_bucket, "delete_bucket")
+        self.register_function(self.list_bucket, "list_bucket")
+        self.register_function(self.head, "head")
+        self.register_function(self.delete, "delete")
+        self.register_function(self.version, "version")
+        self.register_function(self.status, "status")
         self.serve_forever()
 
-    def is_even(self, n):
-        return n%2 == 0
+    # s3-like functions
+    def list_all_my_buckets(self):
+        names = os.listdir(self.directory)
+        buckets = []
+        for name in names:
+            path = os.path.join(self.directory, name)
+            info = os.stat(path)
+            buckets.append(
+                "Name: " + name + " CreationDate: " +
+                datetime.datetime.utcfromtimestamp(info.st_ctime).ctime()
+            )
+        return '\n'.join(buckets)
 
+    def check_bucket_exists(self, bucket):
+        path = os.path.abspath(os.path.join(self.directory, bucket))
+        if not path.startswith(self.directory) or not os.path.isdir(path):
+            return 404
+        else:
+            return 200
 
-# from tornado.ioloop import IOLoop
-# from tornado import web
+    def create_bucket(self, bucket):
+        path = os.path.abspath(os.path.join(self.directory, bucket))
+        if not path.startswith(self.directory) or os.path.exists(path):
+            return 403
+        else:
+            os.makedirs(path)
+            return 200
 
-# class BasicHandler(web.RequestHandler):
-#     """BasicHandler implements common functions for all handlers"""
-#     SUPPORTED_METHODS = ("PUT", "GET", "DELETE", "HEAD")
+    def delete_bucket(self, bucket):
+        path = os.path.abspath(os.path.join(self.directory, bucket))
+        if not path.startswith(self.directory) or not os.path.isdir(path):
+            return 404
+        if len(os.listdir(path)) > 0:
+            return 403
+        os.rmdir(path)
+        return 204
 
+    def list_bucket(self, bucket):
+        path = os.path.abspath(os.path.join(self.directory, bucket))
+        if not path.startswith(self.directory) or not os.path.isdir(path):
+            return ''
+        object_names = []
+        for root, dirs, files in os.walk(path):
+            for file_name in files:
+                object_names.append(os.path.join(root, file_name))
+        return '\n'.join(object_names)
 
-# class RootHandler(BasicHandler):
-#     def get(self):
-#         names = os.listdir(self.application.directory)
-#         buckets = []
-#         for name in names:
-#             path = os.path.join(self.application.directory, name)
-#             info = os.stat(path)
-#             buckets.append(
-#                 "Name: " + name + " CreationDate: " +
-#                 datetime.datetime.utcfromtimestamp(info.st_ctime).ctime()
-#             )
-#         self.finish('<br/>'.join(buckets))
+    def head(self, bucket, key):
+        path = os.path.abspath(os.path.join(self.directory, bucket, key))
+        if not path.startswith(self.directory) or not os.path.isfile(path):
+            return 404
+        else:
+            return 200
 
+    def delete(self, bucket, key):
+        path = os.path.abspath(os.path.join(self.directory, bucket, key))
+        if not path.startswith(self.directory) or not os.path.isfile(path):
+            return 404
+        os.unlink(path)
+        return 204
 
-# class BucketHandler(BasicHandler):
-#     def get(self, bucket_name):
-#         path = os.path.abspath(os.path.join(self.application.directory,
-#                                             bucket_name))
-#         if not path.startswith(self.application.directory) or \
-#            not os.path.isdir(path):
-#             raise web.HTTPError(404)
-#         object_names = []
-#         for root, dirs, files in os.walk(path):
-#             for file_name in files:
-#                 object_names.append(os.path.join(root, file_name))
-#         self.finish('\n'.join(object_names))
+    # system functions
+    def version(self):
+        path = os.path.abspath(os.path.join(self.directory, '.seed/version'))
+        if not path.startswith(self.directory) or not os.path.isfile(path):
+            return "error while getting version info"
+        else:
+            response = open(path).read()
+            return response
 
-#     def put(self, bucket_name):
-#         path = os.path.abspath(os.path.join(
-#             self.application.directory, bucket_name))
-#         if not path.startswith(self.application.directory) or \
-#            os.path.exists(path):
-#             raise web.HTTPError(403)
-#         os.makedirs(path)
-#         self.finish()
-
-#     def delete(self, bucket_name):
-#         path = os.path.abspath(os.path.join(
-#             self.application.directory, bucket_name))
-#         if not path.startswith(self.application.directory) or \
-#            not os.path.isdir(path):
-#             raise web.HTTPError(404)
-#         if len(os.listdir(path)) > 0:
-#             raise web.HTTPError(403)
-#         os.rmdir(path)
-#         self.set_status(204)
-#         self.finish()
-
-#     def head(self, bucket_name):
-#         path = os.path.abspath(os.path.join(self.application.directory,
-#                                             bucket_name))
-#         if not path.startswith(self.application.directory) or \
-#            not os.path.isdir(path):
-#             raise web.HTTPError(404)
-#         self.finish(bucket_name)
-
-
-# class ObjectHandler(BasicHandler):
-#     def get(self, bucket, object_name):
-#         object_name = urllib.unquote(object_name)
-#         path = os.path.abspath(os.path.join(
-#             self.application.directory, bucket, object_name))
-#         if not path.startswith(self.application.directory) or \
-#            not os.path.isfile(path):
-#             raise web.HTTPError(404)
-#         object_file = open(path, "r")
-#         try:
-#             self.finish(object_file.read())
-#         finally:
-#             object_file.close()
-
-#     def put(self, bucket, object_name):
-#         object_name = urllib.unquote(object_name)
-#         bucket_dir = os.path.abspath(os.path.join(
-#             self.application.directory, bucket))
-#         if not bucket_dir.startswith(self.application.directory) or \
-#            not os.path.isdir(bucket_dir):
-#             raise web.HTTPError(404)
-#         path = os.path.abspath(os.path.join(
-#             self.application.directory, bucket, object_name))
-#         if not path.startswith(bucket_dir) or os.path.isdir(path):
-#             raise web.HTTPError(403)
-#         directory = os.path.dirname(path)
-#         if not os.path.exists(directory):
-#             os.makedirs(directory)
-#         object_file = open(path, "w")
-#         object_file.write(self.request.body)
-#         object_file.close()
-#         self.finish()
-
-#     def delete(self, bucket, object_name):
-#         object_name = urllib.unquote(object_name)
-#         path = os.path.abspath(os.path.join(
-#             self.application.directory, bucket, object_name))
-#         if not path.startswith(self.application.directory) or \
-#            not os.path.isfile(path):
-#             raise web.HTTPError(404)
-#         os.unlink(path)
-#         self.set_status(204)
-#         self.finish()
-
-#     def head(self, bucket, object_name):
-#         object_name = urllib.unquote(object_name)
-#         path = os.path.abspath(os.path.join(
-#             self.application.directory, bucket, object_name))
-#         if not path.startswith(self.application.directory) or \
-#            not os.path.isfile(path):
-#             raise web.HTTPError(404)
-#         self.finish(object_name)
-
-
-# class Daemon(web.Application):
-#     """tornado application for RESTful file service"""
-#     def __init__(self, port=10001, root_directory='/tmp/s3'):
-#         web.Application.__init__(self, [
-#             (r"/", RootHandler),
-#             (r"/([^/]+)/", BucketHandler),
-#             (r"/([^/]+)/(.+)", ObjectHandler),
-#         ])
-#         self.port = port
-#         self.directory = os.path.abspath(root_directory)
-#         if not os.path.exists(self.directory):
-#             os.makedirs(self.directory)
-        
-#     def run(self):
-#         self.listen(self.port)
-#         IOLoop.instance().start()
+    def status(self):
+        return "not implemented"
