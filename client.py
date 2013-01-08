@@ -3,61 +3,45 @@
 Client:
 Implementation of a Simplified S3-like storage client based on HTTPClient.
 """
-import urllib
-from tornado.httpclient import HTTPClient
-from tornado.httpclient import HTTPError
+from xmlrpclib import ServerProxy
 
 DEFAULT_HOST = "127.0.0.1"
 DEFAULT_PORT = 10001
 
-class Client(object):
-    """ClientApplication for accessing SEED"""
+class Client(ServerProxy):
+    """XML RPC Client for accessing SEED"""
     def __init__(self, server=DEFAULT_HOST, port=DEFAULT_PORT):
-        self.http_client = HTTPClient()
-        self.url_base = 'http://' + server + ':' + str(port) + '/'
+        ServerProxy.__init__(self,
+            'http://' + server + ':' + str(port) + '/')
 
     # private methods
-    def _request(self, url, method='GET', body=None):
-        response = None
-
-        try:
-            response = self.http_client.fetch(url, method=method, body=body)
-        except HTTPError, e:
-            print "Error:", e
+    def _request(self):
+        return self.is_even(1)
 
     # public methods
     def list_all_my_buckets(self):
-        return self._request(self.url_base)
+        return None
 
     def check_bucket_exists(self, bucket):
-        url_bucket = self.url_base + bucket + '/'
-        return self._request(url_bucket, method='HEAD')
+        return self._request()
 
     def create_bucket(self, bucket):
-        url_bucket = self.url_base + bucket + '/'
-        return self._request(url_bucket, method='PUT')
+        return None
 
     def delete_bucket(self, bucket):
-        url_bucket = self.url_base + bucket + '/'
-        return self._request(url_bucket, method='DELETE')
+        return None
 
     def list_bucket(self, bucket):
-        url_bucket = self.url_base + bucket + '/'
-        return self._request(url_bucket)
+        return None
 
     def put(self, bucket, key, value):
-        url_key = self.url_base + bucket + '/' + key
-        data = urllib.urlencode(value)
-        return self._request(url_key, method='PUT', body=data)
+        return None
 
     def get(self, bucket, key):
-        url_key = self.url_base + bucket + '/' + key
-        return self._request(url_key)
+        return None
 
     def head(self, bucket, key):
-        url_key = self.url_base + bucket + '/' + key
-        return self._request(url_key, method='HEAD')
+        return None
 
     def delete(self, bucket, key):
-        url_key = self.url_base + bucket + '/' + key
-        return self._request(url_key, method='DELETE')
+        return None
