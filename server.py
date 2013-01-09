@@ -9,6 +9,8 @@ from Pyro4.core import Daemon
 from Pyro4 import config as PyroConfig
 
 from utils import Initialize
+from utils import DefaultID
+from utils import SeedLog
 
 class Server(Daemon):
     """XML RPC Server for SEED"""
@@ -16,7 +18,8 @@ class Server(Daemon):
         PyroConfig.HMAC_KEY = 'SEED indentifier'
         Daemon.__init__(self, host = ip, port = port)
         # register(Obj, ID) 2nd parameter ID cannot be empty
-        print self.register(S3Handler(root_directory), "SEED")
+        uri = self.register(S3Handler(root_directory), DefaultID)
+        SeedLog.info(uri)
 
     def run(self):
         self.requestLoop()
@@ -25,10 +28,9 @@ class S3Handler(object):
     """SEED handler class for remote invoking"""
     def __init__(self, root_directory):
         self.directory = os.path.abspath(root_directory)
-        if not os.path.exists(self.directory):
-            # root not initiailized, use '-i' first.
+        if not os.path.exists(os.path.join(self.directory, '.seed')):
+            SeedLog.info("root not initiailized, prepare now...")
             Initialize(self.directory)
-
 
     # s3-like functions
     def list_all_my_buckets(self):

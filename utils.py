@@ -1,11 +1,36 @@
 #coding=utf-8
 """SEED program utility helper classes and functions
 
+SeedLog: Global logger for internal use
+InitLogger: Configure global logger
 Version: Check code version from local repository
 Initialize: Initialize '.seed' bucket for holding meta data
+NodeURI: Generate node URI for Pyro4 object using ip, port and DefaultID
 """
 import os
 import time
+import logging
+
+# create logger
+SeedLog = logging.getLogger('SEED logger')
+
+def InitLogger():
+    """configure global logger"""
+    # set level
+    SeedLog.setLevel(logging.DEBUG)
+
+    # create console handler and set level to debug
+    ch = logging.StreamHandler()
+    ch.setLevel(logging.DEBUG)
+
+    # create formatter
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+    # add formatter to ch
+    ch.setFormatter(formatter)
+
+    # add ch to logger
+    SeedLog.addHandler(ch)
 
 def Version():
     """SEED Version"""
@@ -33,9 +58,9 @@ def Version():
 
 def Initialize(root):
     """init SEED root"""
-    seed_meta_path = root + '/.seed'
+    seed_meta_path = os.path.join(root, '.seed')
     if os.path.exists(seed_meta_path):
-        print 'already initialized.'
+        SeedLog.warn('already initialized.')
 
     else:
         os.mkdir(seed_meta_path)
@@ -43,8 +68,11 @@ def Initialize(root):
         version_file_name = seed_meta_path + '/version'
         with open(version_file_name, 'w') as version_file:
             version_file.write(Version())
-    pass
 
-def NodeURI(ip, port):
+    return
+
+DefaultID = "SEED"
+
+def NodeURI(ip, port, id = DefaultID):
     """Use IP:Port as node name, create connection without Pyro4 name server"""
-    return 'PYRO:SEED@' + ip + ':' + str(port)
+    return 'PYRO:' + DefaultID + '@' + ip + ':' + str(port)
