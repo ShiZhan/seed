@@ -8,27 +8,28 @@ import datetime
 from Pyro4.core import Daemon
 from Pyro4 import config as PyroConfig
 
-from utils import NodeName
 from utils import Initialize
 
 class Server(Daemon):
     """XML RPC Server for SEED"""
     def __init__(self, ip, port, root_directory):
-        Daemon.__init__(self)
-        self.directory = os.path.abspath(root_directory)
-        if not os.path.exists(self.directory):
-            # root not initiailized, use '-i' first.
-            Initialize(self.directory)
-        self.config = PyroConfig
-        self.config.HMAC_KEY = 'SEED indentifier'
-        self.config.HOST = ip
-        self.config.
-        self.register(S3Handler(), NodeName(ip, port))
+        PyroConfig.HMAC_KEY = 'SEED indentifier'
+        Daemon.__init__(self, host = ip, port = port)
+        # register(Obj, ID) 2nd parameter ID cannot be empty
+        print self.register(S3Handler(root_directory), "SEED")
 
     def run(self):
         self.requestLoop()
 
 class S3Handler(object):
+    """SEED handler class for remote invoking"""
+    def __init__(self, root_directory):
+        self.directory = os.path.abspath(root_directory)
+        if not os.path.exists(self.directory):
+            # root not initiailized, use '-i' first.
+            Initialize(self.directory)
+
+
     # s3-like functions
     def list_all_my_buckets(self):
         names = os.listdir(self.directory)
@@ -40,7 +41,7 @@ class S3Handler(object):
                 "Name: " + name + " CreationDate: " +
                 datetime.datetime.utcfromtimestamp(info.st_ctime).ctime()
             )
-        handle.done('\n'.join(buckets))
+        return '\n'.join(buckets)
 
     def check_bucket_exists(self, bucket):
         path = os.path.abspath(os.path.join(self.directory, bucket))
@@ -49,7 +50,7 @@ class S3Handler(object):
         else:
             response = 200
 
-        handle.done(response)
+        return response
 
     def create_bucket(self, bucket):
         path = os.path.abspath(os.path.join(self.directory, bucket))
@@ -59,7 +60,7 @@ class S3Handler(object):
             os.makedirs(path)
             response = 200
 
-        handle.done(response)
+        return response
 
     def delete_bucket(self, bucket):
         path = os.path.abspath(os.path.join(self.directory, bucket))
@@ -71,7 +72,7 @@ class S3Handler(object):
             os.rmdir(path)
             response = 204
 
-        handle.done(response)
+        return response
 
     def list_bucket(self, bucket):
         path = os.path.abspath(os.path.join(self.directory, bucket))
@@ -82,7 +83,7 @@ class S3Handler(object):
             for file_name in files:
                 object_names.append(os.path.join(root, file_name))
 
-        handle.done('\n'.join(object_names))
+        return '\n'.join(object_names)
 
     def head(self, bucket, key):
         path = os.path.abspath(os.path.join(self.directory, bucket, key))
@@ -91,7 +92,7 @@ class S3Handler(object):
         else:
             response = 200
 
-        handle.done(response)
+        return response
 
     def delete(self, bucket, key):
         path = os.path.abspath(os.path.join(self.directory, bucket, key))
@@ -101,7 +102,7 @@ class S3Handler(object):
             os.unlink(path)
             response = 204
 
-        handle.done(response)
+        return response
 
     # system functions
     def version(self):
@@ -111,7 +112,7 @@ class S3Handler(object):
         else:
             response = open(path).read()
 
-        handle.done(response)
+        return(response)
 
     def status(self):
-        handle.done("not implemented")
+        return "not implemented"

@@ -45,6 +45,6 @@ def Initialize(root):
             version_file.write(Version())
     pass
 
-def NodeName(server, port):
+def NodeURI(ip, port):
     """Use IP:Port as node name, create connection without Pyro4 name server"""
-    return 'seed://' + server + ':' + str(port)
+    return 'PYRO:SEED@' + ip + ':' + str(port)
