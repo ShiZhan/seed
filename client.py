@@ -3,16 +3,20 @@
 Client:
 Implementation of a Simplified S3-like storage client based on HTTPClient.
 """
-from xmlrpclib import ServerProxy
+from Pyro4.core import Proxy
+from Pyro4 import config as PyroConfig
+
+from utils import NodeName
 
 DEFAULT_HOST = "127.0.0.1"
 DEFAULT_PORT = 10001
 
-class Client(ServerProxy):
+PyroConfig.HMAC_KEY = 'SEED indentifier'
+
+class Client(Proxy):
     """XML RPC Client for accessing SEED"""
-    def __init__(self, server=DEFAULT_HOST, port=DEFAULT_PORT):
-        ServerProxy.__init__(self,
-            'http://' + server + ':' + str(port) + '/')
+    def __init__(self, ip=DEFAULT_HOST, port=DEFAULT_PORT):
+        Proxy.__init__(self, NodeName(ip, port))
 
     def put(self, bucket, key, value):
         return

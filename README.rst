@@ -20,7 +20,15 @@ All modules in one excutable, the depenencies are listed in Requirements_.
 _`Requirements`
 ---------------
 
-* Just use Python Standard Library, nothing more.
+* Pyro_: a library (`MIT License <http://www.opensource.org/licenses/mit-license.php>`_) that helps building applications in which objects can talk to each other over the network. The code is in `SVN repository <http://svn.razorvine.net/Pyro/Pyro4>`_, use
+
+::
+
+    $ svn co svn://svn.razorvine.net/Pyro/Pyro4/trunk Pyro4.
+
+to access.
+
+.. _Pyro: http://packages.python.org/Pyro4/intro.html
 
 Related Work
 ------------

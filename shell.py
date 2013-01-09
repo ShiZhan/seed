@@ -17,10 +17,10 @@ class Shell(Cmd):
     # command parameters
     parameters = []
 
-    def __init__(self, server="127.0.0.1", port=10001):
+    def __init__(self, ip, port):
         Cmd.__init__(self)
-        self.prompt = '[' + server + ':' + str(port) + ']>> '
-        self.client = Client(server=server, port=port)
+        self.prompt = '[' + ip + ':' + str(port) + ']>> '
+        self.client = Client(ip=ip, port=port)
         if 200 == self.client.check_bucket_exists('.seed'):
             print "remote node initialized"
         else:

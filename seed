@@ -28,17 +28,18 @@ if float("%d.%d" %(sys.version_info[0], sys.version_info[1])) < 2.7:
 import re
 import argparse
 import logging
+import os
 
 from shell import Shell
-from daemon import Daemon
+from server import Server
 from utils import Initialize
 
 def main():
     """SEED main program"""
 
     # create logger
-    logger = logging.getLogger('SEED logger')
-    logger.setLevel(logging.DEBUG)
+    seedlog = logging.getLogger('SEED logger')
+    seedlog.setLevel(logging.DEBUG)
 
     # create console handler and set level to debug
     ch = logging.StreamHandler()
@@ -51,7 +52,10 @@ def main():
     ch.setFormatter(formatter)
 
     # add ch to logger
-    logger.addHandler(ch)
+    seedlog.addHandler(ch)
+
+    # default root directory
+    default_root = os.path.abspath(os.path.join(os.getcwd(), 's3'))
 
     parser = argparse.ArgumentParser(
         description='Storage based on "Extemporal Ensemble" Devices'
@@ -91,7 +95,7 @@ def main():
         action='store',
         dest='server',
         default='127.0.0.1',
-        help='connect server on specified IP address',
+        help='connect/create server on specified IP address',
         )
 
     parser.add_argument(
@@ -107,7 +111,7 @@ def main():
         '-r', '--root',
         action='store',
         dest='root',
-        default='/tmp/s3',
+        default=default_root,
         help='load server on specified directory as root',
         )
 
@@ -133,15 +137,15 @@ def main():
 
     elif options.shell:
         # run the shell @ host
-        logger.info('Opening shell on host %s port %d ...' %
-                    (options.server, options.port))
+        seedlog.info('Opening shell on host %s port %d ...' %
+                     (options.server, options.port))
         Shell(options.server, options.port).cmdloop()
 
     elif options.daemon:
         # run the daemon on specified root directory, bucket depth and port
-        logger.info('Serving HTTP on port %d root %s ...' %
-                    (options.port, options.root))
-        Daemon(options.port, options.root).run()
+        seedlog.info('Serving on port %d root %s ...' %
+                     (options.port, options.root))
+        Server(options.server, options.port, options.root).run()
 
     else:
         print "either start daemon (-D) or enter shell (-S), "\
