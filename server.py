@@ -5,21 +5,22 @@ Implementation of a Simplified S3-like storage server based on local files.
 """
 import os
 import datetime
+
 from Pyro4.core import Daemon
 from Pyro4 import config as PyroConfig
 
 from utils import Initialize
-from utils import DefaultID
 from utils import SeedLog
+from utils import DEFAULT_ID, DEFAULT_HMAC_KEY
 
 class Server(Daemon):
     """XML RPC Server for SEED"""
     def __init__(self, ip, port, root_directory):
-        PyroConfig.HMAC_KEY = 'SEED indentifier'
+        PyroConfig.HMAC_KEY = DEFAULT_HMAC_KEY
         Daemon.__init__(self, host = ip, port = port)
         # register(Obj, ID) 2nd parameter ID cannot be empty
-        uri = self.register(S3Handler(root_directory), DefaultID)
-        SeedLog.info(uri)
+        uri = self.register(S3Handler(root_directory), DEFAULT_ID)
+        SeedLog.info("URI: %s" % uri)
 
     def run(self):
         self.requestLoop()
@@ -114,7 +115,7 @@ class S3Handler(object):
         else:
             response = open(path).read()
 
-        return(response)
+        return response
 
     def status(self):
         return "not implemented"

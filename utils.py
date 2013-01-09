@@ -56,6 +56,9 @@ def Version():
 
     return version
 
+# default root directory
+DEFAULT_ROOT = os.path.abspath(os.path.join(os.getcwd(), 's3'))
+
 def Initialize(root):
     """init SEED root"""
     seed_meta_path = os.path.join(root, '.seed')
@@ -71,8 +74,9 @@ def Initialize(root):
 
     return
 
-DefaultID = "SEED"
+DEFAULT_ID = "SEED"
+DEFAULT_HMAC_KEY = 'SEED indentifier'
 
-def NodeURI(ip, port, id = DefaultID):
+def NodeURI(ip, port, id = DEFAULT_ID):
     """Use IP:Port as node name, create connection without Pyro4 name server"""
-    return 'PYRO:' + DefaultID + '@' + ip + ':' + str(port)
+    return 'PYRO:' + DEFAULT_ID + '@' + ip + ':' + str(port)

@@ -32,15 +32,12 @@ import os
 
 from shell import Shell
 from server import Server
-from utils import Initialize
-from utils import SeedLog, InitLogger
+from utils import DEFAULT_ROOT
+from utils import Initialize, SeedLog, InitLogger
 
 def main():
     """SEED main program"""
     InitLogger()
-
-    # default root directory
-    default_root = os.path.abspath(os.path.join(os.getcwd(), 's3'))
 
     parser = argparse.ArgumentParser(
         description='Storage based on "Extemporal Ensemble" Devices'
@@ -96,7 +93,7 @@ def main():
         '-r', '--root',
         action='store',
         dest='root',
-        default=default_root,
+        default=DEFAULT_ROOT,
         help='load server on specified directory as root',
         )
 
