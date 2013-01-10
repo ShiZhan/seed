@@ -22,8 +22,7 @@ and scale. """
 import sys
 
 if float("%d.%d" %(sys.version_info[0], sys.version_info[1])) < 2.7:
-    sys.stderr.write("ERROR: Python 2.7 or higher required, sorry.\n")
-    sys.exit(1)
+    sys.stderr.write("WARNING: Python below 2.6 need argparse.\n")
 
 import re
 import argparse
