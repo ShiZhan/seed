@@ -66,7 +66,7 @@ def Initialize(root):
         SeedLog.warn('already initialized.')
 
     else:
-        os.mkdir(seed_meta_path)
+        os.makedirs(seed_meta_path)
         # setup/update version in self.directory+'/.seed/version'
         version_file_name = seed_meta_path + '/version'
         with open(version_file_name, 'w') as version_file:
