@@ -17,10 +17,10 @@ class Shell(Cmd):
     # command parameters
     parameters = []
 
-    def __init__(self, ip, port):
+    def __init__(self, ip_address, port):
         Cmd.__init__(self)
-        self.prompt = '[' + ip + ':' + str(port) + ']>> '
-        self.client = Client(ip=ip, port=port)
+        self.prompt = '[' + ip_address + ':' + str(port) + ']>> '
+        self.client = Client(ip_address=ip_address, port=port)
         if 200 == self.client.check_bucket_exists('.seed'):
             print "remote node initialized"
         else:
@@ -34,7 +34,7 @@ class Shell(Cmd):
     def do_shell(self, line):
         """Run a shell command"""
         print "running shell command:", line
-        # beware of the decode/encode pair, since 'output' may vary between OSes.
+        # beware of the encoding, since 'output' may vary between shell/OSes.
         output = os.popen(line).read()
         print output
 
@@ -58,7 +58,8 @@ class Shell(Cmd):
             print "parameter not enough, need '[bucket] [key] [value]'."
         else:
             self.client.put(parameters[0], parameters[1], parameters[2])
-            print "put %s=%s into %s" % (parameters[1], parameters[2], parameters[0])
+            print "put %s=%s into %s" % \
+                (parameters[1], parameters[2], parameters[0])
 
     def do_get(self, line):
         """get objects"""

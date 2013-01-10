@@ -27,17 +27,15 @@ if float("%d.%d" %(sys.version_info[0], sys.version_info[1])) < 2.7:
 
 import re
 import argparse
-import logging
-import os
 
 from shell import Shell
 from server import Server
+from utils import _SEED_LOG, _init_logger, _init_root
 from utils import DEFAULT_ROOT
-from utils import Initialize, SeedLog, InitLogger
 
 def main():
     """SEED main program"""
-    InitLogger()
+    _init_logger()
 
     parser = argparse.ArgumentParser(
         description='Storage based on "Extemporal Ensemble" Devices'
@@ -99,7 +97,7 @@ def main():
 
     options = parser.parse_args()
 
-    # valid server, port
+    # valid ip, port
     valid_ip = \
         re.search(
             '^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])(\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])){3}',
@@ -112,21 +110,21 @@ def main():
               "should be as '-a 127.0.0.1 -p 10001 (between 1000 and 65535)'."
         exit(1)
 
-    # which way to go ... start daemon or open shell?
+    # which way to go ... start server or open cli or simply init then return?
     if options.initialize:
         # run the shell @ host
-        Initialize(options.root)
+        _init_root(options.root)
 
     elif options.cli:
         # run the shell @ host
-        SeedLog.info('Opening command line interface on ip %s port %d ...' %
-                     (options.ip, options.port))
+        _SEED_LOG.info('Opening command line interface on ip %s port %d ...' %
+                       (options.ip, options.port))
         Shell(options.ip, options.port).cmdloop()
 
     elif options.server:
         # run the server on specified ip, port and root directory
-        SeedLog.info('Serving on ip %s port %d root %s ...' %
-                     (options.ip, options.port, options.root))
+        _SEED_LOG.info('Serving on ip %s port %d root %s ...' %
+                       (options.ip, options.port, options.root))
         Server(options.ip, options.port, options.root).run()
 
     else:
