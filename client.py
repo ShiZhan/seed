@@ -22,9 +22,19 @@ class Client(Proxy):
     def put(self, bucket, key, file_name):
         """put local file to remote bucket:key"""
         _SEED_LOG.info("put %s %s %s" % (bucket, key, file_name))
+        # 1. write the file to local cache (use memory as many as possible)
+        # 2. contact server to decide how to do striping and encoding
+        #    in the form of a dict, which is stored in both client and server
+        # 3. do the encoding
+        # 4. add encoded chunks to transferring queue
+        # 5. sync with (multiple) servers
         return
 
     def get(self, bucket, key):
         """get remote bucket:key to local file"""
         _SEED_LOG.info("get %s %s" % (bucket, key))
+        # 1. contact server to decide where to get the chunks and do decoding
+        #    in the form of a dict, which is then cached in client
+        # 2. download chunks to local cache (use memory as many as possible)
+        # 3. do the decoding and save the file
         return
