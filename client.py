@@ -17,6 +17,7 @@ class Client(Proxy):
         PyroConfig.HMAC_KEY = DEFAULT_HMAC_KEY
         Proxy.__init__(self, NodeURI(ip, port))
 
+    # local functions
     def put(self, bucket, key, value):
         return
 

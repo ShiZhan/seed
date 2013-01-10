@@ -1,6 +1,7 @@
 #coding=utf-8
 """Seed.server -- metadata and data server program for SEED storage.
-Daemon:
+
+Server:
 Implementation of a Simplified S3-like storage server based on local files.
 """
 import os
@@ -18,7 +19,7 @@ class Server(Daemon):
     def __init__(self, ip, port, root_directory):
         PyroConfig.HMAC_KEY = DEFAULT_HMAC_KEY
         Daemon.__init__(self, host = ip, port = port)
-        # register(Obj, ID) 2nd parameter ID cannot be empty
+        # register(Obj, ID) 2nd parameter 'ID' cannot be empty
         uri = self.register(S3Handler(root_directory), DEFAULT_ID)
         SeedLog.info("URI: %s" % uri)
 

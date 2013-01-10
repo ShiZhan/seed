@@ -1,11 +1,11 @@
 #coding=utf-8
 """SEED program utility helper classes and functions
 
-SeedLog: Global logger for internal use
+SeedLog:    Global logger for internal use
 InitLogger: Configure global logger
-Version: Check code version from local repository
-Initialize: Initialize '.seed' bucket for holding meta data
-NodeURI: Generate node URI for Pyro4 object using ip, port and DefaultID
+Version:    Check code version from local repository
+Initialize: Initialize root directory and '.seed' bucket for storing meta data
+NodeURI:    Generate node URI for Pyro4 object using ip, port and DefaultID
 """
 import os
 import time

@@ -49,19 +49,19 @@ def main():
         version='%(prog)s 1.0')
 
     parser.add_argument(
-        '-D', '--daemon',
+        '-S', '--server',
         action='store_true',
-        dest='daemon',
+        dest='server',
         default=False,
-        help='start daemon on specified port',
+        help='start server on specified ip and port',
         )
 
     parser.add_argument(
-        '-S', '--shell',
+        '-C', '--cli',
         action='store_true',
-        dest='shell',
+        dest='cli',
         default=False,
-        help='start shell on specified server and port'
+        help='open command line interface on specified server ip and port'
         )
 
     parser.add_argument(
@@ -73,9 +73,9 @@ def main():
         )
 
     parser.add_argument(
-        '-s', '--server',
+        '-a', '--address',
         action='store',
-        dest='server',
+        dest='ip',
         default='127.0.0.1',
         help='connect/create server on specified IP address',
         )
@@ -100,16 +100,16 @@ def main():
     options = parser.parse_args()
 
     # valid server, port
-    valid_server = \
+    valid_ip = \
         re.search(
             '^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])(\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])){3}',
-            options.server
+            options.ip
             )
     valid_port = (options.port > 1000 and options.port < 65535)
 
-    if not (valid_server and valid_port):
+    if not (valid_ip and valid_port):
         print "invalid parameter, "\
-              "should be as '-s 127.0.0.1 -p 10001 (between 1000 and 65535)'."
+              "should be as '-a 127.0.0.1 -p 10001 (between 1000 and 65535)'."
         exit(1)
 
     # which way to go ... start daemon or open shell?
@@ -117,20 +117,20 @@ def main():
         # run the shell @ host
         Initialize(options.root)
 
-    elif options.shell:
+    elif options.cli:
         # run the shell @ host
-        SeedLog.info('Opening shell on host %s port %d ...' %
-                     (options.server, options.port))
-        Shell(options.server, options.port).cmdloop()
+        SeedLog.info('Opening command line interface on ip %s port %d ...' %
+                     (options.ip, options.port))
+        Shell(options.ip, options.port).cmdloop()
 
-    elif options.daemon:
-        # run the daemon on specified root directory, bucket depth and port
-        SeedLog.info('Serving on host %s port %d root %s ...' %
-                     (options.server, options.port, options.root))
-        Server(options.server, options.port, options.root).run()
+    elif options.server:
+        # run the server on specified ip, port and root directory
+        SeedLog.info('Serving on ip %s port %d root %s ...' %
+                     (options.ip, options.port, options.root))
+        Server(options.ip, options.port, options.root).run()
 
     else:
-        print "either start daemon (-D) or enter shell (-S), "\
+        print "either start server (-S) or enter CLI (-C), "\
               " or use -h to access help."
 
 
