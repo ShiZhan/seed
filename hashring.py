@@ -1,9 +1,14 @@
-#coding=utf-8
-"""Consistent hashing"""
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 # http://amix.dk/blog/viewEntry/19367
 # modified 2012 by g.shizhan.g@gmail.com
 # change md5 to hashlib.md5
+
+"""Consistent hashing"""
+
 import hashlib
+
 
 class HashRing(object):
 
@@ -14,6 +19,7 @@ class HashRing(object):
         `replicas` indicates how many virtual points should be used pr. node,
         replicas are required to improve the distribution.
         """
+
         self.replicas = replicas
 
         self.ring = dict()
@@ -26,6 +32,7 @@ class HashRing(object):
     def add_node(self, node):
         """Adds a `node` to the hash ring (including a number of replicas).
         """
+
         for i in xrange(0, self.replicas):
             key = self.gen_key('%s:%s' % (node, i))
             self.ring[key] = node
@@ -36,6 +43,7 @@ class HashRing(object):
     def remove_node(self, node):
         """Removes `node` from the hash ring and its replicas.
         """
+
         for i in xrange(0, self.replicas):
             key = self.gen_key('%s:%s' % (node, i))
             del self.ring[key]
@@ -46,6 +54,7 @@ class HashRing(object):
 
         If the hash ring is empty, `None` is returned.
         """
+
         return self.get_node_pos(string_key)[0]
 
     def get_node_pos(self, string_key):
@@ -54,8 +63,9 @@ class HashRing(object):
 
         If the hash ring is empty, (`None`, `None`) is returned.
         """
+
         if not self.ring:
-            return None, None
+            return (None, None)
 
         key = self.gen_key(string_key)
 
@@ -63,9 +73,9 @@ class HashRing(object):
         for i in xrange(0, len(nodes)):
             node = nodes[i]
             if key <= node:
-                return self.ring[node], i
+                return (self.ring[node], i)
 
-        return self.ring[nodes[0]], 0
+        return (self.ring[nodes[0]], 0)
 
     def get_nodes(self, string_key):
         """Given a string key it returns the nodes as a generator that can hold the key.
@@ -73,10 +83,11 @@ class HashRing(object):
         The generator is never ending and iterates through the ring
         starting at the correct position.
         """
-        if not self.ring:
-            yield None, None
 
-        node, pos = self.get_node_pos(string_key)
+        if not self.ring:
+            yield (None, None)
+
+        (node, pos) = self.get_node_pos(string_key)
         for key in self._sorted_keys[pos:]:
             yield self.ring[key]
 
@@ -90,6 +101,9 @@ class HashRing(object):
 
         md5 is currently used because it mixes well.
         """
+
         m = hashlib.md5.new()
         m.update(key)
         return long(m.hexdigest(), 16)
+
+
