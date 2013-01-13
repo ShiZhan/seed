@@ -29,7 +29,7 @@ import argparse
 
 from shell import Shell
 from server import Server
-from utils import _SEED_LOG, _init_logger, _init_root
+from utils import _SEED_LOG, _init_logger, _init_root, _version
 from utils import DEFAULT_ROOT
 
 def main():
@@ -43,7 +43,7 @@ def main():
     parser.add_argument(
         '-v', '--version',
         action='version',
-        version='%(prog)s 1.0')
+        version='%(prog)s ' + _version())
 
     parser.add_argument(
         '-S', '--server',
@@ -58,7 +58,7 @@ def main():
         action='store_true',
         dest='cli',
         default=False,
-        help='open command line interface on specified server ip and port'
+        help='open command line interface on specified server'
         )
 
     parser.add_argument(
@@ -74,7 +74,7 @@ def main():
         action='store',
         dest='ip',
         default='127.0.0.1',
-        help='connect/create server on specified IP address',
+        help='connect/create server on specified ip address',
         )
 
     parser.add_argument(
