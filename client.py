@@ -26,12 +26,7 @@ class Client(Proxy):
 
     # local functions
 
-    def put(
-        self,
-        bucket,
-        key,
-        file_name,
-        ):
+    def put(self, bucket, key, file_name):
         """put local file to remote bucket:key"""
 
         _SEED_LOG.info('put %s %s %s' % (bucket, key, file_name))
