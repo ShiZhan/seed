@@ -37,6 +37,7 @@ class Client(Proxy):
         # 3. do the encoding
         # 4. add encoded chunks to transferring queue
         # 5. sync with (multiple) servers
+        self.put_meta()
 
         return
 
@@ -49,6 +50,7 @@ class Client(Proxy):
         #    in the form of a dict, which is then cached in client
         # 2. download chunks to local cache (use memory as many as possible)
         # 3. do the decoding and save the file
+        self.get_meta()
 
         return
 

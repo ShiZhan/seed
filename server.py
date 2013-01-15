@@ -13,6 +13,7 @@ from datetime import datetime
 from Pyro4.core import Daemon
 from Pyro4 import config as PyroConfig
 
+from hashring import HashRing
 from utils import _init_root, _SEED_LOG
 from utils import DEFAULT_ID, DEFAULT_HMAC_KEY
 
@@ -21,12 +22,7 @@ class Server(Daemon):
 
     """XML RPC Server for SEED"""
 
-    def __init__(
-        self,
-        ip_address,
-        port,
-        root_directory,
-        ):
+    def __init__(self, ip_address, port, root_directory):
         PyroConfig.HMAC_KEY = DEFAULT_HMAC_KEY
         Daemon.__init__(self, host=ip_address, port=port)
 
@@ -123,6 +119,22 @@ class S3Handler(object):
             response = 204
 
         return response
+
+    # get/put functions, metadata phase
+
+    def get_meta():
+        return
+
+    def put_meta():
+        return
+
+    # chunk transferring functions
+
+    def get_trunk():
+        return
+
+    def put_trunk():
+        return
 
     # system functions
 
