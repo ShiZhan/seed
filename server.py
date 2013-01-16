@@ -13,7 +13,6 @@ from datetime import datetime
 from Pyro4.core import Daemon
 from Pyro4 import config as PyroConfig
 
-from hashring import HashRing
 from utils import _init_root, _SEED_LOG
 from utils import DEFAULT_ID, DEFAULT_HMAC_KEY
 

@@ -9,6 +9,8 @@ Implementation of a Simplified S3-like storage client based on HTTPClient.
 from Pyro4.core import Proxy
 from Pyro4 import config as PyroConfig
 
+from hashring import HashRing
+
 from utils import _SEED_LOG, _node_uri
 from utils import DEFAULT_HMAC_KEY
 
