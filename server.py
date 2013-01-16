@@ -34,6 +34,7 @@ class Server(Daemon):
     def run(self):
         """enter server loop"""
 
+        _SEED_LOG.info('Request loop ...')
         self.requestLoop()
 
 
