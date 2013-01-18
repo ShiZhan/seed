@@ -3,7 +3,7 @@
 
 """Seed.client -- client program for SEED storage.
 Client:
-Implementation of a Simplified S3-like storage client based on HTTPClient.
+Implementation of a Simplified S3-like storage client based on Pyro4 RPC.
 """
 
 from Pyro4.core import Proxy
