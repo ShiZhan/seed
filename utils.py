@@ -76,7 +76,7 @@ def _version():
 
 # default root directory
 
-DEFAULT_ROOT = os.path.abspath(os.path.join(os.getcwd(), 's3'))
+DEFAULT_ROOT = os.path.abspath(os.path.join(os.getcwd(), 'storage'))
 
 
 def _init_root(root):
