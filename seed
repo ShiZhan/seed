@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-"""SEED -- A storage system based on 'Extemporal Ensemble' Devices
-
-Program aims at minimum deployment effort and dependencies, easy to manage
-and scale. """
+"""
+SEED -- A storage system based on 'Extemporal Ensemble' Devices
+Aims at minimum deployment effort and dependencies, easy to manage and scale.
+"""
 #
 #  Copyright 2012 Shi.Zhan
 #

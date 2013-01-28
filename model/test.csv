@@ -1,6 +1,0 @@
-test,is,object
-test_bucket,is,bucket
-root,is,bucket
-root,version,1bcd822b6a800bd7e9a61e6d14f7053e3b7019b8
-root,contain,test
-root,contain,test_bucket

@@ -10,4 +10,4 @@ fs_model.add(('test', 'is', 'object'))
 fs_model.add(('root', 'contain', 'test_bucket'))
 fs_model.add(('test_bucket', 'is', 'bucket'))
 
-fs_model.save('model/test.csv')
+fs_model.save('storage/test.csv')
