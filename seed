@@ -46,7 +46,7 @@ def main():
         version='%(prog)s ' + _version())
 
     parser.add_argument(
-        '-S', '--server',
+        '-s', '--server',
         action='store_true',
         dest='server',
         default=False,
@@ -54,7 +54,7 @@ def main():
         )
 
     parser.add_argument(
-        '-C', '--cli',
+        '-c', '--cli',
         action='store_true',
         dest='cli',
         default=False,

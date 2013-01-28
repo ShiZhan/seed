@@ -55,11 +55,11 @@ def _version():
 
     if os.path.exists('.git'):
         with open('.git/refs/heads/master', mode='r') as git_meta:
-            version = git_meta.read()
+            version = ''.join(git_meta.read().split())
     elif os.path.exists('.hg/git'):
 
         with open('.hg/git/refs/heads/master', mode='r') as hggit_meta:
-            version = hggit_meta.read()
+            version = ''.join(hggit_meta.read().split())
     elif os.path.exists('.hg'):
 
         with open('.hg/cache/tags', mode='r') as hg_meta:

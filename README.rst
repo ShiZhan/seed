@@ -13,7 +13,7 @@ Organize commodity storage devices with minimum cost to build a loose-coupled sy
 Design
 ------
 
-All modules in one excutable, the depenencies are listed in Requirements_.
+Minimum dependency, listed in Requirements_.
 
 _`Requirements`
 ---------------
@@ -27,6 +27,8 @@ _`Requirements`
 to access.
 
 .. _Pyro: http://packages.python.org/Pyro4/intro.html
+
+This lib can be replace by xmlrpclib or some other rpc modules, if it's sufficiently lightweight and fast.
 
 Related Work
 ------------
