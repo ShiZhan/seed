@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <office:document xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0" xmlns:number="urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0" xmlns:presentation="urn:oasis:names:tc:opendocument:xmlns:presentation:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:chart="urn:oasis:names:tc:opendocument:xmlns:chart:1.0" xmlns:dr3d="urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0" xmlns:math="http://www.w3.org/1998/Math/MathML" xmlns:form="urn:oasis:names:tc:opendocument:xmlns:form:1.0" xmlns:script="urn:oasis:names:tc:opendocument:xmlns:script:1.0" xmlns:config="urn:oasis:names:tc:opendocument:xmlns:config:1.0" xmlns:ooo="http://openoffice.org/2004/office" xmlns:ooow="http://openoffice.org/2004/writer" xmlns:oooc="http://openoffice.org/2004/calc" xmlns:dom="http://www.w3.org/2001/xml-events" xmlns:xforms="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:smil="urn:oasis:names:tc:opendocument:xmlns:smil-compatible:1.0" xmlns:anim="urn:oasis:names:tc:opendocument:xmlns:animation:1.0" xmlns:rpt="http://openoffice.org/2005/report" xmlns:of="urn:oasis:names:tc:opendocument:xmlns:of:1.2" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:grddl="http://www.w3.org/2003/g/data-view#" xmlns:officeooo="http://openoffice.org/2009/office" xmlns:tableooo="http://openoffice.org/2009/table" xmlns:drawooo="http://openoffice.org/2010/draw" xmlns:calcext="urn:org:documentfoundation:names:experimental:calc:xmlns:calcext:1.0" xmlns:field="urn:openoffice:names:experimental:ooo-ms-interop:xmlns:field:1.0" xmlns:formx="urn:openoffice:names:experimental:ooxml-odf-interop:xmlns:form:1.0" xmlns:css3t="http://www.w3.org/TR/css3-text/" office:version="1.2" office:mimetype="application/vnd.oasis.opendocument.graphics">
- <office:meta><meta:creation-date>2012-12-07T14:55:53.30</meta:creation-date><dc:date>2012-12-07T15:22:21.41</dc:date><meta:editing-duration>PT6M56S</meta:editing-duration><meta:editing-cycles>3</meta:editing-cycles><meta:generator>LibreOffice/3.6$Windows_x86 LibreOffice_project/2ef5aff-a6fb0ff-166bdff-cf087ad-0f1389</meta:generator><meta:document-statistic meta:object-count="184"/></office:meta>
+ <office:meta><meta:creation-date>2012-12-07T14:55:53.30</meta:creation-date><dc:date>2012-12-07T15:22:21.41</dc:date><meta:editing-duration>PT6M56S</meta:editing-duration><meta:editing-cycles>3</meta:editing-cycles><meta:generator>LibreOffice/3.6$Windows_x86 LibreOffice_project/2ef5aff-a6fb0ff-166bdff-cf087ad-0f1389</meta:generator><meta:document-statistic meta:object-count="224"/></office:meta>
  <office:settings>
   <config:config-item-set config:name="ooo:view-settings">
    <config:config-item config:name="VisibleAreaTop" config:type="int">-301</config:config-item>
    <config:config-item config:name="VisibleAreaLeft" config:type="int">-3848</config:config-item>
-   <config:config-item config:name="VisibleAreaWidth" config:type="int">37432</config:config-item>
-   <config:config-item config:name="VisibleAreaHeight" config:type="int">21647</config:config-item>
+   <config:config-item config:name="VisibleAreaWidth" config:type="int">37433</config:config-item>
+   <config:config-item config:name="VisibleAreaHeight" config:type="int">21648</config:config-item>
    <config:config-item-map-indexed config:name="Views">
     <config:config-item-map-entry>
      <config:config-item config:name="ViewId" config:type="string">view1</config:config-item>
@@ -29,7 +29,7 @@
      <config:config-item config:name="NoColors" config:type="boolean">true</config:config-item>
      <config:config-item config:name="RulerIsVisible" config:type="boolean">true</config:config-item>
      <config:config-item config:name="PageKind" config:type="short">0</config:config-item>
-     <config:config-item config:name="SelectedPage" config:type="short">0</config:config-item>
+     <config:config-item config:name="SelectedPage" config:type="short">4</config:config-item>
      <config:config-item config:name="IsLayerMode" config:type="boolean">true</config:config-item>
      <config:config-item config:name="IsDoubleClickTextEdit" config:type="boolean">true</config:config-item>
      <config:config-item config:name="IsClickChangeRotation" config:type="boolean">false</config:config-item>
@@ -350,6 +350,15 @@
   <style:style style:name="gr35" style:family="graphic" style:parent-style-name="standard">
    <style:graphic-properties draw:stroke="none" svg:stroke-color="#000000" draw:fill="none" draw:fill-color="#ffffff" fo:min-height="1.654cm"/>
   </style:style>
+  <style:style style:name="gr36" style:family="graphic" style:parent-style-name="objectwithoutfill">
+   <style:graphic-properties draw:stroke="dash" draw:stroke-dash="Fine_20_Dashed_20__28_var_29_" svg:stroke-width="0.1cm" svg:stroke-color="#c0c0c0" draw:marker-start-width="0.35cm" draw:marker-end-width="0.35cm" draw:fill="none" draw:textarea-vertical-align="middle" fo:padding-top="0.175cm" fo:padding-bottom="0.175cm" fo:padding-left="0.3cm" fo:padding-right="0.3cm"/>
+  </style:style>
+  <style:style style:name="gr37" style:family="graphic" style:parent-style-name="objectwithoutfill">
+   <style:graphic-properties svg:stroke-width="0.08cm" svg:stroke-color="#23ff23" draw:marker-start-width="0.32cm" draw:marker-end="" draw:marker-end-width="0.42cm" draw:fill="none" draw:textarea-vertical-align="middle" fo:padding-top="0.165cm" fo:padding-bottom="0.165cm" fo:padding-left="0.29cm" fo:padding-right="0.29cm"/>
+  </style:style>
+  <style:style style:name="gr38" style:family="graphic" style:parent-style-name="objectwithoutfill">
+   <style:graphic-properties svg:stroke-width="0.08cm" svg:stroke-color="#23ff23" draw:marker-start="Line_20_Arrow_20_1" draw:marker-start-width="0.32cm" draw:marker-end="Line_20_Arrow_20_1" draw:marker-end-width="0.42cm" draw:fill="none" draw:textarea-vertical-align="middle" fo:padding-top="0.165cm" fo:padding-bottom="0.165cm" fo:padding-left="0.29cm" fo:padding-right="0.29cm"/>
+  </style:style>
   <style:style style:name="P1" style:family="paragraph">
    <style:paragraph-properties fo:text-align="center"/>
   </style:style>
@@ -455,6 +464,10 @@
    <style:paragraph-properties fo:text-align="start"/>
    <style:text-properties fo:font-size="16pt" style:font-size-asian="16pt" style:font-size-complex="16pt"/>
   </style:style>
+  <style:style style:name="P29" style:family="paragraph">
+   <style:paragraph-properties fo:line-height="100%" fo:text-align="start"/>
+   <style:text-properties fo:font-size="10.5pt" fo:font-style="normal" style:font-size-asian="10.5pt" style:font-style-asian="normal" style:font-size-complex="10.5pt" style:font-style-complex="normal"/>
+  </style:style>
   <style:style style:name="T1" style:family="text">
    <style:text-properties style:text-position="0% 100%" fo:font-size="12pt" fo:font-style="italic" style:font-size-asian="12pt" style:font-style-asian="italic" style:font-size-complex="12pt" style:font-style-complex="italic"/>
   </style:style>
@@ -517,6 +530,12 @@
   </style:style>
   <style:style style:name="T21" style:family="text">
    <style:text-properties fo:font-family="Consolas" style:font-family-generic="swiss" style:font-pitch="variable" fo:font-size="12pt" style:font-family-asian="文泉驿等宽微米黑" style:font-style-name-asian="标准" style:font-family-generic-asian="swiss" style:font-pitch-asian="variable" style:font-size-asian="12pt" style:font-size-complex="12pt"/>
+  </style:style>
+  <style:style style:name="T22" style:family="text">
+   <style:text-properties fo:font-family="Consolas" style:font-family-generic="swiss" style:font-pitch="variable" fo:font-size="16pt" style:font-family-asian="文泉驿等宽微米黑" style:font-style-name-asian="标准" style:font-family-generic-asian="swiss" style:font-pitch-asian="variable" style:font-size-asian="16pt" style:font-size-complex="16pt"/>
+  </style:style>
+  <style:style style:name="T23" style:family="text">
+   <style:text-properties fo:font-size="10.5pt" fo:font-style="normal" fo:font-weight="bold" style:font-size-asian="10.5pt" style:font-style-asian="normal" style:font-weight-asian="bold" style:font-size-complex="10.5pt" style:font-style-complex="normal" style:font-weight-complex="bold"/>
   </style:style>
   <text:list-style style:name="L1">
    <text:list-level-style-bullet text:level="1" text:bullet-char="●">
@@ -1324,11 +1343,165 @@
     </draw:frame>
    </draw:page>
    <draw:page draw:name="page5" draw:style-name="dp2" draw:master-page-name="默认">
+    <draw:line draw:style-name="gr36" draw:text-style-name="P1" draw:layer="layout" svg:x1="15cm" svg:y1="2cm" svg:x2="15cm" svg:y2="18.1cm">
+     <text:p/>
+    </draw:line>
     <draw:frame draw:style-name="gr18" draw:text-style-name="P26" draw:layer="controls" svg:width="9cm" svg:height="1.928cm" svg:x="1cm" svg:y="18cm">
      <draw:text-box>
       <text:p><text:span text:style-name="T12">Case 4: Multi View Storage System</text:span></text:p>
       <text:p><text:span text:style-name="T13">Shi.Zhan (c) 2013</text:span></text:p>
       <text:p><text:span text:style-name="T13">Project SEED</text:span></text:p>
+     </draw:text-box>
+    </draw:frame>
+    <draw:custom-shape draw:style-name="gr1" draw:text-style-name="P8" xml:id="id77" draw:id="id77" draw:layer="layout" svg:width="3cm" svg:height="1cm" svg:x="8cm" svg:y="2cm">
+     <text:p text:style-name="P1"><text:span text:style-name="T3">root_A</text:span></text:p>
+     <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:glue-points="10800 0 0 10800 10800 21600 21600 10800" draw:type="flowchart-process" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
+    </draw:custom-shape>
+    <draw:custom-shape draw:style-name="gr28" draw:text-style-name="P25" xml:id="id76" draw:id="id76" draw:layer="layout" svg:width="3cm" svg:height="1cm" svg:x="2cm" svg:y="2cm">
+     <text:p text:style-name="P1"><text:span text:style-name="T20">uuid</text:span></text:p>
+     <text:p text:style-name="P2"><text:span text:style-name="T1">000-001</text:span></text:p>
+     <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:glue-points="10800 0 0 10800 10800 21600 21600 10800" draw:type="flowchart-process" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
+    </draw:custom-shape>
+    <draw:connector draw:style-name="gr7" draw:text-style-name="P4" draw:layer="layout" draw:type="curve" svg:x1="5cm" svg:y1="2.5cm" svg:x2="8cm" svg:y2="2.5cm" draw:start-shape="id76" draw:start-glue-point="7" draw:end-shape="id77" draw:end-glue-point="5" svg:d="m5000 2500h3000" svg:viewBox="0 0 3001 1">
+     <text:p text:style-name="P1"><text:span text:style-name="T2">name</text:span></text:p>
+    </draw:connector>
+    <draw:custom-shape draw:style-name="gr28" draw:text-style-name="P25" xml:id="id80" draw:id="id80" draw:layer="layout" svg:width="3cm" svg:height="1cm" svg:x="4cm" svg:y="5cm">
+     <text:p text:style-name="P1"><text:span text:style-name="T20">uuid</text:span></text:p>
+     <text:p text:style-name="P2"><text:span text:style-name="T1">000-001</text:span></text:p>
+     <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:glue-points="10800 0 0 10800 10800 21600 21600 10800" draw:type="flowchart-process" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
+    </draw:custom-shape>
+    <draw:custom-shape draw:style-name="gr28" draw:text-style-name="P25" xml:id="id79" draw:id="id79" draw:layer="layout" svg:width="3cm" svg:height="1cm" svg:x="22cm" svg:y="5cm">
+     <text:p text:style-name="P1"><text:span text:style-name="T20">uuid</text:span></text:p>
+     <text:p text:style-name="P2"><text:span text:style-name="T1">000-002</text:span></text:p>
+     <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:glue-points="10800 0 0 10800 10800 21600 21600 10800" draw:type="flowchart-process" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
+    </draw:custom-shape>
+    <draw:connector draw:style-name="gr30" draw:text-style-name="P9" draw:layer="layout" svg:x1="26.5cm" svg:y1="3cm" svg:x2="25cm" svg:y2="5.5cm" draw:start-shape="id78" draw:start-glue-point="6" draw:end-shape="id79" draw:end-glue-point="7" svg:d="m26500 3000v2500h-1500" svg:viewBox="0 0 1501 2501">
+     <text:p text:style-name="P1"><text:span text:style-name="T22">contain</text:span></text:p>
+    </draw:connector>
+    <draw:connector draw:style-name="gr30" draw:text-style-name="P9" draw:layer="layout" svg:x1="3.5cm" svg:y1="3cm" svg:x2="4cm" svg:y2="5.5cm" draw:start-shape="id76" draw:start-glue-point="6" draw:end-shape="id80" draw:end-glue-point="5" svg:d="m3500 3000v1001h-1v1499h501" svg:viewBox="0 0 502 2501">
+     <text:p text:style-name="P1"><text:span text:style-name="T2">contain</text:span></text:p>
+    </draw:connector>
+    <draw:custom-shape draw:style-name="gr1" draw:text-style-name="P25" xml:id="id81" draw:id="id81" draw:layer="layout" svg:width="3cm" svg:height="1cm" svg:x="7cm" svg:y="7cm">
+     <text:p text:style-name="P1"><text:span text:style-name="T20">uuid</text:span></text:p>
+     <text:p text:style-name="P2"><text:span text:style-name="T1">001-002</text:span></text:p>
+     <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:glue-points="10800 0 0 10800 10800 21600 21600 10800" draw:type="flowchart-process" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
+    </draw:custom-shape>
+    <draw:connector draw:style-name="gr29" draw:text-style-name="P9" xml:id="id82" draw:id="id82" draw:layer="layout" svg:x1="5.5cm" svg:y1="6cm" svg:x2="7cm" svg:y2="7.5cm" draw:start-shape="id80" draw:end-shape="id81" draw:end-glue-point="5" svg:d="m5500 6000v1500h1500" svg:viewBox="0 0 1501 1501">
+     <text:p/>
+    </draw:connector>
+    <draw:custom-shape draw:style-name="gr1" draw:text-style-name="P25" xml:id="id83" draw:id="id83" draw:layer="layout" svg:width="3cm" svg:height="1cm" svg:x="7cm" svg:y="9cm">
+     <text:p text:style-name="P1"><text:span text:style-name="T20">uuid</text:span></text:p>
+     <text:p text:style-name="P2"><text:span text:style-name="T1">001-003</text:span></text:p>
+     <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:glue-points="10800 0 0 10800 10800 21600 21600 10800" draw:type="flowchart-process" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
+    </draw:custom-shape>
+    <draw:connector draw:style-name="gr30" draw:text-style-name="P9" xml:id="id86" draw:id="id86" draw:layer="layout" svg:x1="5.5cm" svg:y1="7.5cm" svg:x2="7cm" svg:y2="9.5cm" draw:start-shape="id82" draw:start-glue-point="0" draw:end-shape="id83" draw:end-glue-point="5" svg:d="m5500 7500v2000h1500" svg:viewBox="0 0 1501 2001">
+     <text:p text:style-name="P1"><text:span text:style-name="T22">contain</text:span></text:p>
+    </draw:connector>
+    <draw:custom-shape draw:style-name="gr1" draw:text-style-name="P25" xml:id="id90" draw:id="id90" draw:layer="layout" svg:width="3cm" svg:height="1cm" svg:x="19cm" svg:y="8cm">
+     <text:p text:style-name="P1"><text:span text:style-name="T20">uuid</text:span></text:p>
+     <text:p text:style-name="P2"><text:span text:style-name="T1">001-006</text:span></text:p>
+     <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:glue-points="10800 0 0 10800 10800 21600 21600 10800" draw:type="flowchart-process" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
+    </draw:custom-shape>
+    <draw:custom-shape draw:style-name="gr1" draw:text-style-name="P5" xml:id="id84" draw:id="id84" draw:layer="layout" svg:width="3cm" svg:height="1cm" svg:x="10cm" svg:y="5cm">
+     <text:p text:style-name="P1"><text:span text:style-name="T3">foo_bucket1</text:span></text:p>
+     <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:mirror-vertical="false" draw:mirror-horizontal="false" draw:glue-points="10800 0 0 10800 10800 21600 21600 10800" draw:type="flowchart-process" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
+    </draw:custom-shape>
+    <draw:connector draw:style-name="gr7" draw:text-style-name="P4" draw:layer="layout" draw:type="curve" svg:x1="7cm" svg:y1="5.5cm" svg:x2="10cm" svg:y2="5.5cm" draw:start-shape="id80" draw:start-glue-point="7" draw:end-shape="id84" draw:end-glue-point="5" svg:d="m7000 5500h3000" svg:viewBox="0 0 3001 1">
+     <text:p text:style-name="P1"><text:span text:style-name="T2">name</text:span></text:p>
+    </draw:connector>
+    <draw:custom-shape draw:style-name="gr1" draw:text-style-name="P5" xml:id="id85" draw:id="id85" draw:layer="layout" svg:width="3cm" svg:height="1cm" svg:x="16cm" svg:y="5cm">
+     <text:p text:style-name="P1"><text:span text:style-name="T3">foo_bucket2</text:span></text:p>
+     <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:mirror-vertical="false" draw:mirror-horizontal="false" draw:glue-points="10800 0 0 10800 10800 21600 21600 10800" draw:type="flowchart-process" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
+    </draw:custom-shape>
+    <draw:connector draw:style-name="gr7" draw:text-style-name="P4" draw:layer="layout" draw:type="curve" svg:x1="22cm" svg:y1="5.5cm" svg:x2="19cm" svg:y2="5.5cm" draw:start-shape="id79" draw:start-glue-point="3" draw:end-shape="id85" svg:d="m22000 5500h-3000" svg:viewBox="0 0 3001 1">
+     <text:p text:style-name="P1"><text:span text:style-name="T2">name</text:span></text:p>
+    </draw:connector>
+    <draw:custom-shape draw:style-name="gr1" draw:text-style-name="P25" xml:id="id87" draw:id="id87" draw:layer="layout" svg:width="3cm" svg:height="1cm" svg:x="7cm" svg:y="11cm">
+     <text:p text:style-name="P1"><text:span text:style-name="T20">uuid</text:span></text:p>
+     <text:p text:style-name="P2"><text:span text:style-name="T1">001-004</text:span></text:p>
+     <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:glue-points="10800 0 0 10800 10800 21600 21600 10800" draw:type="flowchart-process" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
+    </draw:custom-shape>
+    <draw:connector draw:style-name="gr30" draw:text-style-name="P28" draw:layer="layout" svg:x1="5.5cm" svg:y1="9.5cm" svg:x2="7cm" svg:y2="11.5cm" draw:start-shape="id86" draw:start-glue-point="0" draw:end-shape="id87" draw:end-glue-point="5" svg:d="m5500 9500v2000h1500" svg:viewBox="0 0 1501 2001">
+     <text:p/>
+    </draw:connector>
+    <draw:connector draw:style-name="gr30" draw:text-style-name="P28" xml:id="id98" draw:id="id98" draw:layer="layout" svg:x1="23.5cm" svg:y1="8.5cm" svg:x2="13cm" svg:y2="13.5cm" draw:start-shape="id88" draw:start-glue-point="0" draw:end-shape="id89" draw:end-glue-point="7" svg:d="m23500 8500v5000h-10500" svg:viewBox="0 0 10501 5001">
+     <text:p/>
+    </draw:connector>
+    <draw:connector draw:style-name="gr30" draw:text-style-name="P9" xml:id="id88" draw:id="id88" draw:layer="layout" svg:x1="23.5cm" svg:y1="6cm" svg:x2="22cm" svg:y2="8.5cm" draw:start-shape="id79" draw:start-glue-point="6" draw:end-shape="id90" draw:end-glue-point="7" svg:d="m23500 6000v2500h-1500" svg:viewBox="0 0 1501 2501">
+     <text:p text:style-name="P1"><text:span text:style-name="T22">contain</text:span></text:p>
+    </draw:connector>
+    <draw:custom-shape draw:style-name="gr1" draw:text-style-name="P8" xml:id="id91" draw:id="id91" draw:layer="layout" svg:width="3cm" svg:height="1cm" svg:x="19cm" svg:y="2cm">
+     <text:p text:style-name="P1"><text:span text:style-name="T3">root_B</text:span></text:p>
+     <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:glue-points="10800 0 0 10800 10800 21600 21600 10800" draw:type="flowchart-process" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
+    </draw:custom-shape>
+    <draw:custom-shape draw:style-name="gr28" draw:text-style-name="P25" xml:id="id78" draw:id="id78" draw:layer="layout" svg:width="3cm" svg:height="1cm" svg:x="25cm" svg:y="2cm">
+     <text:p text:style-name="P1"><text:span text:style-name="T20">uuid</text:span></text:p>
+     <text:p text:style-name="P2"><text:span text:style-name="T1">000-002</text:span></text:p>
+     <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:glue-points="10800 0 0 10800 10800 21600 21600 10800" draw:type="flowchart-process" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
+    </draw:custom-shape>
+    <draw:connector draw:style-name="gr7" draw:text-style-name="P4" draw:layer="layout" draw:type="curve" svg:x1="25cm" svg:y1="2.5cm" svg:x2="22cm" svg:y2="2.5cm" draw:start-shape="id78" draw:end-shape="id91" draw:end-glue-point="1" svg:d="m25000 2500h-3000" svg:viewBox="0 0 3001 1">
+     <text:p text:style-name="P1"><text:span text:style-name="T2">name</text:span></text:p>
+    </draw:connector>
+    <draw:custom-shape draw:style-name="gr1" draw:text-style-name="P25" xml:id="id89" draw:id="id89" draw:layer="layout" svg:width="3cm" svg:height="1cm" svg:x="10cm" svg:y="13cm">
+     <text:p text:style-name="P1"><text:span text:style-name="T20">uuid</text:span></text:p>
+     <text:p text:style-name="P2"><text:span text:style-name="T1">001-002</text:span></text:p>
+     <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:glue-points="10800 0 0 10800 10800 21600 21600 10800" draw:type="flowchart-process" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
+    </draw:custom-shape>
+    <draw:connector draw:style-name="gr29" draw:text-style-name="P9" xml:id="id92" draw:id="id92" draw:layer="layout" svg:x1="8.5cm" svg:y1="12cm" svg:x2="10cm" svg:y2="13.5cm" draw:start-shape="id87" draw:start-glue-point="6" draw:end-shape="id89" draw:end-glue-point="5" svg:d="m8500 12000v1500h1500" svg:viewBox="0 0 1501 1501">
+     <text:p/>
+    </draw:connector>
+    <draw:custom-shape draw:style-name="gr1" draw:text-style-name="P25" xml:id="id93" draw:id="id93" draw:layer="layout" svg:width="3cm" svg:height="1cm" svg:x="10cm" svg:y="15cm">
+     <text:p text:style-name="P1"><text:span text:style-name="T20">uuid</text:span></text:p>
+     <text:p text:style-name="P2"><text:span text:style-name="T1">001-003</text:span></text:p>
+     <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:glue-points="10800 0 0 10800 10800 21600 21600 10800" draw:type="flowchart-process" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
+    </draw:custom-shape>
+    <draw:connector draw:style-name="gr30" draw:text-style-name="P9" xml:id="id94" draw:id="id94" draw:layer="layout" svg:x1="8.5cm" svg:y1="13.5cm" svg:x2="10cm" svg:y2="15.5cm" draw:start-shape="id92" draw:start-glue-point="0" draw:end-shape="id93" draw:end-glue-point="5" svg:d="m8500 13500v2000h1500" svg:viewBox="0 0 1501 2001">
+     <text:p text:style-name="P1"><text:span text:style-name="T22">relation_A</text:span></text:p>
+    </draw:connector>
+    <draw:custom-shape draw:style-name="gr1" draw:text-style-name="P25" xml:id="id95" draw:id="id95" draw:layer="layout" svg:width="3cm" svg:height="1cm" svg:x="10cm" svg:y="17cm">
+     <text:p text:style-name="P1"><text:span text:style-name="T20">uuid</text:span></text:p>
+     <text:p text:style-name="P2"><text:span text:style-name="T1">001-004</text:span></text:p>
+     <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:glue-points="10800 0 0 10800 10800 21600 21600 10800" draw:type="flowchart-process" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
+    </draw:custom-shape>
+    <draw:connector draw:style-name="gr30" draw:text-style-name="P28" draw:layer="layout" svg:x1="8.5cm" svg:y1="15.5cm" svg:x2="10cm" svg:y2="17.5cm" draw:start-shape="id94" draw:start-glue-point="0" draw:end-shape="id95" draw:end-glue-point="5" svg:d="m8500 15500v2000h1500" svg:viewBox="0 0 1501 2001">
+     <text:p/>
+    </draw:connector>
+    <draw:connector draw:style-name="gr3" draw:text-style-name="P4" draw:layer="layout" draw:type="curve" svg:x1="10cm" svg:y1="11.5cm" svg:x2="13cm" svg:y2="10.5cm" draw:start-shape="id87" draw:start-glue-point="7" draw:end-shape="id96" draw:end-glue-point="5" svg:d="m10000 11500c2251 0 752-1000 3000-1000" svg:viewBox="0 0 3001 1001">
+     <text:p text:style-name="P1"><text:span text:style-name="T2">is</text:span></text:p>
+    </draw:connector>
+    <draw:custom-shape draw:style-name="gr2" draw:text-style-name="P1" xml:id="id96" draw:id="id96" draw:layer="layout" svg:width="3cm" svg:height="1cm" svg:x="13cm" svg:y="10cm">
+     <text:p text:style-name="P1">Composite</text:p>
+     <draw:enhanced-geometry svg:viewBox="0 0 21600 21600" draw:glue-points="10800 0 0 10800 10800 21600 21600 10800" draw:type="flowchart-process" draw:enhanced-path="M 0 0 L 21600 0 21600 21600 0 21600 0 0 Z N"/>
+    </draw:custom-shape>
+    <draw:connector draw:style-name="gr3" draw:text-style-name="P4" draw:layer="layout" draw:type="curve" svg:x1="20.5cm" svg:y1="9cm" svg:x2="16cm" svg:y2="10.5cm" draw:start-shape="id90" draw:start-glue-point="6" draw:end-shape="id96" draw:end-glue-point="7" svg:d="m20500 9000c0 1000-1500 1500-4500 1500" svg:viewBox="0 0 4501 1501">
+     <text:p text:style-name="P1"><text:span text:style-name="T2">is</text:span></text:p>
+    </draw:connector>
+    <draw:connector draw:style-name="gr37" draw:text-style-name="P9" draw:layer="layout" svg:x1="13cm" svg:y1="8.5cm" svg:x2="19cm" svg:y2="8.5cm" draw:start-shape="id97" draw:start-glue-point="0" draw:end-shape="id90" draw:end-glue-point="5" svg:d="m13000 8500h6000" svg:viewBox="0 0 6001 1">
+     <text:p text:style-name="P1"><text:span text:style-name="T22">relation_B</text:span></text:p>
+    </draw:connector>
+    <draw:connector draw:style-name="gr38" draw:text-style-name="P28" xml:id="id97" draw:id="id97" draw:layer="layout" draw:line-skew="2.498cm" svg:x1="10cm" svg:y1="9.5cm" svg:x2="10cm" svg:y2="7.5cm" draw:start-shape="id83" draw:start-glue-point="7" draw:end-shape="id81" draw:end-glue-point="7" svg:d="m10000 9500h3000v-2000h-3000" svg:viewBox="0 0 3001 2001">
+     <text:p/>
+    </draw:connector>
+    <draw:connector draw:style-name="gr30" draw:text-style-name="P28" xml:id="id99" draw:id="id99" draw:layer="layout" svg:x1="23.5cm" svg:y1="13.5cm" svg:x2="13cm" svg:y2="15.5cm" draw:start-shape="id98" draw:start-glue-point="0" draw:end-shape="id93" draw:end-glue-point="7" svg:d="m23500 13500v2000h-10500" svg:viewBox="0 0 10501 2001">
+     <text:p/>
+    </draw:connector>
+    <draw:connector draw:style-name="gr30" draw:text-style-name="P28" draw:layer="layout" svg:x1="23.5cm" svg:y1="15.5cm" svg:x2="13cm" svg:y2="17.5cm" draw:start-shape="id99" draw:start-glue-point="0" draw:end-shape="id95" draw:end-glue-point="7" svg:d="m23500 15500v2000h-10500" svg:viewBox="0 0 10501 2001">
+     <text:p/>
+    </draw:connector>
+    <draw:frame draw:style-name="gr10" draw:text-style-name="P6" draw:layer="layout" svg:width="3cm" svg:height="0.958cm" svg:x="12cm" svg:y="2.042cm">
+     <draw:text-box>
+      <text:p><text:span text:style-name="T4">View A</text:span></text:p>
+     </draw:text-box>
+    </draw:frame>
+    <draw:frame draw:style-name="gr10" draw:text-style-name="P6" draw:layer="layout" svg:width="3cm" svg:height="0.958cm" svg:x="15cm" svg:y="2cm">
+     <draw:text-box>
+      <text:p><text:span text:style-name="T4">View B</text:span></text:p>
+     </draw:text-box>
+    </draw:frame>
+    <draw:frame draw:style-name="gr13" draw:text-style-name="P29" draw:layer="layout" svg:width="7cm" svg:height="1.907cm" svg:x="21cm" svg:y="18cm">
+     <draw:text-box>
+      <text:p text:style-name="P21"><text:span text:style-name="T23">e.g.</text:span><text:span text:style-name="T9"> for composite as ‘tar’ package, relation_A/B = ‘stripe’.</text:span></text:p>
+      <text:p text:style-name="P21"><text:span text:style-name="T9">complex relationship may require more composite functions.</text:span></text:p>
      </draw:text-box>
     </draw:frame>
    </draw:page>

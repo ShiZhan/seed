@@ -13,7 +13,6 @@ NodeURI:    Generate node URI for Pyro4 object using ip, port and DefaultID
 import os
 import time
 import logging
-import uuid
 
 # create logger
 
