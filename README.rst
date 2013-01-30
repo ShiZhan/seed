@@ -13,12 +13,12 @@ Organize commodity storage devices with minimum cost to build a loose-coupled sy
 Design
 ------
 
-Minimum dependency, listed in Requirements_.
+Listed in Requirements_.
 
 _`Requirements`
 ---------------
 
-* Pyro_: a library (`MIT License <http://www.opensource.org/licenses/mit-license.php>`_) that helps building applications in which objects can talk to each other over the network. The code is in `SVN repository <http://svn.razorvine.net/Pyro/Pyro4>`_, use
+* Pyro_: a Python library (`MIT License <http://www.opensource.org/licenses/mit-license.php>`_) that helps building applications in which objects can talk to each other over the network. The code is in `SVN repository <http://svn.razorvine.net/Pyro/Pyro4>`_, use
 
 ::
 
@@ -29,6 +29,26 @@ to access.
 .. _Pyro: http://packages.python.org/Pyro4/intro.html
 
 This lib can be replace by xmlrpclib or some other rpc modules, if it's sufficiently lightweight and fast.
+
+* RDFLib_: a Python library for working with RDF_, a simple yet powerful language for representing information.
+
+Use
+
+::
+
+    $ pip install rdflib
+
+or
+
+::
+
+    $ easy_install rdflib
+
+to install, isodate_ may be installed automatically by pip.
+
+.. _RDF: http://www.w3.org/RDF/
+.. _RDFLib: https://github.com/RDFLib/rdflib
+.. _isodate: https://github.com/gweis/isodate
 
 Related Work
 ------------

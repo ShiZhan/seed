@@ -1,2 +1,4 @@
 *.pyc
 storage/
+catalog-v001.xml
+seed.owl

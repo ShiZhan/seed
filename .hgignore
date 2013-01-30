@@ -1,3 +1,5 @@
 syntax: glob
 *.pyc
-s3/
+storage/
+catalog-v001.xml
+seed.owl

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-"""Seed.Shell -- Shell program for SEED storage, 
+"""Seed.shell -- Shell program for SEED storage, 
 for accessing storage manually, through command line interface. """
 
 import os
