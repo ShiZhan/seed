@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""mkmodel -- SEED Core model"""
+"""mkmodel -- SEED Core model creation script"""
 
 import time
 
@@ -41,7 +41,7 @@ def main():
 
     model.add((BASE, RDF.type, OWL['Ontology']))
     model.add((BASE, RDFS['comment'], Literal('SEED system ontology', lang='EN')))
-    model.add((BASE, DC['date'], Literal('2011-3-28')))
+    model.add((BASE, DC['date'], Literal('2013-01-30')))
     model.add((BASE, DC['creator'], Literal('Shi.Zhan')))
     model.add((BASE, DC['created'], Literal(
         time.strftime(u'%Y-%m-%d %H:%M:%S'.encode('utf-8'),
@@ -70,6 +70,8 @@ def main():
     model.add((SEED.Composite, RDF.type, OWL.Class))
     model.add((SEED.Composite, RDFS.subClassOf, SEED.Object))
 
+    model.add((SEED.Bucket, OWL.disjointWith, SEED.Composite))
+
     _SEED_LOG.info('declare and assign properties ...')
 
     model.add((SEED.contain,    RDF.type, OWL.ObjectProperty))
@@ -89,46 +91,19 @@ def main():
     model.add((SEED.group,     RDF.type, OWL.DatatypeProperty))
     model.add((SEED.host,      RDF.type, OWL.DatatypeProperty))
 
-    # Bucket contain only Object
-    _node = BNode()
-    model.add((_node, RDF.type, OWL.Restriction))
-    model.add((_node, OWL.onProperty, SEED.contain))
-    model.add((_node, OWL.allValuesFrom, SEED.Object))
-    model.add((SEED.Bucket, RDFS.subClassOf, _node))
-
-    # Composite ["stripe", "replicate", "redundancy"] only Object
-    _node = BNode()
-    model.add((_node, RDF.type, OWL.Restriction))
-    model.add((_node, OWL.onProperty, SEED.stripe))
-    model.add((_node, OWL.allValuesFrom, SEED.Object))
-    model.add((SEED.Composite, RDFS.subClassOf, _node))
-
-    _node = BNode()
-    model.add((_node, RDF.type, OWL.Restriction))
-    model.add((_node, OWL.onProperty, SEED.replicate))
-    model.add((_node, OWL.allValuesFrom, SEED.Object))
-    model.add((SEED.Composite, RDFS.subClassOf, _node))
-
-    _node = BNode()
-    model.add((_node, RDF.type, OWL.Restriction))
-    model.add((_node, OWL.onProperty, SEED.redundancy))
-    model.add((_node, OWL.allValuesFrom, SEED.Object))
-    model.add((SEED.Composite, RDFS.subClassOf, _node))
-
-    # Object ["name", "path", "mode", "{c|m|a}time",
-    #         "length", "size", "owner", "group"]
-    def addDatatypeProperty(item, property, type=XSD.anyType,
+    def assignProperty(item, property, range,
         only=False, some=False, max=None, min=None):
+        """assign item property with restriction"""
 
         _node = BNode()
         model.add((_node, RDF.type, OWL.Restriction))
         model.add((_node, OWL.onProperty, property))
         if only:
-            model.add((_node, OWL.allValuesFrom, type))
+            model.add((_node, OWL.allValuesFrom, range))
         elif some:
-            model.add((_node, OWL.someValuesFrom, type))
+            model.add((_node, OWL.someValuesFrom, range))
         else:
-            model.add((_node, OWL.onDataRange, type))
+            model.add((_node, OWL.onDataRange, range))
             if max is not None:
                 model.add((_node, OWL.maxQualifiedCardinality, Literal(max)))
             if min is not None:
@@ -140,25 +115,30 @@ def main():
         model.add((item, RDFS.subClassOf, _node))
         pass
 
-    addDatatypeProperty(SEED.Object, SEED.name,   XSD.NCName, max=1)
-    addDatatypeProperty(SEED.Object, SEED.path,   XSD.normalizedString, max=1)
-    addDatatypeProperty(SEED.Object, SEED.mode,   XSD.unsignedShort, max=1)
-    addDatatypeProperty(SEED.Object, SEED.ctime,  XSD.dateTimeStamp, max=1)
-    addDatatypeProperty(SEED.Object, SEED.mtime,  XSD.dateTimeStamp, max=1)
-    addDatatypeProperty(SEED.Object, SEED.atime,  XSD.dateTimeStamp, max=1)
-    addDatatypeProperty(SEED.Object, SEED.length, XSD.unsignedLong, max=1)
-    addDatatypeProperty(SEED.Object, SEED.owner,  XSD.NCName, max=1)
-    addDatatypeProperty(SEED.Object, SEED.group,  XSD.NCName, max=1)
+    # Bucket contain only Object
+    assignProperty(SEED.Bucket, SEED.contain, SEED.Object, only=True)
 
-    addDatatypeProperty(SEED.Composite, SEED.size, XSD.unsignedLong, max=1)
+    # Composite ["stripe", "replicate", "redundancy"] only Object
+    assignProperty(SEED.Composite, SEED.stripe,     SEED.Object, only=True)
+    assignProperty(SEED.Composite, SEED.replicate,  SEED.Object, only=True)
+    assignProperty(SEED.Composite, SEED.redundancy, SEED.Object, only=True)
 
+    # Object ["name", "path", "mode", "{c|m|a}time",
+    #         "length", "size", "owner", "group"]
+    assignProperty(SEED.Object, SEED.name,   XSD.NCName, max=1)
+    assignProperty(SEED.Object, SEED.path,   XSD.normalizedString, max=1)
+    assignProperty(SEED.Object, SEED.mode,   XSD.unsignedShort, max=1)
+    assignProperty(SEED.Object, SEED.ctime,  XSD.dateTimeStamp, max=1)
+    assignProperty(SEED.Object, SEED.mtime,  XSD.dateTimeStamp, max=1)
+    assignProperty(SEED.Object, SEED.atime,  XSD.dateTimeStamp, max=1)
+    assignProperty(SEED.Object, SEED.length, XSD.unsignedLong, max=1)
+    assignProperty(SEED.Object, SEED.owner,  XSD.NCName, max=1)
+    assignProperty(SEED.Object, SEED.group,  XSD.NCName, max=1)
+
+    assignProperty(SEED.Composite, SEED.size, XSD.unsignedLong, max=1)
 
     # Object ["host"] only HOST_ID (8 Bytes)
-    _node = BNode()
-    model.add((_node, RDF.type, OWL.Restriction))
-    model.add((_node, OWL.onProperty, SEED.host))
-    model.add((_node, OWL.allValuesFrom, XSD.hexBinary))
-    model.add((SEED.Object, RDFS.subClassOf, _node))
+    assignProperty(SEED.Object, SEED.host, XSD.hexBinary, only=True)
 
     # Serialize the store as RDF/XML to file.
     model.serialize("seed.owl", format="pretty-xml")
