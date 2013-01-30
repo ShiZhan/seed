@@ -78,11 +78,13 @@ def main():
     model.add((SEED.redundancy, RDF.type, OWL.ObjectProperty))
 
     model.add((SEED.name,      RDF.type, OWL.DatatypeProperty))
-    model.add((SEED.abspath,   RDF.type, OWL.DatatypeProperty))
+    model.add((SEED.path,      RDF.type, OWL.DatatypeProperty))
     model.add((SEED.mode,      RDF.type, OWL.DatatypeProperty))
-    model.add((SEED.time,      RDF.type, OWL.DatatypeProperty))
+    model.add((SEED.ctime,     RDF.type, OWL.DatatypeProperty))
+    model.add((SEED.mtime,     RDF.type, OWL.DatatypeProperty))
+    model.add((SEED.atime,     RDF.type, OWL.DatatypeProperty))
     model.add((SEED.length,    RDF.type, OWL.DatatypeProperty))
-    model.add((SEED.fullsize,  RDF.type, OWL.DatatypeProperty))
+    model.add((SEED.size,      RDF.type, OWL.DatatypeProperty))
     model.add((SEED.owner,     RDF.type, OWL.DatatypeProperty))
     model.add((SEED.group,     RDF.type, OWL.DatatypeProperty))
     model.add((SEED.host,      RDF.type, OWL.DatatypeProperty))
@@ -95,18 +97,67 @@ def main():
     model.add((SEED.Bucket, RDFS.subClassOf, _node))
 
     # Composite ["stripe", "replicate", "redundancy"] only Object
+    _node = BNode()
+    model.add((_node, RDF.type, OWL.Restriction))
+    model.add((_node, OWL.onProperty, SEED.stripe))
+    model.add((_node, OWL.allValuesFrom, SEED.Object))
+    model.add((SEED.Composite, RDFS.subClassOf, _node))
 
+    _node = BNode()
+    model.add((_node, RDF.type, OWL.Restriction))
+    model.add((_node, OWL.onProperty, SEED.replicate))
+    model.add((_node, OWL.allValuesFrom, SEED.Object))
+    model.add((SEED.Composite, RDFS.subClassOf, _node))
 
-    # Object ["name", "abspath", "mode", "time",
-    #         "length", "fullsize", "owner", "group"]
-    # exactly 1 value
+    _node = BNode()
+    model.add((_node, RDF.type, OWL.Restriction))
+    model.add((_node, OWL.onProperty, SEED.redundancy))
+    model.add((_node, OWL.allValuesFrom, SEED.Object))
+    model.add((SEED.Composite, RDFS.subClassOf, _node))
+
+    # Object ["name", "path", "mode", "{c|m|a}time",
+    #         "length", "size", "owner", "group"]
+    def addDatatypeProperty(item, property, type=XSD.anyType,
+        only=False, some=False, max=None, min=None):
+
+        _node = BNode()
+        model.add((_node, RDF.type, OWL.Restriction))
+        model.add((_node, OWL.onProperty, property))
+        if only:
+            model.add((_node, OWL.allValuesFrom, type))
+        elif some:
+            model.add((_node, OWL.someValuesFrom, type))
+        else:
+            model.add((_node, OWL.onDataRange, type))
+            if max is not None:
+                model.add((_node, OWL.maxQualifiedCardinality, Literal(max)))
+            if min is not None:
+                model.add((_node, OWL.minQualifiedCardinality, Literal(min)))
+             # keep integrety, since onDataRange has been set.
+            if (max is None) and (min is None):
+                model.add((_node, OWL.qualifiedCardinality, Literal(1)))
+
+        model.add((item, RDFS.subClassOf, _node))
+        pass
+
+    addDatatypeProperty(SEED.Object, SEED.name,   XSD.NCName, max=1)
+    addDatatypeProperty(SEED.Object, SEED.path,   XSD.normalizedString, max=1)
+    addDatatypeProperty(SEED.Object, SEED.mode,   XSD.unsignedShort, max=1)
+    addDatatypeProperty(SEED.Object, SEED.ctime,  XSD.dateTimeStamp, max=1)
+    addDatatypeProperty(SEED.Object, SEED.mtime,  XSD.dateTimeStamp, max=1)
+    addDatatypeProperty(SEED.Object, SEED.atime,  XSD.dateTimeStamp, max=1)
+    addDatatypeProperty(SEED.Object, SEED.length, XSD.unsignedLong, max=1)
+    addDatatypeProperty(SEED.Object, SEED.owner,  XSD.NCName, max=1)
+    addDatatypeProperty(SEED.Object, SEED.group,  XSD.NCName, max=1)
+
+    addDatatypeProperty(SEED.Composite, SEED.size, XSD.unsignedLong, max=1)
 
 
     # Object ["host"] only HOST_ID (8 Bytes)
     _node = BNode()
     model.add((_node, RDF.type, OWL.Restriction))
     model.add((_node, OWL.onProperty, SEED.host))
-    model.add((_node, OWL.allValuesFrom, XSD.base64Binary))
+    model.add((_node, OWL.allValuesFrom, XSD.hexBinary))
     model.add((SEED.Object, RDFS.subClassOf, _node))
 
     # Serialize the store as RDF/XML to file.

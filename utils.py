@@ -16,7 +16,7 @@ import logging
 
 # create logger
 
-_SEED_LOG = logging.getLogger('SEED logger')
+_SEED_LOG = logging.getLogger('SEED')
 
 
 def _init_logger():
