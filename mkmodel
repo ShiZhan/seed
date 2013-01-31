@@ -23,30 +23,36 @@ def main():
 
     _SEED_LOG.info('adding namespaces and prefixes ...')
 
-    DC      = Namespace("http://purl.org/dc/elements/1.1/")
-    TERMS   = Namespace("http://purl.org/dc/terms/")
-    baseURI = "https://sites.google.com/site/ontology2013/seed.owl"
-    BASE    = URIRef(baseURI)
-    SEED    = Namespace(baseURI+'#')
+    # http://dublincore.org/documents/dc-rdf/
+    dc_uri      = 'http://purl.org/dc/elements/1.1/'
+    dcterms_uri = 'http://purl.org/dc/terms/'
+    DC          = Namespace(dc_uri)
+    TERMS       = Namespace(dcterms_uri)
+
+    # use google sites as persistent URL
+    base_uri    = "https://sites.google.com/site/ontology2013/seed.owl"
+    SEED        = Namespace(base_uri + '#')
+
+    BASE        = URIRef(base_uri)
 
     model.bind("rdf",   "http://www.w3.org/1999/02/22-rdf-syntax-ns#")
     model.bind("rdfs",  "http://www.w3.org/2000/01/rdf-schema#")
     model.bind("xsd",   "http://www.w3.org/2001/XMLSchema#")
     model.bind("owl",   "http://www.w3.org/2002/07/owl#")
-    model.bind("dc",    "http://purl.org/dc/elements/1.1/")
-    model.bind("terms", "http://purl.org/dc/terms/")
-    model.bind("seed",   SEED)
+    model.bind("dc",    dc_uri)
+    model.bind("terms", dcterms_uri)
+    model.bind("seed",  SEED)
 
     _SEED_LOG.info('declare metadata ...')
 
-    model.add((BASE, RDF.type, OWL['Ontology']))
-    model.add((BASE, RDFS['comment'], Literal('SEED system ontology', lang='EN')))
-    model.add((BASE, DC['date'], Literal('2013-01-30')))
-    model.add((BASE, DC['creator'], Literal('Shi.Zhan')))
-    model.add((BASE, DC['created'], Literal(
+    model.add((BASE, RDF.type,     OWL.Ontology))
+    model.add((BASE, RDFS.comment, Literal('SEED system ontology', lang='EN')))
+    model.add((BASE, DC.date,      Literal('2013-01-30')))
+    model.add((BASE, DC.creator,   Literal('Shi.Zhan')))
+    model.add((BASE, DC.created,   Literal(
         time.strftime(u'%Y-%m-%d %H:%M:%S'.encode('utf-8'),
         time.localtime(time.time())).decode('utf-8'))))
-    model.add((BASE, TERMS['license'], Literal('Copyright 2013 Shi.Zhan.'
+    model.add((BASE, TERMS.license, Literal('Copyright 2013 Shi.Zhan.'
         ' Licensed under the Apache License, Version 2.0 (the "License");'
         ' you may not use this file except in compliance with the License.'
         ' You may obtain a copy of the License at\n\n'
@@ -56,6 +62,7 @@ def main():
         ' an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,'
         ' either express or implied. See the License for the specific language'
         ' governing permissions and limitations under the License.')))
+    model.add((BASE, OWL.versionInfo, Literal(_version())))
 
     # declare data types: <rdfs:Datatype rdf:about="&xsd;anyType"/>
     # how to use &xsd directly? as mentioned in http://www.w3.org/TR/rdf-primer/
@@ -67,10 +74,12 @@ def main():
     model.add((SEED.Object, RDF.type, OWL.Class))
     model.add((SEED.Bucket, RDF.type, OWL.Class))
     model.add((SEED.Bucket, RDFS.subClassOf, SEED.Object))
-    model.add((SEED.Composite, RDF.type, OWL.Class))
-    model.add((SEED.Composite, RDFS.subClassOf, SEED.Object))
+    model.add((SEED.SimpleObject, RDF.type, OWL.Class))
+    model.add((SEED.SimpleObject, RDFS.subClassOf, SEED.Object))
+    model.add((SEED.CompositeObject, RDF.type, OWL.Class))
+    model.add((SEED.CompositeObject, RDFS.subClassOf, SEED.SimpleObject))
 
-    model.add((SEED.Bucket, OWL.disjointWith, SEED.Composite))
+    model.add((SEED.Bucket, OWL.disjointWith, SEED.SimpleObject))
 
     _SEED_LOG.info('declare and assign properties ...')
 
@@ -91,59 +100,64 @@ def main():
     model.add((SEED.group,     RDF.type, OWL.DatatypeProperty))
     model.add((SEED.host,      RDF.type, OWL.DatatypeProperty))
 
-    def assignProperty(item, property, range,
-        only=False, some=False, max=None, min=None):
-        """assign item property with restriction"""
+    def assign_property((sub, pre, obj),
+        only=False, some=False, max_qc=None, min_qc=None):
+        """assign object property with restriction"""
 
         _node = BNode()
         model.add((_node, RDF.type, OWL.Restriction))
-        model.add((_node, OWL.onProperty, property))
+        model.add((_node, OWL.onProperty, pre))
         if only:
-            model.add((_node, OWL.allValuesFrom, range))
+            model.add((_node, OWL.allValuesFrom, obj))
         elif some:
-            model.add((_node, OWL.someValuesFrom, range))
+            model.add((_node, OWL.someValuesFrom, obj))
         else:
-            model.add((_node, OWL.onDataRange, range))
-            if max is not None:
-                model.add((_node, OWL.maxQualifiedCardinality, Literal(max)))
-            if min is not None:
-                model.add((_node, OWL.minQualifiedCardinality, Literal(min)))
+            model.add((_node, OWL.onDataRange, obj))
+            if max_qc is not None:
+                model.add((_node, OWL.maxQualifiedCardinality,
+                    Literal(max_qc, datatype=XSD.nonNegativeInteger)))
+            if min_qc is not None:
+                model.add((_node, OWL.minQualifiedCardinality,
+                    Literal(min_qc, datatype=XSD.nonNegativeInteger)))
              # keep integrety, since onDataRange has been set.
-            if (max is None) and (min is None):
-                model.add((_node, OWL.qualifiedCardinality, Literal(1)))
+            if (max_qc is None) and (min_qc is None):
+                model.add((_node, OWL.qualifiedCardinality,
+                    Literal(1, datatype=XSD.nonNegativeInteger)))
 
-        model.add((item, RDFS.subClassOf, _node))
-        pass
+        model.add((sub, RDFS.subClassOf, _node))
 
     # Bucket contain only Object
-    assignProperty(SEED.Bucket, SEED.contain, SEED.Object, only=True)
+    assign_property((SEED.Bucket, SEED.contain, SEED.Object), only=True)
 
-    # Composite ["stripe", "replicate", "redundancy"] only Object
-    assignProperty(SEED.Composite, SEED.stripe,     SEED.Object, only=True)
-    assignProperty(SEED.Composite, SEED.replicate,  SEED.Object, only=True)
-    assignProperty(SEED.Composite, SEED.redundancy, SEED.Object, only=True)
+    # CompositeObject [stripe, replicate, redundancy] only SimpleObject
+    assign_property((SEED.CompositeObject, SEED.stripe,     SEED.SimpleObject),
+        only=True)
+    assign_property((SEED.CompositeObject, SEED.replicate,  SEED.SimpleObject),
+        only=True)
+    assign_property((SEED.CompositeObject, SEED.redundancy, SEED.SimpleObject),
+        only=True)
 
-    # Object ["name", "path", "mode", "{c|m|a}time",
-    #         "length", "size", "owner", "group"]
-    assignProperty(SEED.Object, SEED.name,   XSD.NCName, max=1)
-    assignProperty(SEED.Object, SEED.path,   XSD.normalizedString, max=1)
-    assignProperty(SEED.Object, SEED.mode,   XSD.unsignedShort, max=1)
-    assignProperty(SEED.Object, SEED.ctime,  XSD.dateTimeStamp, max=1)
-    assignProperty(SEED.Object, SEED.mtime,  XSD.dateTimeStamp, max=1)
-    assignProperty(SEED.Object, SEED.atime,  XSD.dateTimeStamp, max=1)
-    assignProperty(SEED.Object, SEED.length, XSD.unsignedLong, max=1)
-    assignProperty(SEED.Object, SEED.owner,  XSD.NCName, max=1)
-    assignProperty(SEED.Object, SEED.group,  XSD.NCName, max=1)
+    # Object [name, path, mode, {c|m|a}time, length, size, owner, group]
+    assign_property((SEED.Object, SEED.name,   XSD.NCName), max_qc=1)
+    assign_property((SEED.Object, SEED.path,   XSD.normalizedString), max_qc=1)
+    assign_property((SEED.Object, SEED.mode,   XSD.unsignedShort), max_qc=1)
+    assign_property((SEED.Object, SEED.ctime,  XSD.dateTimeStamp), max_qc=1)
+    assign_property((SEED.Object, SEED.mtime,  XSD.dateTimeStamp), max_qc=1)
+    assign_property((SEED.Object, SEED.atime,  XSD.dateTimeStamp), max_qc=1)
+    assign_property((SEED.Object, SEED.length, XSD.unsignedLong), max_qc=1)
+    assign_property((SEED.Object, SEED.owner,  XSD.NCName), max_qc=1)
+    assign_property((SEED.Object, SEED.group,  XSD.NCName), max_qc=1)
 
-    assignProperty(SEED.Composite, SEED.size, XSD.unsignedLong, max=1)
+    assign_property((SEED.CompositeObject, SEED.size, XSD.unsignedLong),
+        max_qc=1)
 
-    # Object ["host"] only HOST_ID (8 Bytes)
-    assignProperty(SEED.Object, SEED.host, XSD.hexBinary, only=True)
+    # Object [host] only HOST_ID (8 Bytes)
+    assign_property((SEED.Object, SEED.host, XSD.hexBinary), only=True)
 
     # Serialize the store as RDF/XML to file.
     model.serialize("seed.owl", format="pretty-xml")
 
-    print "Produced %d Triples." % len(model)
+    _SEED_LOG.info("produced %d triples." % len(model))
 
 
 if __name__ == '__main__':

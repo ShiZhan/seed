@@ -23,20 +23,14 @@ def main():
     model = Graph()
     model.load('seed.owl')
 
+    _SEED_LOG.info('loaded %d triples.' % len(model))
+
+
     _SEED_LOG.info('initializing node ...')
 
-# fs_model.add(('root', 'version', _version()))
-# fs_model.add(('root', 'is', 'bucket'))
+    for s,p,o in model: 
+        print s,p,o
 
-# node = _getnode()
-# objId = str(_genid(node = node))
-# fs_model.add(('root', 'contain', objId))
-# fs_model.add((objId, 'is', 'object'))
-# fs_model.add((objId, 'name', 'test'))
-# fs_model.add(('root', 'contain', 'test_bucket'))
-# fs_model.add(('test_bucket', 'is', 'bucket'))
-
-# fs_model.save('storage/test.csv')
 
 if __name__ == '__main__':
     main()
