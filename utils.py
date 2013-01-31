@@ -74,6 +74,10 @@ def _version():
     return version
 
 
+# program version
+VERSION = _version()
+
+
 # default root directory
 
 DEFAULT_ROOT = os.path.abspath(os.path.join(os.getcwd(), 'storage'))
@@ -93,7 +97,7 @@ def _init_root(root):
 
         version_file_name = seed_meta_path + '/version'
         with open(version_file_name, 'w') as version_file:
-            version_file.write(_version())
+            version_file.write(VERSION)
 
     return
 

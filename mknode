@@ -6,30 +6,27 @@
 from uuid import uuid1 as _genid
 from uuid import getnode as _getnode
 
-from utils import _SEED_LOG, _init_logger, _version
+from model import Model, _seed_base, _node_model_file
+from model import RDF, RDFS, OWL, XSD, SEED
+from model import Literal, BNode
 from utils import DEFAULT_ROOT
-
-from rdflib.graph import Graph
-from rdflib.term import URIRef, Literal, BNode
-from rdflib.namespace import Namespace, RDF, RDFS, OWL, XSD
+from utils import _SEED_LOG, _init_logger
 
 def main():
     """mknode program"""
 
     _init_logger()
 
-    _SEED_LOG.info('loading core model ...')
+    _SEED_LOG.info('creating node model ...')
 
     model = Graph()
-    model.load('seed.owl')
+    model.load(_node_model_file)
 
     _SEED_LOG.info('loaded %d triples.' % len(model))
 
 
-    _SEED_LOG.info('initializing node ...')
-
-    for s,p,o in model: 
-        print s,p,o
+    _SEED_LOG.info('saving node ...')
+    model.serialize(_node_model_file)
 
 
 if __name__ == '__main__':
