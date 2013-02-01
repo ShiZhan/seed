@@ -6,10 +6,10 @@
 from uuid import uuid1 as _genid
 from uuid import getnode as _getnode
 
-from model import Model, _seed_base, _node_model_file
+from model import Model, DEFAULT_NODE_MODEL
 from model import RDF, RDFS, OWL, XSD, SEED
 from model import Literal, BNode
-from utils import DEFAULT_ROOT
+from utils import DEFAULT_ROOT, DEFAULT_HOST, DEFAULT_PORT, _node_uri
 from utils import _SEED_LOG, _init_logger
 
 def main():
@@ -19,14 +19,27 @@ def main():
 
     _SEED_LOG.info('creating node model ...')
 
-    model = Graph()
-    model.load(_node_model_file)
+    model = Model()
 
-    _SEED_LOG.info('loaded %d triples.' % len(model))
+    _SEED_LOG.info('adding namespaces and prefixes ...')
+
+    # use default values to generate base uri for node model
+
+    base_uri = _node_uri(DEFAULT_HOST, DEFAULT_PORT) + '/' + DEFAULT_NODE_MODEL
+
+    model._gen_header(base_uri)
+
+    # traverse default root, collect metadata, add to model.
 
 
-    _SEED_LOG.info('saving node ...')
-    model.serialize(_node_model_file)
+
+    # mission complete
+
+    _SEED_LOG.info('created %d triples.' % len(model))
+
+    _SEED_LOG.info('saving node model ...')
+
+    model.serialize(DEFAULT_NODE_MODEL)
 
 
 if __name__ == '__main__':

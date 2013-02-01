@@ -3,8 +3,7 @@
 
 """mkmodel -- SEED Core model creation script"""
 
-from model import Model, _seed_base, _core_model_file
-from model import RDF, RDFS, OWL, XSD, SEED
+from model import Model, DEFAULT_CORE_MODEL
 from utils import _SEED_LOG, _init_logger
 
 def main():
@@ -16,71 +15,10 @@ def main():
 
     core = Model()
 
-    _SEED_LOG.info('adding namespaces and prefixes ...')
-
-    core.create_header(_seed_base)
-
-    _SEED_LOG.info('declare classes ...')
-
-    core.add((SEED.Object, RDF.type, OWL.Class))
-    core.add((SEED.Bucket, RDF.type, OWL.Class))
-    core.add((SEED.Bucket, RDFS.subClassOf, SEED.Object))
-    core.add((SEED.SimpleObject, RDF.type, OWL.Class))
-    core.add((SEED.SimpleObject, RDFS.subClassOf, SEED.Object))
-    core.add((SEED.CompositeObject, RDF.type, OWL.Class))
-    core.add((SEED.CompositeObject, RDFS.subClassOf, SEED.SimpleObject))
-
-    core.add((SEED.Bucket, OWL.disjointWith, SEED.SimpleObject))
-
-    _SEED_LOG.info('declare and assign properties ...')
-
-    core.add((SEED.contain,    RDF.type, OWL.ObjectProperty))
-    core.add((SEED.stripe,     RDF.type, OWL.ObjectProperty))
-    core.add((SEED.replicate,  RDF.type, OWL.ObjectProperty))
-    core.add((SEED.redundancy, RDF.type, OWL.ObjectProperty))
-
-    core.add((SEED.name,      RDF.type, OWL.DatatypeProperty))
-    core.add((SEED.path,      RDF.type, OWL.DatatypeProperty))
-    core.add((SEED.mode,      RDF.type, OWL.DatatypeProperty))
-    core.add((SEED.ctime,     RDF.type, OWL.DatatypeProperty))
-    core.add((SEED.mtime,     RDF.type, OWL.DatatypeProperty))
-    core.add((SEED.atime,     RDF.type, OWL.DatatypeProperty))
-    core.add((SEED.length,    RDF.type, OWL.DatatypeProperty))
-    core.add((SEED.size,      RDF.type, OWL.DatatypeProperty))
-    core.add((SEED.owner,     RDF.type, OWL.DatatypeProperty))
-    core.add((SEED.group,     RDF.type, OWL.DatatypeProperty))
-    core.add((SEED.host,      RDF.type, OWL.DatatypeProperty))
-
-    # Bucket contain only Object
-    core.set_property((SEED.Bucket, SEED.contain, SEED.Object), only=True)
-
-    # CompositeObject [stripe, replicate, redundancy] only SimpleObject
-    core.set_property(
-        (SEED.CompositeObject, SEED.stripe,     SEED.SimpleObject), only=True)
-    core.set_property(
-        (SEED.CompositeObject, SEED.replicate,  SEED.SimpleObject), only=True)
-    core.set_property(
-        (SEED.CompositeObject, SEED.redundancy, SEED.SimpleObject), only=True)
-
-    # Object [name, path, mode, {c|m|a}time, length, size, owner, group]
-    core.set_property((SEED.Object, SEED.name, XSD.NCName), max_qc=1)
-    core.set_property((SEED.Object, SEED.path, XSD.normalizedString), max_qc=1)
-    core.set_property((SEED.Object, SEED.mode, XSD.unsignedShort), max_qc=1)
-    core.set_property((SEED.Object, SEED.ctime, XSD.dateTimeStamp), max_qc=1)
-    core.set_property((SEED.Object, SEED.mtime, XSD.dateTimeStamp), max_qc=1)
-    core.set_property((SEED.Object, SEED.atime, XSD.dateTimeStamp), max_qc=1)
-    core.set_property((SEED.Object, SEED.length, XSD.unsignedLong), max_qc=1)
-    core.set_property((SEED.Object, SEED.owner, XSD.NCName), max_qc=1)
-    core.set_property((SEED.Object, SEED.group, XSD.NCName), max_qc=1)
-
-    core.set_property((SEED.CompositeObject, SEED.size, XSD.unsignedLong),
-        max_qc=1)
-
-    # Object [host] only HOST_ID (8 Bytes)
-    core.set_property((SEED.Object, SEED.host, XSD.hexBinary), only=True)
+    core._gen_core()
 
     # Serialize the store as RDF/XML to file.
-    core.serialize(_core_model_file)
+    core.serialize(DEFAULT_CORE_MODEL)
 
     _SEED_LOG.info("produced %d triples." % len(core))
 

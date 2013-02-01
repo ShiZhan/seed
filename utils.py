@@ -102,6 +102,9 @@ def _init_root(root):
     return
 
 
+DEFAULT_HOST = '127.0.0.1'
+DEFAULT_PORT = 10001
+
 DEFAULT_ID = 'SEED'
 DEFAULT_HMAC_KEY = 'SEED indentifier'
 

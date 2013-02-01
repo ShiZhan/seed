@@ -33,8 +33,8 @@ SEED = ClosedNamespace(
         ]
 )
 
-_core_model_file = 'seed.owl'
-_node_model_file = 'node.owl'
+DEFAULT_CORE_MODEL = 'seed.owl'
+DEFAULT_NODE_MODEL = 'node.owl'
 
 
 class Model(Graph):
@@ -42,8 +42,10 @@ class Model(Graph):
     def __init__(self):
         Graph.__init__(self)
 
-    def create_header(self, base_uri):
-        """create prefix, base and datatypes for base_uri"""
+    # helper methods for creating seed models
+    def _gen_header(self, base_uri):
+        """generate prefix, base and datatypes for model base_uri"""
+
         # setup prefix
         self.bind("rdf",   "http://www.w3.org/1999/02/22-rdf-syntax-ns#")
         self.bind("rdfs",  "http://www.w3.org/2000/01/rdf-schema#")
@@ -56,13 +58,19 @@ class Model(Graph):
         # setup base URI
         self.base = URIRef(base_uri)
 
+        # this is an OWL Ontology
         self.add((self.base, RDF.type,     OWL.Ontology))
+
         self.add((self.base, RDFS.comment, Literal('SEED ontology', lang='EN')))
+
+        # Dublin Core Metadata
         self.add((self.base, DC.date,      Literal('2013-01-31')))
         self.add((self.base, DC.creator,   Literal('Shi.Zhan')))
-        self.add((self.base, DC.created,   Literal(
-            time.strftime(u'%Y-%m-%d %H:%M:%S'.encode('utf-8'),
-            time.localtime(time.time())).decode('utf-8'))))
+        self.add((self.base, DC.created,
+                    Literal(time.strftime('%Y-%m-%d %H:%M:%S',
+                                time.localtime(time.time())).encode('utf-8'),
+                            datatype=XSD.dateTimeStamp)
+                ))
         self.add((self.base, TERMS.license, Literal('Copyright 2013 Shi.Zhan.'
             ' Licensed under the Apache License, Version 2.0 (the "License");'
             ' you may not use this file except in compliance with the License.'
@@ -74,17 +82,20 @@ class Model(Graph):
             ' either express or implied. See the License for the specific language'
             ' governing permissions and limitations under the License.',
             datatype=XSD.string)))
-        self.add((self.base, OWL.versionInfo, Literal(VERSION,
-            datatype=XSD.hexBinary)))
+
+        # use program version as model version, recording the origin of model.
+        self.add((self.base, OWL.versionInfo,
+            Literal(VERSION, datatype=XSD.hexBinary)))
 
         # if in node model, import core model.
         if not (base_uri == _seed_base):
             self.add((self.base, OWL.imports, URIRef(_seed_base)))
 
-        # setup datatype
+        # setup default datatype
         self.add((XSD.anyType, RDF.type, RDFS.Datatype))
 
-    def set_property(self, (sub, pre, obj),
+
+    def _set_property(self, (sub, pre, obj),
         only=False, some=False, max_qc=None, min_qc=None):
         """set property with restriction on object"""
 
@@ -103,10 +114,77 @@ class Model(Graph):
             if min_qc is not None:
                 self.add((_node, OWL.minQualifiedCardinality,
                     Literal(min_qc, datatype=XSD.nonNegativeInteger)))
-             # keep integrety, since onDataRange has been set.
+            # keep integrity, something must be set
+            # since onProperty, onDataRange has been set
             if (max_qc is None) and (min_qc is None):
                 self.add((_node, OWL.qualifiedCardinality,
                     Literal(1, datatype=XSD.nonNegativeInteger)))
 
         self.add((sub, RDFS.subClassOf, _node))
+
+
+    def _gen_core(self):
+        """generate core model"""
+
+        # core model base, prefix and namespace
+
+        self._gen_header(_seed_base)
+
+        # declare classes
+
+        self.add((SEED.Object, RDF.type, OWL.Class))
+        self.add((SEED.Bucket, RDF.type, OWL.Class))
+        self.add((SEED.Bucket, RDFS.subClassOf, SEED.Object))
+        self.add((SEED.SimpleObject, RDF.type, OWL.Class))
+        self.add((SEED.SimpleObject, RDFS.subClassOf, SEED.Object))
+        self.add((SEED.CompositeObject, RDF.type, OWL.Class))
+        self.add((SEED.CompositeObject, RDFS.subClassOf, SEED.SimpleObject))
+
+        self.add((SEED.Bucket, OWL.disjointWith, SEED.SimpleObject))
+
+        # declare and assign properties
+
+        self.add((SEED.contain,    RDF.type, OWL.ObjectProperty))
+        self.add((SEED.stripe,     RDF.type, OWL.ObjectProperty))
+        self.add((SEED.replicate,  RDF.type, OWL.ObjectProperty))
+        self.add((SEED.redundancy, RDF.type, OWL.ObjectProperty))
+
+        self.add((SEED.name,      RDF.type, OWL.DatatypeProperty))
+        self.add((SEED.path,      RDF.type, OWL.DatatypeProperty))
+        self.add((SEED.mode,      RDF.type, OWL.DatatypeProperty))
+        self.add((SEED.ctime,     RDF.type, OWL.DatatypeProperty))
+        self.add((SEED.mtime,     RDF.type, OWL.DatatypeProperty))
+        self.add((SEED.atime,     RDF.type, OWL.DatatypeProperty))
+        self.add((SEED.length,    RDF.type, OWL.DatatypeProperty))
+        self.add((SEED.size,      RDF.type, OWL.DatatypeProperty))
+        self.add((SEED.owner,     RDF.type, OWL.DatatypeProperty))
+        self.add((SEED.group,     RDF.type, OWL.DatatypeProperty))
+        self.add((SEED.host,      RDF.type, OWL.DatatypeProperty))
+
+        # Bucket contain only Object
+        self._set_property((SEED.Bucket, SEED.contain, SEED.Object), only=True)
+
+        # CompositeObject [stripe, replicate, redundancy] only SimpleObject
+        self._set_property(
+            (SEED.CompositeObject, SEED.stripe,     SEED.SimpleObject), only=True)
+        self._set_property(
+            (SEED.CompositeObject, SEED.replicate,  SEED.SimpleObject), only=True)
+        self._set_property(
+            (SEED.CompositeObject, SEED.redundancy, SEED.SimpleObject), only=True)
+
+        # Object [name, path, mode, {c|m|a}time, length, size, owner, group]
+        self._set_property((SEED.Object, SEED.name, XSD.NCName), max_qc=1)
+        self._set_property((SEED.Object, SEED.path, XSD.normalizedString), max_qc=1)
+        self._set_property((SEED.Object, SEED.mode, XSD.unsignedShort), max_qc=1)
+        self._set_property((SEED.Object, SEED.ctime, XSD.dateTimeStamp), max_qc=1)
+        self._set_property((SEED.Object, SEED.mtime, XSD.dateTimeStamp), max_qc=1)
+        self._set_property((SEED.Object, SEED.atime, XSD.dateTimeStamp), max_qc=1)
+        self._set_property((SEED.Object, SEED.length, XSD.unsignedLong), max_qc=1)
+        self._set_property((SEED.Object, SEED.owner, XSD.NCName), max_qc=1)
+        self._set_property((SEED.Object, SEED.group, XSD.NCName), max_qc=1)
+
+        self._set_property((SEED.CompositeObject, SEED.size, XSD.unsignedLong), max_qc=1)
+
+        # Object [host] only HOST_ID (8 Bytes)
+        self._set_property((SEED.Object, SEED.host, XSD.hexBinary), only=True)
 

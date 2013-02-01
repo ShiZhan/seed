@@ -12,10 +12,7 @@ from Pyro4 import config as PyroConfig
 from hashring import HashRing
 
 from utils import _SEED_LOG, _node_uri
-from utils import DEFAULT_HMAC_KEY
-
-DEFAULT_HOST = '127.0.0.1'
-DEFAULT_PORT = 10001
+from utils import DEFAULT_HMAC_KEY, DEFAULT_HOST, DEFAULT_PORT
 
 
 class Client(Proxy):
