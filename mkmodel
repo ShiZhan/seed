@@ -20,7 +20,7 @@ def main():
     # Serialize the store as RDF/XML to file.
     core.serialize(DEFAULT_CORE_MODEL)
 
-    _SEED_LOG.info("produced %d triples." % len(core))
+    _SEED_LOG.info("produced %d triples in %s." % (len(core), DEFAULT_CORE_MODEL))
 
 
 if __name__ == '__main__':

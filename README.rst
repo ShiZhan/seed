@@ -13,7 +13,21 @@ Organize commodity storage devices with minimum cost to build a loose-coupled sy
 Design
 ------
 
-Listed in Requirements_.
+* System architecture draft
+
+    doc/design.fodg
+
+* Communication draft
+
+    doc/session.fodg
+
+* Metadata model draft
+
+    doc/model.fodg
+
+All drafts are in `LibreOffice <http://www.libreoffice.org/>`_ plain XML format.
+
+All dependencies are listed in Requirements_.
 
 _`Requirements`
 ---------------
@@ -22,7 +36,7 @@ _`Requirements`
 
 ::
 
-    $ svn co svn://svn.razorvine.net/Pyro/Pyro4/trunk Pyro4.
+    $ svn co svn://svn.razorvine.net/Pyro/Pyro4/trunk Pyro4
 
 to access.
 
@@ -30,7 +44,7 @@ to access.
 
 This lib can be replace by xmlrpclib or some other rpc modules, if it's sufficiently lightweight and fast.
 
-* RDFLib_: a Python library for working with RDF_, a simple yet powerful language for representing information.
+* RDFLib_: a Python library (`BSD 3-Clause License <http://opensource.org/licenses/BSD-3-Clause>`_) for working with RDF_, a simple yet powerful language for representing information.
 
 Use
 
@@ -44,7 +58,7 @@ or
 
     $ easy_install rdflib
 
-to install, isodate_ may be installed automatically by pip.
+RDFLib depend on isodate_, it may be installed together by pip.
 
 .. _RDF: http://www.w3.org/RDF/
 .. _RDFLib: https://github.com/RDFLib/rdflib
@@ -58,7 +72,7 @@ Various Distributed File Systems: GFS_, HDFS_, Ceph_, `Tahoe-LAFS`_, `Storage@ho
 Author
 ======
 
-`ShiZhan <http://shizhan.github.com/>`_ (c) 2012
+`ShiZhan <http://shizhan.github.com/>`_ (c) 2012 `Apache License Version 2.0 <http://www.apache.org/licenses/>`_ 
 
 .. _`Amazon S3`: http://docs.amazonwebservices.com/AmazonS3/2006-03-01/dev/Introduction.html
 .. _GFS: http://labs.google.com/papers/gfs.html

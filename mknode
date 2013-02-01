@@ -3,19 +3,32 @@
 
 """mknode -- SEED node initialization"""
 
+import sys, os
+
 from uuid import uuid1 as _genid
 from uuid import getnode as _getnode
 
 from model import Model, DEFAULT_NODE_MODEL
 from model import RDF, RDFS, OWL, XSD, SEED
 from model import Literal, BNode
-from utils import DEFAULT_ROOT, DEFAULT_HOST, DEFAULT_PORT, _node_uri
+
+from utils import DEFAULT_HOST, DEFAULT_PORT, _node_uri
 from utils import _SEED_LOG, _init_logger
 
 def main():
     """mknode program"""
 
     _init_logger()
+
+    if len(sys.argv) > 1:
+        root_directory = sys.argv[1]
+    else:
+        _SEED_LOG.error('give a directory to import')
+        exit(1)
+
+    if not os.path.exists(os.path.abspath(root_directory)):
+        _SEED_LOG.error('directory not exist')
+        exit(1)
 
     _SEED_LOG.info('creating node model ...')
 
@@ -24,22 +37,33 @@ def main():
     _SEED_LOG.info('adding namespaces and prefixes ...')
 
     # use default values to generate base uri for node model
+    # if every node starts its own SimpleHTTPServer, the base URI may be set as
+    #   http://[IP]/node.owl
 
     base_uri = _node_uri(DEFAULT_HOST, DEFAULT_PORT) + '/' + DEFAULT_NODE_MODEL
 
     model._gen_header(base_uri)
 
-    # traverse default root, collect metadata, add to model.
+    _SEED_LOG.info('traversing specified directory ...')
 
+    _SEED_LOG.info('------------------------------')
 
+    list_dirs = os.walk(root_directory)
+    for root, dirs, files in list_dirs:
+        for d in dirs: 
+            print os.path.join(root, d)
+        for f in files: 
+            print os.path.join(root, f)
+
+    _SEED_LOG.info('------------------------------')
 
     # mission complete
-
-    _SEED_LOG.info('created %d triples.' % len(model))
 
     _SEED_LOG.info('saving node model ...')
 
     model.serialize(DEFAULT_NODE_MODEL)
+
+    _SEED_LOG.info('created %d triples in %s.' % (len(model), DEFAULT_NODE_MODEL))
 
 
 if __name__ == '__main__':
