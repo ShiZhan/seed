@@ -4,13 +4,14 @@
 """mknode -- SEED node initialization"""
 
 import sys, os
+from uuid import uuid1
+from uuid import getnode
 
-from uuid import uuid1 as _genid
-from uuid import getnode as _getnode
+_NODE_ID = getnode() # object id is based on unique node id
 
 from model import Model, DEFAULT_NODE_MODEL
 from model import RDF, RDFS, OWL, XSD, SEED
-from model import Literal, BNode
+from model import Literal, URIRef
 
 from utils import DEFAULT_HOST, DEFAULT_PORT, _node_uri
 from utils import _SEED_LOG, _init_logger
@@ -46,16 +47,42 @@ def main():
 
     _SEED_LOG.info('traversing specified directory ...')
 
-    _SEED_LOG.info('------------------------------')
+    def create_individual(i_base_uri, i_type):
+        """declare individual and assign type"""
+        i_uri = i_base_uri + '#' + str(uuid1(_NODE_ID))
+        i_node = URIRef(i_uri)
 
-    list_dirs = os.walk(root_directory)
-    for root, dirs, files in list_dirs:
-        for d in dirs: 
-            print os.path.join(root, d)
-        for f in files: 
-            print os.path.join(root, f)
+        model.add((i_node, RDF.type, OWL.NamedIndividual))
+        model.add((i_node, RDF.type, i_type))
 
-    _SEED_LOG.info('------------------------------')
+        return i_node
+
+    # create triples for root directory
+    i_root = create_individual(base_uri, SEED.Bucket)
+    model.add((i_root, SEED.path,
+        Literal(os.path.abspath(root_directory),
+            datatype=XSD.normalizedString)))
+    model.add((i_root, SEED.name,
+        Literal(os.path.basename(root_directory),
+            datatype=XSD.normalizedString)))
+
+    def traverse_dir(root_directory, parent):
+        for item in os.listdir(root_directory):
+            path = os.path.join(root_directory, item)
+
+            if os.path.isdir(path):
+                i_path = create_individual(base_uri, SEED.Bucket)
+                traverse_dir(path, i_path)
+            else:
+                i_path = create_individual(base_uri, SEED.Object)
+
+            model.add((parent, SEED.contain, i_path))
+            model.add((i_path, SEED.path,
+                Literal(os.path.abspath(path), datatype=XSD.normalizedString)))
+            model.add((i_path, SEED.name,
+                Literal(item, datatype=XSD.normalizedString)))
+
+    traverse_dir(root_directory, i_root)
 
     # mission complete
 
