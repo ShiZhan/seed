@@ -6,8 +6,8 @@
   <config:config-item-set config:name="ooo:view-settings">
    <config:config-item config:name="VisibleAreaTop" config:type="int">-301</config:config-item>
    <config:config-item config:name="VisibleAreaLeft" config:type="int">-3848</config:config-item>
-   <config:config-item config:name="VisibleAreaWidth" config:type="int">37432</config:config-item>
-   <config:config-item config:name="VisibleAreaHeight" config:type="int">21647</config:config-item>
+   <config:config-item config:name="VisibleAreaWidth" config:type="int">37433</config:config-item>
+   <config:config-item config:name="VisibleAreaHeight" config:type="int">21648</config:config-item>
    <config:config-item-map-indexed config:name="Views">
     <config:config-item-map-entry>
      <config:config-item config:name="ViewId" config:type="string">view1</config:config-item>
@@ -29,7 +29,7 @@
      <config:config-item config:name="NoColors" config:type="boolean">true</config:config-item>
      <config:config-item config:name="RulerIsVisible" config:type="boolean">true</config:config-item>
      <config:config-item config:name="PageKind" config:type="short">0</config:config-item>
-     <config:config-item config:name="SelectedPage" config:type="short">0</config:config-item>
+     <config:config-item config:name="SelectedPage" config:type="short">5</config:config-item>
      <config:config-item config:name="IsLayerMode" config:type="boolean">true</config:config-item>
      <config:config-item config:name="IsDoubleClickTextEdit" config:type="boolean">true</config:config-item>
      <config:config-item config:name="IsClickChangeRotation" config:type="boolean">false</config:config-item>
@@ -773,7 +773,7 @@
      <text:p text:style-name="P1"><text:span text:style-name="T2">mode</text:span></text:p>
     </draw:connector>
     <draw:connector draw:style-name="gr11" draw:text-style-name="P8" draw:layer="controls" draw:type="line" svg:x1="16cm" svg:y1="8.5cm" svg:x2="26.5cm" svg:y2="5cm" draw:start-shape="id4" draw:end-shape="id14" draw:end-glue-point="6" svg:d="m16000 8500 10500-3500" svg:viewBox="0 0 10501 3501">
-     <text:p text:style-name="P1"><text:span text:style-name="T2">length</text:span></text:p>
+     <text:p text:style-name="P1"><text:span text:style-name="T2">size</text:span></text:p>
     </draw:connector>
     <draw:custom-shape draw:style-name="gr2" draw:text-style-name="P5" xml:id="id15" draw:id="id15" draw:layer="controls" svg:width="3cm" svg:height="1cm" svg:x="25cm" svg:y="7cm">
      <text:p text:style-name="P1"><text:span text:style-name="T3">16 Byte</text:span></text:p>
@@ -878,8 +878,8 @@
      <text:p text:style-name="P1"><text:span text:style-name="T2">is</text:span></text:p>
     </draw:connector>
     <draw:connector draw:style-name="gr21" draw:text-style-name="P17" draw:layer="controls" draw:type="curve" draw:line-skew="-1.212cm" svg:x1="5cm" svg:y1="2.5cm" svg:x2="5cm" svg:y2="5.5cm" draw:start-shape="id20" draw:start-glue-point="5" draw:end-shape="id17" draw:end-glue-point="5" svg:d="m5000 2500c-2569 0-2569 3000 0 3000" svg:viewBox="0 0 1928 3001">
-     <text:p text:style-name="P16"><text:span text:style-name="T14">Stripe,</text:span></text:p>
-     <text:p text:style-name="P16"><text:span text:style-name="T14">Replicate,</text:span></text:p>
+     <text:p text:style-name="P16"><text:span text:style-name="T14">stripe,</text:span></text:p>
+     <text:p text:style-name="P16"><text:span text:style-name="T14">replicate,</text:span></text:p>
      <text:p text:style-name="P16"><text:span text:style-name="T14">redundancy</text:span></text:p>
     </draw:connector>
     <draw:connector draw:style-name="gr22" draw:text-style-name="P1" draw:layer="layout" draw:type="line" svg:x1="8cm" svg:y1="2.5cm" svg:x2="13cm" svg:y2="4.5cm" draw:start-shape="id20" draw:start-glue-point="7" draw:end-shape="id12" draw:end-glue-point="5" svg:d="m8000 2500 5000 2000" svg:viewBox="0 0 5001 2001">
@@ -1653,56 +1653,56 @@
     </draw:frame>
     <draw:frame draw:style-name="gr47" draw:text-style-name="P34" draw:layer="layout" svg:width="4.5cm" svg:height="3cm" svg:x="4cm" svg:y="5cm">
      <draw:text-box>
-      <text:p><text:span text:style-name="T26">ls [b]</text:span></text:p>
-      <text:p><text:span text:style-name="T19">(get [*] [property])</text:span></text:p>
+      <text:p><text:span text:style-name="T26">ls [bucket]</text:span></text:p>
+      <text:p><text:span text:style-name="T19">(get [*] [stat</text:span><text:span text:style-name="T19">])</text:span></text:p>
       <text:p><text:span text:style-name="T19"/></text:p>
-      <text:p><text:span text:style-name="T26">get [b] [property]</text:span></text:p>
+      <text:p><text:span text:style-name="T26">get [bucket</text:span><text:span text:style-name="T26">] [stat]</text:span></text:p>
      </draw:text-box>
     </draw:frame>
     <draw:frame draw:style-name="gr47" draw:text-style-name="P34" draw:layer="layout" svg:width="4.5cm" svg:height="3cm" svg:x="9cm" svg:y="5cm">
      <draw:text-box>
-      <text:p><text:span text:style-name="T26">get [o]</text:span></text:p>
-      <text:p><text:span text:style-name="T26">get [o] [property]</text:span></text:p>
+      <text:p><text:span text:style-name="T26">get [object</text:span><text:span text:style-name="T26">]</text:span></text:p>
+      <text:p><text:span text:style-name="T26">get [object</text:span><text:span text:style-name="T26">] [stat]</text:span></text:p>
      </draw:text-box>
     </draw:frame>
     <draw:frame draw:style-name="gr47" draw:text-style-name="P34" draw:layer="layout" svg:width="4.5cm" svg:height="3cm" svg:x="4cm" svg:y="8cm">
      <draw:text-box>
-      <text:p><text:span text:style-name="T26">create [b]</text:span></text:p>
-      <text:p><text:span text:style-name="T19">(update [b])</text:span></text:p>
+      <text:p><text:span text:style-name="T26">create [bucket</text:span><text:span text:style-name="T26">]</text:span></text:p>
+      <text:p><text:span text:style-name="T19">(update [bucket</text:span><text:span text:style-name="T19">])</text:span></text:p>
       <text:p><text:span text:style-name="T26"/></text:p>
-      <text:p><text:span text:style-name="T26">update [b] [property]</text:span></text:p>
+      <text:p><text:span text:style-name="T26">update [bucket</text:span><text:span text:style-name="T26">] [stat]</text:span></text:p>
       <text:p><text:span text:style-name="T26"/></text:p>
      </draw:text-box>
     </draw:frame>
     <draw:frame draw:style-name="gr47" draw:text-style-name="P34" draw:layer="layout" svg:width="4.5cm" svg:height="3cm" svg:x="9cm" svg:y="8cm">
      <draw:text-box>
-      <text:p><text:span text:style-name="T26">create [o]</text:span></text:p>
-      <text:p><text:span text:style-name="T19">(update [b])</text:span></text:p>
+      <text:p><text:span text:style-name="T26">create [object</text:span><text:span text:style-name="T26">]</text:span></text:p>
+      <text:p><text:span text:style-name="T19">(update [bucket</text:span><text:span text:style-name="T19">])</text:span></text:p>
       <text:p><text:span text:style-name="T26"/></text:p>
-      <text:p><text:span text:style-name="T26">update [o]</text:span></text:p>
-      <text:p><text:span text:style-name="T26">update [o] [property]</text:span></text:p>
+      <text:p><text:span text:style-name="T26">update [object</text:span><text:span text:style-name="T26">]</text:span></text:p>
+      <text:p><text:span text:style-name="T26">update [object] [stat]</text:span></text:p>
      </draw:text-box>
     </draw:frame>
     <draw:frame draw:style-name="gr47" draw:text-style-name="P34" draw:layer="layout" svg:width="4.5cm" svg:height="3cm" svg:x="4cm" svg:y="11cm">
      <draw:text-box>
-      <text:p><text:span text:style-name="T26">delete [b]</text:span></text:p>
-      <text:p><text:span text:style-name="T19">(update [b])</text:span></text:p>
+      <text:p><text:span text:style-name="T26">delete [bucket</text:span><text:span text:style-name="T26">]</text:span></text:p>
+      <text:p><text:span text:style-name="T19">(update [bucket</text:span><text:span text:style-name="T19">])</text:span></text:p>
      </draw:text-box>
     </draw:frame>
     <draw:frame draw:style-name="gr47" draw:text-style-name="P34" draw:layer="layout" svg:width="4.5cm" svg:height="3cm" svg:x="9cm" svg:y="11cm">
      <draw:text-box>
-      <text:p><text:span text:style-name="T26">delete [o]</text:span></text:p>
-      <text:p><text:span text:style-name="T19">(update [b])</text:span></text:p>
+      <text:p><text:span text:style-name="T26">delete [object</text:span><text:span text:style-name="T26">]</text:span></text:p>
+      <text:p><text:span text:style-name="T19">(update [bucket</text:span><text:span text:style-name="T19">])</text:span></text:p>
      </draw:text-box>
     </draw:frame>
     <draw:frame draw:style-name="gr47" draw:text-style-name="P34" draw:layer="layout" svg:width="4.5cm" svg:height="3cm" svg:x="4cm" svg:y="14cm">
      <draw:text-box>
-      <text:p><text:span text:style-name="T26">exist [b]</text:span></text:p>
+      <text:p><text:span text:style-name="T26">exist [bucket</text:span><text:span text:style-name="T26">]</text:span></text:p>
      </draw:text-box>
     </draw:frame>
     <draw:frame draw:style-name="gr47" draw:text-style-name="P34" draw:layer="layout" svg:width="4.5cm" svg:height="3cm" svg:x="9cm" svg:y="14cm">
      <draw:text-box>
-      <text:p><text:span text:style-name="T26">exist [o]</text:span></text:p>
+      <text:p><text:span text:style-name="T26">exist [object</text:span><text:span text:style-name="T26">]</text:span></text:p>
      </draw:text-box>
     </draw:frame>
    </draw:page>

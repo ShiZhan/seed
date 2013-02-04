@@ -175,12 +175,12 @@ class Model(Graph):
         # Object [name, mode, {c|m|a}time, length, size, owner, group]
         self._set_property((SEED.Object, SEED.name, XSD.normalizedString), max_qc=1)
         self._set_property((SEED.Object, SEED.mode, XSD.unsignedShort), max_qc=1)
-        self._set_property((SEED.Object, SEED.ctime, XSD.dateTimeStamp), max_qc=1)
-        self._set_property((SEED.Object, SEED.mtime, XSD.dateTimeStamp), max_qc=1)
-        self._set_property((SEED.Object, SEED.atime, XSD.dateTimeStamp), max_qc=1)
-        self._set_property((SEED.Object, SEED.length, XSD.unsignedLong), max_qc=1)
-        self._set_property((SEED.Object, SEED.owner, XSD.NCName), max_qc=1)
-        self._set_property((SEED.Object, SEED.group, XSD.NCName), max_qc=1)
+        self._set_property((SEED.Object, SEED.ctime, XSD.unsignedLong), max_qc=1)
+        self._set_property((SEED.Object, SEED.mtime, XSD.unsignedLong), max_qc=1)
+        self._set_property((SEED.Object, SEED.atime, XSD.unsignedLong), max_qc=1)
+        self._set_property((SEED.Object, SEED.size, XSD.unsignedLong), max_qc=1)
+        self._set_property((SEED.Object, SEED.owner, XSD.unsignedShort), max_qc=1)
+        self._set_property((SEED.Object, SEED.group, XSD.unsignedShort), max_qc=1)
 
         self._set_property((SEED.CompositeObject, SEED.size, XSD.unsignedLong), max_qc=1)
 
