@@ -59,9 +59,6 @@ def main():
 
     # create triples for root directory
     i_root = create_individual(base_uri, SEED.Bucket)
-    model.add((i_root, SEED.path,
-        Literal(os.path.abspath(root_directory),
-            datatype=XSD.normalizedString)))
     model.add((i_root, SEED.name,
         Literal(os.path.basename(root_directory),
             datatype=XSD.normalizedString)))
@@ -77,8 +74,6 @@ def main():
                 i_path = create_individual(base_uri, SEED.Object)
 
             model.add((parent, SEED.contain, i_path))
-            model.add((i_path, SEED.path,
-                Literal(os.path.abspath(path), datatype=XSD.normalizedString)))
             model.add((i_path, SEED.name,
                 Literal(item, datatype=XSD.normalizedString)))
 

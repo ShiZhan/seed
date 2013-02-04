@@ -172,9 +172,8 @@ class Model(Graph):
         self._set_property(
             (SEED.CompositeObject, SEED.redundancy, SEED.SimpleObject), only=True)
 
-        # Object [name, path, mode, {c|m|a}time, length, size, owner, group]
+        # Object [name, mode, {c|m|a}time, length, size, owner, group]
         self._set_property((SEED.Object, SEED.name, XSD.normalizedString), max_qc=1)
-        self._set_property((SEED.Object, SEED.path, XSD.normalizedString), max_qc=1)
         self._set_property((SEED.Object, SEED.mode, XSD.unsignedShort), max_qc=1)
         self._set_property((SEED.Object, SEED.ctime, XSD.dateTimeStamp), max_qc=1)
         self._set_property((SEED.Object, SEED.mtime, XSD.dateTimeStamp), max_qc=1)
