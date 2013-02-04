@@ -43,7 +43,7 @@ class Model(Graph):
         Graph.__init__(self)
 
     # helper methods for creating seed models
-    def _gen_header(self, base_uri):
+    def gen_header(self, base_uri):
         """generate prefix, base and datatypes for model base_uri"""
 
         # setup prefix
@@ -95,7 +95,7 @@ class Model(Graph):
         self.add((XSD.anyType, RDF.type, RDFS.Datatype))
 
 
-    def _set_property(self, (sub, pre, obj),
+    def set_property(self, (sub, pre, obj),
         only=False, some=False, max_qc=None, min_qc=None):
         """set property with restriction on object"""
 
@@ -123,12 +123,12 @@ class Model(Graph):
         self.add((sub, RDFS.subClassOf, _node))
 
 
-    def _gen_core(self):
+    def gen_core(self):
         """generate core model"""
 
         # core model base, prefix and namespace
 
-        self._gen_header(_seed_base)
+        self.gen_header(_seed_base)
 
         # declare classes
 
@@ -162,25 +162,25 @@ class Model(Graph):
         self.add((SEED.host,      RDF.type, OWL.DatatypeProperty))
 
         # Bucket contain only Object
-        self._set_property((SEED.Bucket, SEED.contain, SEED.Object), only=True)
+        self.set_property((SEED.Bucket, SEED.contain, SEED.Object), only=True)
 
         # CompositeObject [stripe, replicate, redundancy] only SimpleObject
-        self._set_property(
+        self.set_property(
             (SEED.CompositeObject, SEED.stripe,     SEED.SimpleObject), only=True)
-        self._set_property(
+        self.set_property(
             (SEED.CompositeObject, SEED.replicate,  SEED.SimpleObject), only=True)
-        self._set_property(
+        self.set_property(
             (SEED.CompositeObject, SEED.redundancy, SEED.SimpleObject), only=True)
 
         # Object [name, mode, {c|m|a}time, length, size, owner, group]
-        self._set_property((SEED.Object, SEED.name, XSD.normalizedString), max_qc=1)
-        self._set_property((SEED.Object, SEED.mode, XSD.unsignedShort), max_qc=1)
-        self._set_property((SEED.Object, SEED.ctime, XSD.unsignedLong), max_qc=1)
-        self._set_property((SEED.Object, SEED.mtime, XSD.unsignedLong), max_qc=1)
-        self._set_property((SEED.Object, SEED.atime, XSD.unsignedLong), max_qc=1)
-        self._set_property((SEED.Object, SEED.size, XSD.unsignedLong), max_qc=1)
-        self._set_property((SEED.Object, SEED.owner, XSD.unsignedShort), max_qc=1)
-        self._set_property((SEED.Object, SEED.group, XSD.unsignedShort), max_qc=1)
+        self.set_property((SEED.Object, SEED.name, XSD.normalizedString), max_qc=1)
+        self.set_property((SEED.Object, SEED.mode, XSD.unsignedShort), max_qc=1)
+        self.set_property((SEED.Object, SEED.ctime, XSD.unsignedLong), max_qc=1)
+        self.set_property((SEED.Object, SEED.mtime, XSD.unsignedLong), max_qc=1)
+        self.set_property((SEED.Object, SEED.atime, XSD.unsignedLong), max_qc=1)
+        self.set_property((SEED.Object, SEED.size, XSD.unsignedLong), max_qc=1)
+        self.set_property((SEED.Object, SEED.owner, XSD.unsignedShort), max_qc=1)
+        self.set_property((SEED.Object, SEED.group, XSD.unsignedShort), max_qc=1)
 
-        self._set_property((SEED.CompositeObject, SEED.size, XSD.unsignedLong), max_qc=1)
+        self.set_property((SEED.CompositeObject, SEED.size, XSD.unsignedLong), max_qc=1)
 

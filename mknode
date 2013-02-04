@@ -10,11 +10,12 @@ from uuid import getnode
 _NODE_ID = getnode() # object id is based on unique node id
 
 from model import Model, DEFAULT_NODE_MODEL
-from model import RDF, RDFS, OWL, XSD, SEED
+from model import RDF, OWL, XSD, SEED
 from model import Literal, URIRef
 
 from utils import DEFAULT_HOST, DEFAULT_PORT, _node_uri
 from utils import _SEED_LOG, _init_logger
+
 
 def main():
     """mknode program"""
@@ -46,7 +47,7 @@ def main():
 
     base_uri = _node_uri(DEFAULT_HOST, DEFAULT_PORT) + '/' + DEFAULT_NODE_MODEL
 
-    model._gen_header(base_uri)
+    model.gen_header(base_uri)
 
     _SEED_LOG.info('traversing specified directory ...')
 
@@ -67,6 +68,8 @@ def main():
             datatype=XSD.normalizedString)))
 
     def traverse_dir(root_directory, parent):
+        """traverse root_directory,
+        transfer its individual 'parent' to create the 'contain' triple."""
         for item in os.listdir(root_directory):
             path = os.path.join(root_directory, item)
 
@@ -111,7 +114,8 @@ def main():
 
     model.serialize(DEFAULT_NODE_MODEL)
 
-    _SEED_LOG.info('created %d triples in %s.' % (len(model), DEFAULT_NODE_MODEL))
+    _SEED_LOG.info('created %d triples in %s.'\
+        % (len(model), DEFAULT_NODE_MODEL))
 
 
 if __name__ == '__main__':

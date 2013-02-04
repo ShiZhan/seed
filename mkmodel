@@ -15,7 +15,7 @@ def main():
 
     core = Model()
 
-    core._gen_core()
+    core.gen_core()
 
     # Serialize the store as RDF/XML to file.
     core.serialize(DEFAULT_CORE_MODEL)
