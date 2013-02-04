@@ -83,28 +83,29 @@ def main():
             model.add((i_path, SEED.name,
                 Literal(item, datatype=XSD.normalizedString)))
 
-            i_stat = os.stat(path)
+            (mode, ino, dev, nlink, uid, gid, size, atime, mtime, ctime) \
+                = os.stat(path)
 
             model.add((i_path, SEED.length,
-                Literal(i_stat.st_size, datatype=XSD.unsignedLong)))
+                Literal(size, datatype=XSD.unsignedLong)))
 
             model.add((i_path, SEED.mode,
-                Literal(i_stat.st_mode, datatype=XSD.unsignedShort)))
+                Literal(mode, datatype=XSD.unsignedShort)))
 
             model.add((i_path, SEED.ctime,
-                Literal(i_stat._integer_ctime, datatype=XSD.unsignedLong)))
+                Literal(ctime, datatype=XSD.unsignedLong)))
 
             model.add((i_path, SEED.mtime,
-                Literal(i_stat._integer_mtime, datatype=XSD.unsignedLong)))
+                Literal(mtime, datatype=XSD.unsignedLong)))
 
             model.add((i_path, SEED.atime,
-                Literal(i_stat._integer_atime, datatype=XSD.unsignedLong)))
+                Literal(atime, datatype=XSD.unsignedLong)))
 
             model.add((i_path, SEED.owner,
-                Literal(i_stat.st_uid, datatype=XSD.unsignedShort)))
+                Literal(uid, datatype=XSD.unsignedShort)))
 
             model.add((i_path, SEED.group,
-                Literal(i_stat.st_gid, datatype=XSD.unsignedShort)))
+                Literal(gid, datatype=XSD.unsignedShort)))
 
     traverse_dir(root_directory, i_root)
 
