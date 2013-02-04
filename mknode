@@ -19,6 +19,9 @@ from utils import _SEED_LOG, _init_logger
 def main():
     """mknode program"""
 
+    print "SEED directory importer"
+    print "usage: <this script> <directory to import>"
+
     _init_logger()
 
     if len(sys.argv) > 1:

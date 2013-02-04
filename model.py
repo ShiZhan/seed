@@ -184,6 +184,3 @@ class Model(Graph):
 
         self._set_property((SEED.CompositeObject, SEED.size, XSD.unsignedLong), max_qc=1)
 
-        # Object [host] only HOST_ID (8 Bytes)
-        self._set_property((SEED.Object, SEED.host, XSD.hexBinary), only=True)
-
