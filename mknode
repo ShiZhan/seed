@@ -86,7 +86,7 @@ def main():
             (mode, ino, dev, nlink, uid, gid, size, atime, mtime, ctime) \
                 = os.stat(path)
 
-            model.add((i_path, SEED.length,
+            model.add((i_path, SEED.size,
                 Literal(size, datatype=XSD.unsignedLong)))
 
             model.add((i_path, SEED.mode,

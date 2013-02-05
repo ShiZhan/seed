@@ -1,0 +1,165 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""mknode -- SEED node initialization, template version"""
+
+import sys, os, time, re
+from uuid import uuid1
+from uuid import getnode
+
+created = time.strftime('%Y-%m-%d %H:%M:%S',
+            time.localtime(time.time())).encode('utf-8')
+node_id = getnode()
+
+from model import _seed_base, DEFAULT_NODE_MODEL
+
+from utils import DEFAULT_HOST, DEFAULT_PORT, _node_uri, VERSION
+from utils import _SEED_LOG, _init_logger
+
+
+# BEGIN: model template
+license = \
+    """
+    Copyright 2013 Shi.Zhan.
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0.
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing
+    permissions and limitations under the License.
+    """
+
+header = \
+    """
+    <?xml version="1.0" encoding="UTF-8"?>
+    <rdf:RDF
+       xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+       xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+       xmlns:owl="http://www.w3.org/2002/07/owl#"
+       xmlns:dc="http://purl.org/dc/elements/1.1/"
+       xmlns:terms="http://purl.org/dc/terms/"
+       xmlns:seed="{%seed_base%}#"
+    >
+      <rdf:Description rdf:about="{%base_uri%}">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+        <owl:imports rdf:resource="{%seed_base%}"/>
+        <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#hexBinary">{%version%}</owl:versionInfo>
+        <dc:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">{%created%}</dc:created>
+        <dc:date>2013-01-31</dc:date>
+        <rdfs:comment xml:lang="EN">SEED node ontology</rdfs:comment>
+        <terms:license rdf:datatype="http://www.w3.org/2001/XMLSchema#string">{%license%}</terms:license>
+        <dc:creator>Shi.Zhan</dc:creator>
+      </rdf:Description>
+      {%individuals%}
+    """,
+    # {%seed_base%}, {%base_uri%},
+    # {%version%}, {%created%}, {%license%},
+    # {%individuals%}
+
+individuals = \
+    """
+      <rdf:Description rdf:about="{%base_uri%}#{%object_id%}">
+        <rdf:type rdf:resource="{%seed_base%}#{%object_type%}"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <seed:name rdf:datatype="http://www.w3.org/2001/XMLSchema#normalizedString">{%name%}</seed:name>
+        <seed:mode rdf:datatype="http://www.w3.org/2001/XMLSchema#unsignedShort">{%mode%}</seed:mode>
+        <seed:owner rdf:datatype="http://www.w3.org/2001/XMLSchema#unsignedShort">{%owner%}</seed:owner>
+        <seed:group rdf:datatype="http://www.w3.org/2001/XMLSchema#unsignedShort">{%group%}</seed:group>
+        <seed:size rdf:datatype="http://www.w3.org/2001/XMLSchema#unsignedLong">{%size%}</seed:size>
+        <seed:atime rdf:datatype="http://www.w3.org/2001/XMLSchema#unsignedLong">{%atime%}</seed:atime>
+        <seed:mtime rdf:datatype="http://www.w3.org/2001/XMLSchema#unsignedLong">{%mtime%}</seed:mtime>
+        <seed:ctime rdf:datatype="http://www.w3.org/2001/XMLSchema#unsignedLong">{%ctime%}</seed:ctime>
+        {%contain_group%}
+      </rdf:Description>
+    """,
+    # {%base_uri%}, {%object_id%}, {%seed_base%}, {%object_type%}[Bucket|Object]
+    # {%name%}, {%mode%}, {%owner%}, {%group%}, {%size%}, {%atime%}, {%mtime%}, {%ctime%}
+    # {%contain_group%}
+
+contain_group = \
+    """
+    <seed:contain rdf:resource="{%base_uri%}#{%object_id%}"/>
+    """,
+    # {%base_uri%}, {%object_id%}
+
+footer = \
+    """
+    </rdf:RDF>
+    """
+# END: model template
+
+
+def main():
+    """mknode program"""
+
+    print "SEED directory importer"
+    print "usage: <this script> <directory to import>"
+
+    _init_logger()
+
+    if len(sys.argv) > 1:
+        root_directory = sys.argv[1]
+    else:
+        _SEED_LOG.error('give a directory to import')
+        exit(1)
+
+    if not os.path.exists(os.path.abspath(root_directory)):
+        _SEED_LOG.error('directory not exist')
+        exit(1)
+
+    base_uri = _node_uri(DEFAULT_HOST, DEFAULT_PORT) + '/' + DEFAULT_NODE_MODEL
+
+    model_file = open(DEFAULT_NODE_MODEL, 'w')
+
+    _SEED_LOG.info('base URI: %s' % base_uri)
+
+    _SEED_LOG.info('reading object list ...')
+
+
+    object_id = str(uuid1(node_id))
+
+    _SEED_LOG.info('gathering metadata ...')
+
+            # (mode, ino, dev, nlink, uid, gid, size, atime, mtime, ctime) \
+            #     = os.stat(path)
+
+            # model.add((i_path, SEED.length,
+            #     Literal(size, datatype=XSD.unsignedLong)))
+
+            # model.add((i_path, SEED.mode,
+            #     Literal(mode, datatype=XSD.unsignedShort)))
+
+            # model.add((i_path, SEED.ctime,
+            #     Literal(ctime, datatype=XSD.unsignedLong)))
+
+            # model.add((i_path, SEED.mtime,
+            #     Literal(mtime, datatype=XSD.unsignedLong)))
+
+            # model.add((i_path, SEED.atime,
+            #     Literal(atime, datatype=XSD.unsignedLong)))
+
+            # model.add((i_path, SEED.owner,
+            #     Literal(uid, datatype=XSD.unsignedShort)))
+
+            # model.add((i_path, SEED.group,
+            #     Literal(gid, datatype=XSD.unsignedShort)))
+
+
+    _SEED_LOG.info('creating node model ...')
+
+
+
+    # mission complete
+
+    model_file.close()
+
+    _SEED_LOG.info('model created in %s.' % DEFAULT_NODE_MODEL)
+
+
+if __name__ == '__main__':
+    main()

@@ -150,16 +150,13 @@ class Model(Graph):
         self.add((SEED.redundancy, RDF.type, OWL.ObjectProperty))
 
         self.add((SEED.name,      RDF.type, OWL.DatatypeProperty))
-        self.add((SEED.path,      RDF.type, OWL.DatatypeProperty))
         self.add((SEED.mode,      RDF.type, OWL.DatatypeProperty))
         self.add((SEED.ctime,     RDF.type, OWL.DatatypeProperty))
         self.add((SEED.mtime,     RDF.type, OWL.DatatypeProperty))
         self.add((SEED.atime,     RDF.type, OWL.DatatypeProperty))
-        self.add((SEED.length,    RDF.type, OWL.DatatypeProperty))
         self.add((SEED.size,      RDF.type, OWL.DatatypeProperty))
         self.add((SEED.owner,     RDF.type, OWL.DatatypeProperty))
         self.add((SEED.group,     RDF.type, OWL.DatatypeProperty))
-        self.add((SEED.host,      RDF.type, OWL.DatatypeProperty))
 
         # Bucket contain only Object
         self.set_property((SEED.Bucket, SEED.contain, SEED.Object), only=True)
@@ -181,6 +178,4 @@ class Model(Graph):
         self.set_property((SEED.Object, SEED.size, XSD.unsignedLong), max_qc=1)
         self.set_property((SEED.Object, SEED.owner, XSD.unsignedShort), max_qc=1)
         self.set_property((SEED.Object, SEED.group, XSD.unsignedShort), max_qc=1)
-
-        self.set_property((SEED.CompositeObject, SEED.size, XSD.unsignedLong), max_qc=1)
 
