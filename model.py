@@ -27,7 +27,8 @@ SEED = ClosedNamespace(
     terms =
         [
             "Object", "Bucket", "SimpleObject", "CompositeObject",
-            "contain", "stripe", "replicate", "redundancy",
+            "contain", "within",
+            "stripe", "replicate", "redundancy",
             "name", "path", "mode", "ctime", "mtime", "atime",
             "length", "size", "owner", "group", "host"
         ]
@@ -144,6 +145,7 @@ class Model(Graph):
 
         # declare and assign properties
 
+        self.add((SEED.within,     RDF.type, OWL.ObjectProperty))
         self.add((SEED.contain,    RDF.type, OWL.ObjectProperty))
         self.add((SEED.stripe,     RDF.type, OWL.ObjectProperty))
         self.add((SEED.replicate,  RDF.type, OWL.ObjectProperty))
@@ -160,6 +162,11 @@ class Model(Graph):
 
         # Bucket contain only Object
         self.set_property((SEED.Bucket, SEED.contain, SEED.Object), only=True)
+
+        # Object within only Bucket
+        self.set_property((SEED.Object, SEED.within, SEED.Bucket), only=True)
+
+        # TODO: owl:inverseOf
 
         # CompositeObject [stripe, replicate, redundancy] only SimpleObject
         self.set_property(
