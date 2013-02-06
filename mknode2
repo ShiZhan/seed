@@ -65,17 +65,12 @@ t_individual = Template(
     <seed:atime rdf:datatype="http://www.w3.org/2001/XMLSchema#unsignedLong">$atime</seed:atime>
     <seed:mtime rdf:datatype="http://www.w3.org/2001/XMLSchema#unsignedLong">$mtime</seed:mtime>
     <seed:ctime rdf:datatype="http://www.w3.org/2001/XMLSchema#unsignedLong">$ctime</seed:ctime>
-    $within
     $contain
   </rdf:Description>
 """)
 # $base_uri, $seed_base, $object_id, $object_type[Bucket|Object], $name
 # $mode, $owner, $group, $size, $atime, $mtime, $ctime
-# $within, $contain
-
-t_within = Template("""<seed:within rdf:resource="$base_uri#$object_id"/>
-    """)
-# $base_uri, $object_id
+# $contain
 
 t_contain = Template("""<seed:contain rdf:resource="$base_uri#$object_id"/>
     """)
@@ -137,7 +132,6 @@ def main():
                     'id':   root_id,
                     'name': root_name,
                     'type': 'Bucket',
-                    'within':  [],
                     'contain': [],
                     'stat': os.stat(root_directory)
                 }
@@ -154,7 +148,6 @@ def main():
                     'id':   object_id,
                     'name': dirname,
                     'type': 'Bucket',
-                    'within':  [object_list[dirpath]['id']],
                     'contain': [], # fill this later
                     'stat': os.stat(object_path)
                 }
@@ -170,7 +163,6 @@ def main():
                     'id':   object_id,
                     'name': filename,
                     'type': 'Object',
-                    'within':  [object_list[dirpath]['id']],
                     'contain': [], # files contain None
                     'stat': os.stat(object_path)
                 }
@@ -200,13 +192,6 @@ def main():
 
         print path
 
-        i_object_within = ''
-
-        if not len(i_object['within']) == 0:
-            for bucket_id in i_object['within']:
-                i_object_within += t_within.substitute(
-                    base_uri=base_uri, object_id=bucket_id)
-
         i_object_contain = ''
 
         if not len(i_object['contain']) == 0:
@@ -224,7 +209,6 @@ def main():
             name=i_object['name'],
             object_type=i_object['type'],
 
-            within=i_object_within,
             contain=i_object_contain,
 
             mode=mode,
@@ -247,3 +231,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
