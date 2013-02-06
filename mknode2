@@ -12,7 +12,7 @@ from utils import _SEED_LOG, _init_logger, VERSION
 
 
 # BEGIN: model template
-license = \
+t_license = \
 """
 Copyright 2013 Shi.Zhan.
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -73,22 +73,15 @@ t_individual = Template(
 # $mode, $owner, $group, $size, $atime, $mtime, $ctime
 # $within, $contain
 
-t_within = Template(
-"""
-<seed:within rdf:resource="$base_uri#$object_id"/>
-""")
+t_within = Template("""<seed:within rdf:resource="$base_uri#$object_id"/>
+    """)
 # $base_uri, $object_id
 
-t_contain = Template(
-"""
-<seed:contain rdf:resource="$base_uri#$object_id"/>
-""")
+t_contain = Template("""<seed:contain rdf:resource="$base_uri#$object_id"/>
+    """)
 # $base_uri, $object_id
 
-t_footer = \
-"""
-</rdf:RDF>
-"""
+t_footer = """</rdf:RDF>"""
 
 # END: model template
 
@@ -196,18 +189,16 @@ def main():
                 base_uri=base_uri,
                 version=VERSION,
                 created=created,
-                license=license
+                license=t_license
             )
 
     footer = t_footer
 
     print >> model, header
 
-    i_object_text = ''
-
     for path, i_object in object_list.iteritems():
 
-        _SEED_LOG.info(path)
+        print path
 
         i_object_within = ''
 
@@ -226,7 +217,7 @@ def main():
         (mode, ino, dev, nlink, uid, gid, size, atime, mtime, ctime) \
             = i_object['stat']
 
-        i_object_text += t_individual.substitute(
+        i_object_text = t_individual.substitute(
             base_uri=base_uri,
             seed_base=seed_base,
             object_id=i_object['id'],
@@ -245,13 +236,13 @@ def main():
             ctime=ctime
         )
 
-    print >> model, i_object_text
+        print >> model, i_object_text
 
     print >> model, footer
 
     model.close()
 
-    _SEED_LOG.info('model created in %s.' % model_file)
+    _SEED_LOG.info('%d object individuals created in %s.' % (len(object_list), model_file))
 
 
 if __name__ == '__main__':
