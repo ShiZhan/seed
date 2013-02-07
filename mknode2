@@ -81,6 +81,16 @@ t_footer = """</rdf:RDF>"""
 # END: model template
 
 
+def stat(path):
+    result = None
+    try:
+        result = os.stat(path)
+    except Exception, e:
+        print 'stat error', e
+    finally:
+        return result
+
+
 def main():
     """mknode program"""
 
@@ -133,7 +143,7 @@ def main():
                     'name': root_name,
                     'type': 'Bucket',
                     'contain': [],
-                    'stat': os.stat(root_directory)
+                    'stat': stat(root_directory)
                 }
         }
 
@@ -149,7 +159,7 @@ def main():
                     'name': dirname,
                     'type': 'Bucket',
                     'contain': [], # fill this later
-                    'stat': os.stat(object_path)
+                    'stat': stat(object_path)
                 }
 
             object_list[dirpath]['contain'].append(object_id)
@@ -164,7 +174,7 @@ def main():
                     'name': filename,
                     'type': 'Object',
                     'contain': [], # files contain None
-                    'stat': os.stat(object_path)
+                    'stat': stat(object_path)
                 }
 
             object_list[dirpath]['contain'].append(object_id)
