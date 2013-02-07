@@ -1,0 +1,11 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX seed: <https://sites.google.com/site/ontology2013/seed.owl#>
+SELECT ?name1 ?name2 ?name3
+    WHERE { ?oid seed:name "crawler.py"^^xsd:normalizedString .
+                       ?p1_id seed:contain ?oid   . ?p1_id seed:name ?name1 .
+            OPTIONAL { ?p2_id seed:contain ?p1_id . ?p2_id seed:name ?name2 } .
+            OPTIONAL { ?p3_id seed:contain ?p2_id . ?p3_id seed:name ?name3 } .
+          }
