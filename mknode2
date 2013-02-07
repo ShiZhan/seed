@@ -182,7 +182,9 @@ def main():
             object_list[dirpath]['contain'].append(object_id)
 
 
-    _SEED_LOG.info('%d objects read' % len(object_list))
+    object_total = len(object_list)
+
+    _SEED_LOG.info('%d objects read' % object_total)
 
     _SEED_LOG.info('creating node model ...')
 
@@ -200,9 +202,17 @@ def main():
 
     print >> model, header
 
+    progress = 0
+
     for path, i_object in object_list.iteritems():
 
-        print path
+        # print path
+
+        progress += 1
+
+        sys.stdout.write(
+            "Generating progress: %d%%\r" % int(100*progress/object_total))
+        sys.stdout.flush()
 
         i_object_contain = ''
 
@@ -234,11 +244,13 @@ def main():
 
         print >> model, i_object_text
 
+    print '\n' # CR after flush
+
     print >> model, footer
 
     model.close()
 
-    _SEED_LOG.info('%d object individuals created in %s.' % (len(object_list), model_file))
+    _SEED_LOG.info('%d object individuals created in %s.' % (object_total, model_file))
 
 
 if __name__ == '__main__':
