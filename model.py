@@ -29,8 +29,7 @@ SEED = ClosedNamespace(
             "Object", "Bucket", "SimpleObject", "CompositeObject",
             "contain", "stripe", "replicate", "redundancy",
             "name", "origin",
-            "path", "mode", "ctime", "mtime", "atime",
-            "length", "size", "owner", "group", "host"
+            "mode", "ctime", "mtime", "atime", "length", "size", "uid", "gid"
         ]
 )
 
@@ -158,8 +157,8 @@ class Model(Graph):
         self.add((SEED.mtime,     RDF.type, OWL.DatatypeProperty))
         self.add((SEED.atime,     RDF.type, OWL.DatatypeProperty))
         self.add((SEED.size,      RDF.type, OWL.DatatypeProperty))
-        self.add((SEED.owner,     RDF.type, OWL.DatatypeProperty))
-        self.add((SEED.group,     RDF.type, OWL.DatatypeProperty))
+        self.add((SEED.uid,       RDF.type, OWL.DatatypeProperty))
+        self.add((SEED.gid,       RDF.type, OWL.DatatypeProperty))
 
         # Bucket contain only Object
         self.set_property((SEED.Bucket, SEED.contain, SEED.Object), only=True)
@@ -178,12 +177,12 @@ class Model(Graph):
         # Object origin
         self.set_property((SEED.Object, SEED.origin, XSD.normalizedString), max_qc=1)
 
-        # Object stat [mode, {c|m|a}time, length, size, owner, group]
+        # Object stat [mode, {c|m|a}time, length, size, uid, gid]
         self.set_property((SEED.Object, SEED.mode, XSD.unsignedShort), max_qc=1)
         self.set_property((SEED.Object, SEED.ctime, XSD.unsignedLong), max_qc=1)
         self.set_property((SEED.Object, SEED.mtime, XSD.unsignedLong), max_qc=1)
         self.set_property((SEED.Object, SEED.atime, XSD.unsignedLong), max_qc=1)
         self.set_property((SEED.Object, SEED.size, XSD.unsignedLong), max_qc=1)
-        self.set_property((SEED.Object, SEED.owner, XSD.unsignedShort), max_qc=1)
-        self.set_property((SEED.Object, SEED.group, XSD.unsignedShort), max_qc=1)
+        self.set_property((SEED.Object, SEED.uid, XSD.int), max_qc=1)
+        self.set_property((SEED.Object, SEED.gid, XSD.int), max_qc=1)
 

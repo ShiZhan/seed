@@ -90,6 +90,8 @@ def read_tree(directory):
                     "Traversed %d K objects\r" % int(progress >> 10))
                 sys.stdout.flush()
 
+    print 'Traversed %d objects' % progress
+
     return object_list
 
 
@@ -146,8 +148,8 @@ T_INDIVIDUAL = Template(
     <seed:name rdf:datatype="&xsd;normalizedString">$name</seed:name>
     <seed:origin rdf:datatype="&xsd;normalizedString">$origin</seed:origin>
     <seed:mode rdf:datatype="&xsd;unsignedShort">$mode</seed:mode>
-    <seed:owner rdf:datatype="&xsd;unsignedShort">$owner</seed:owner>
-    <seed:group rdf:datatype="&xsd;unsignedShort">$group</seed:group>
+    <seed:uid rdf:datatype="&xsd;int">$uid</seed:uid>
+    <seed:gid rdf:datatype="&xsd;int">$gid</seed:gid>
     <seed:size rdf:datatype="&xsd;unsignedLong">$size</seed:size>
     <seed:atime rdf:datatype="&xsd;unsignedLong">$atime</seed:atime>
     <seed:mtime rdf:datatype="&xsd;unsignedLong">$mtime</seed:mtime>
@@ -156,7 +158,7 @@ T_INDIVIDUAL = Template(
   </rdf:Description>
 """)
 # $base_uri, $seed_base, $object_id, $object_type[Bucket|Object], $name, $origin
-# $mode, $owner, $group, $size, $atime, $mtime, $ctime
+# $mode, $uid, $gid, $size, $atime, $mtime, $ctime
 # $contain
 
 T_CONTAIN = Template("""<seed:contain rdf:resource="$base_uri#$object_id"/>
@@ -221,9 +223,10 @@ def write_model(object_list, model_file):
 
         progress += 1
 
-        sys.stdout.write(
-            "Generating progress: %d%%\r" % int(100*progress/object_total))
-        sys.stdout.flush()
+        if object_total > 1024 and progress % 1024 is object_total % 1024:
+            sys.stdout.write(
+                "Generating progress: %d%%\r" % int(100*progress/object_total))
+            sys.stdout.flush()
 
         i_object_contain = ''
 
@@ -246,8 +249,8 @@ def write_model(object_list, model_file):
             contain=i_object_contain,
 
             mode=mode,
-            owner=uid,
-            group=gid,
+            uid=uid,
+            gid=gid,
             size=size,
             atime=atime,
             mtime=mtime,
