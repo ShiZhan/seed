@@ -28,7 +28,8 @@ SEED = ClosedNamespace(
         [
             "Object", "Bucket", "SimpleObject", "CompositeObject",
             "contain", "stripe", "replicate", "redundancy",
-            "name", "path", "mode", "ctime", "mtime", "atime",
+            "name", "origin",
+            "path", "mode", "ctime", "mtime", "atime",
             "length", "size", "owner", "group", "host"
         ]
 )
@@ -150,6 +151,8 @@ class Model(Graph):
         self.add((SEED.redundancy, RDF.type, OWL.ObjectProperty))
 
         self.add((SEED.name,      RDF.type, OWL.DatatypeProperty))
+        self.add((SEED.origin,    RDF.type, OWL.DatatypeProperty))
+
         self.add((SEED.mode,      RDF.type, OWL.DatatypeProperty))
         self.add((SEED.ctime,     RDF.type, OWL.DatatypeProperty))
         self.add((SEED.mtime,     RDF.type, OWL.DatatypeProperty))
@@ -169,8 +172,13 @@ class Model(Graph):
         self.set_property(
             (SEED.CompositeObject, SEED.redundancy, SEED.SimpleObject), only=True)
 
-        # Object [name, mode, {c|m|a}time, length, size, owner, group]
+        # Object name
         self.set_property((SEED.Object, SEED.name, XSD.normalizedString), max_qc=1)
+
+        # Object origin
+        self.set_property((SEED.Object, SEED.origin, XSD.normalizedString), max_qc=1)
+
+        # Object stat [mode, {c|m|a}time, length, size, owner, group]
         self.set_property((SEED.Object, SEED.mode, XSD.unsignedShort), max_qc=1)
         self.set_property((SEED.Object, SEED.ctime, XSD.unsignedLong), max_qc=1)
         self.set_property((SEED.Object, SEED.mtime, XSD.unsignedLong), max_qc=1)
