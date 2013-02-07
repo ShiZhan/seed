@@ -215,6 +215,7 @@ def write_model(object_list, model_file):
     print >> model, header
 
     object_total = len(object_list)
+    object_total_m1k = object_total % 1024 # update progress every 1K loop
     progress = 0
 
     for path, i_object in object_list.iteritems():
@@ -223,7 +224,7 @@ def write_model(object_list, model_file):
 
         progress += 1
 
-        if object_total > 1024 and progress % 1024 is object_total % 1024:
+        if object_total > 1024 and progress % 1024 is object_total_m1k:
             sys.stdout.write(
                 "Generating progress: %d%%\r" % int(100*progress/object_total))
             sys.stdout.flush()
