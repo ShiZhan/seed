@@ -151,6 +151,19 @@ def read_tree(directory):
     return object_list
 
 
+XML_ESCAPE_TABLE = {
+    "&": "&amp;",
+    '"': "&quot;",
+    "'": "&apos;",
+    ">": "&gt;",
+    "<": "&lt;",
+    }
+
+def xml_escape(text):
+    """Produce entities within text."""
+    return "".join(XML_ESCAPE_TABLE.get(c, c) for c in text)
+
+
 def main():
     """mknode program"""
 
@@ -236,8 +249,8 @@ def main():
             seed_base=seed_base,
             object_id=i_object['id'],
             object_type=i_object['type'],
-            name=i_object['name'],
-            origin=path,
+            name=xml_escape(i_object['name']),
+            origin=xml_escape(path),
 
             contain=i_object_contain,
 
