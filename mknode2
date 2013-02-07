@@ -5,81 +5,9 @@
 
 import sys, os, time, socket
 from string import Template
-from uuid import uuid1
-from uuid import getnode
+from uuid import uuid1, getnode
 
 from utils import _SEED_LOG, _init_logger, VERSION
-
-
-# BEGIN: model template
-T_LICENSE = \
-"""
-Copyright 2013 Shi.Zhan.
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0.
-
-Unless required by applicable law or agreed to in writing,
-software distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing
-permissions and limitations under the License.
-"""
-
-T_HEADER = Template(
-"""<?xml version="1.0" encoding="UTF-8"?>
-<rdf:RDF
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-   xmlns:owl="http://www.w3.org/2002/07/owl#"
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:terms="http://purl.org/dc/terms/"
-   xmlns:seed="$seed_base#"
->
-  <rdf:Description rdf:about="$base_uri">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
-    <owl:imports rdf:resource="$seed_base"/>
-    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#hexBinary">$version</owl:versionInfo>
-    <dc:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">$created</dc:created>
-    <dc:date>2013-01-31</dc:date>
-    <rdfs:comment xml:lang="EN">SEED node ontology</rdfs:comment>
-    <terms:license rdf:datatype="http://www.w3.org/2001/XMLSchema#string">$license</terms:license>
-    <dc:creator>Shi.Zhan</dc:creator>
-  </rdf:Description>
-""")
-# $seed_base, $base_uri,
-# $version, $created, $license,
-
-T_INDIVIDUAL = Template(
-"""
-  <rdf:Description rdf:about="$base_uri#$object_id">
-    <rdf:type rdf:resource="$seed_base#$object_type"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-    <seed:name rdf:datatype="http://www.w3.org/2001/XMLSchema#normalizedString">$name</seed:name>
-    <seed:origin rdf:datatype="http://www.w3.org/2001/XMLSchema#normalizedString">$origin</seed:origin>
-    <seed:mode rdf:datatype="http://www.w3.org/2001/XMLSchema#unsignedShort">$mode</seed:mode>
-    <seed:owner rdf:datatype="http://www.w3.org/2001/XMLSchema#unsignedShort">$owner</seed:owner>
-    <seed:group rdf:datatype="http://www.w3.org/2001/XMLSchema#unsignedShort">$group</seed:group>
-    <seed:size rdf:datatype="http://www.w3.org/2001/XMLSchema#unsignedLong">$size</seed:size>
-    <seed:atime rdf:datatype="http://www.w3.org/2001/XMLSchema#unsignedLong">$atime</seed:atime>
-    <seed:mtime rdf:datatype="http://www.w3.org/2001/XMLSchema#unsignedLong">$mtime</seed:mtime>
-    <seed:ctime rdf:datatype="http://www.w3.org/2001/XMLSchema#unsignedLong">$ctime</seed:ctime>
-    $contain
-  </rdf:Description>
-""")
-# $base_uri, $seed_base, $object_id, $object_type[Bucket|Object], $name, $origin
-# $mode, $owner, $group, $size, $atime, $mtime, $ctime
-# $contain
-
-T_CONTAIN = Template("""<seed:contain rdf:resource="$base_uri#$object_id"/>
-    """)
-# $base_uri, $object_id
-
-T_FOOTER = """</rdf:RDF>"""
-
-# END: model template
 
 
 def safe_stat(path):
@@ -116,6 +44,8 @@ def read_tree(directory):
                 }
         }
 
+    progress = 1
+
     for (dirpath, dirnames, filenames) in tree:
 
         for dirname in dirnames:
@@ -133,6 +63,12 @@ def read_tree(directory):
 
             object_list[dirpath]['contain'].append(object_id)
 
+            progress += 1
+            if progress % 1024 is 0:
+                sys.stdout.write(
+                    "Traversed %d K objects\r" % int(progress >> 10))
+                sys.stdout.flush()
+
         for filename in filenames:
             object_id = str(uuid1(node_id))
             object_path = os.path.join(dirpath, filename)
@@ -147,6 +83,12 @@ def read_tree(directory):
                 }
 
             object_list[dirpath]['contain'].append(object_id)
+
+            progress += 1
+            if progress % 1024 is 0:
+                sys.stdout.write(
+                    "Traversed %d K objects\r" % int(progress >> 10))
+                sys.stdout.flush()
 
     return object_list
 
@@ -164,64 +106,113 @@ def xml_escape(text):
     return "".join(XML_ESCAPE_TABLE.get(c, c) for c in text)
 
 
-def main():
-    """mknode program"""
+# BEGIN: model template
+T_HEADER = Template(
+"""<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+  <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+  <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+  <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+  <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+<rdf:RDF
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:owl="http://www.w3.org/2002/07/owl#"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:terms="http://purl.org/dc/terms/"
+  xmlns:seed="$seed_base#"
+>
+  <rdf:Description rdf:about="$base_uri">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+    <owl:imports rdf:resource="$seed_base"/>
+    <owl:versionInfo rdf:datatype="&xsd;hexBinary">$version</owl:versionInfo>
+    <dc:created rdf:datatype="&xsd;dateTimeStamp">$created</dc:created>
+    <dc:date>2013-01-31</dc:date>
+    <rdfs:comment xml:lang="EN">SEED node ontology</rdfs:comment>
+    <terms:license rdf:datatype="&xsd;string">$license</terms:license>
+    <dc:creator>Shi.Zhan</dc:creator>
+  </rdf:Description>
+""")
+# $seed_base, $base_uri,
+# $version, $created, $license
 
-    print 'SEED directory importer'
+T_INDIVIDUAL = Template(
+"""
+  <rdf:Description rdf:about="$base_uri#$object_id">
+    <rdf:type rdf:resource="$seed_base#$object_type"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <seed:name rdf:datatype="&xsd;normalizedString">$name</seed:name>
+    <seed:origin rdf:datatype="&xsd;normalizedString">$origin</seed:origin>
+    <seed:mode rdf:datatype="&xsd;unsignedShort">$mode</seed:mode>
+    <seed:owner rdf:datatype="&xsd;unsignedShort">$owner</seed:owner>
+    <seed:group rdf:datatype="&xsd;unsignedShort">$group</seed:group>
+    <seed:size rdf:datatype="&xsd;unsignedLong">$size</seed:size>
+    <seed:atime rdf:datatype="&xsd;unsignedLong">$atime</seed:atime>
+    <seed:mtime rdf:datatype="&xsd;unsignedLong">$mtime</seed:mtime>
+    <seed:ctime rdf:datatype="&xsd;unsignedLong">$ctime</seed:ctime>
+    $contain
+  </rdf:Description>
+""")
+# $base_uri, $seed_base, $object_id, $object_type[Bucket|Object], $name, $origin
+# $mode, $owner, $group, $size, $atime, $mtime, $ctime
+# $contain
 
-    _init_logger()
+T_CONTAIN = Template("""<seed:contain rdf:resource="$base_uri#$object_id"/>
+    """)
+# $base_uri, $object_id
 
-    # check arguments
-    if len(sys.argv) > 1:
-        root_directory = sys.argv[1]
-    else:
-        print 'usage: <this script> <directory to import>'
-        exit(1)
+T_FOOTER = """</rdf:RDF>"""
 
-    root_directory = os.path.abspath(root_directory)
+# END: model template
 
-    if not os.path.exists(root_directory):
-        print 'directory not exist'
-        exit(1)
+# BEGIN: model constants
+LICENSE = \
+"""
+Copyright 2013 Shi.Zhan.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-    # prepare constants
-    seed_base = 'https://sites.google.com/site/ontology2013/seed.owl'
-    model_file = 'node.owl'
+    http://www.apache.org/licenses/LICENSE-2.0.
 
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing
+permissions and limitations under the License.
+"""
+
+SEED_BASE = 'https://sites.google.com/site/ontology2013/seed.owl'
+# END: model constants
+
+def write_model(object_list, model_file):
+    """write objects in list to model file"""
     (hostname, aliaslist, ipaddrlist) = \
         socket.gethostbyname_ex(socket.gethostname())
     ip_address = ipaddrlist[0]
+
     base_uri = 'http://' + ip_address + '/' + model_file
 
     created = time.strftime('%Y-%m-%d %H:%M:%S',
                 time.localtime(time.time())).encode('utf-8')
 
-    _SEED_LOG.info('base URI: %s' % base_uri)
-
-    _SEED_LOG.info('reading object list ...')
-
-    object_list = read_tree(root_directory)
-
-    object_total = len(object_list)
-
-    _SEED_LOG.info('%d objects read' % object_total)
-
-    _SEED_LOG.info('creating node model ...')
-
     model = open(model_file, 'w')
 
     header = T_HEADER.substitute(
-                seed_base=seed_base,
+                seed_base=SEED_BASE,
                 base_uri=base_uri,
                 version=VERSION,
                 created=created,
-                license=T_LICENSE
+                license=LICENSE
             )
 
     footer = T_FOOTER
 
     print >> model, header
 
+    object_total = len(object_list)
     progress = 0
 
     for path, i_object in object_list.iteritems():
@@ -246,7 +237,7 @@ def main():
 
         i_object_text = T_INDIVIDUAL.substitute(
             base_uri=base_uri,
-            seed_base=seed_base,
+            seed_base=SEED_BASE,
             object_id=i_object['id'],
             object_type=i_object['type'],
             name=xml_escape(i_object['name']),
@@ -271,7 +262,38 @@ def main():
 
     model.close()
 
-    _SEED_LOG.info('%d object individuals created in %s.' % (object_total, model_file))
+
+def main():
+    """mknode program"""
+
+    print 'SEED directory importer'
+
+    _init_logger()
+
+    # check arguments
+    if len(sys.argv) > 2:
+        root_directory = sys.argv[1]
+        model_file = sys.argv[2]
+    else:
+        print 'usage: %s <directory to import> <model file>' % sys.argv[0]
+        exit(1)
+
+    root_directory = os.path.abspath(root_directory)
+
+    if not os.path.exists(root_directory):
+        print 'directory not exist'
+        exit(1)
+
+    _SEED_LOG.info('reading object list ...')
+
+    object_list = read_tree(root_directory)
+
+    _SEED_LOG.info('creating node model ...')
+
+    write_model(object_list, model_file)
+
+    _SEED_LOG.info('%d object individuals created in %s.' % \
+        (len(object_list), model_file))
 
 
 if __name__ == '__main__':
