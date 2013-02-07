@@ -87,6 +87,8 @@ def stat(path):
         result = os.stat(path)
     except Exception, e:
         print 'stat error', e
+        result = \
+            (0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     finally:
         return result
 
