@@ -474,15 +474,19 @@ def init_model(root_directory, model_file):
         core_model = Graph()
         core_model.load(DEFAULT_CORE_MODEL)
 
-        version = ''
-        for value in core_model.objects(URIRef(SEED_BASE), OWL.versionInfo):
-            version = value
+        version = core_model.value(URIRef(SEED_BASE), OWL.versionInfo)
 
-        _SEED_LOG.info('core model version: %s' % version)
+        _SEED_LOG.info('core model version: [%s]' % version)
 
-        if version is not VERSION:
-            _SEED_LOG.error('version incompatible, need to regenerate.')
+        if not version == VERSION:
+            _SEED_LOG.error(
+                'incompatible to program version [%s], need to regenerate.' \
+                % VERSION)
+
             gen_core()
+
+        else:
+            _SEED_LOG.info('version compatible, proceed to node model creation.')
 
     else:
         _SEED_LOG.error('core model does not exist, need to generate.')
