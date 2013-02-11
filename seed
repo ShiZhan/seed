@@ -24,13 +24,13 @@ import sys
 if float("%d.%d" %(sys.version_info[0], sys.version_info[1])) < 2.7:
     sys.stderr.write("WARNING: Python below 2.6 need argparse.\n")
 
-import re
+import re, os
 import argparse
 
 from shell import Shell
 from server import Server
-from utils import _SEED_LOG, _init_logger, _init_root
-from utils import DEFAULT_ROOT, VERSION
+from model import DEFAULT_NODE_MODEL, init_model
+from utils import _SEED_LOG, _init_logger, VERSION
 
 def main():
     """SEED main program"""
@@ -62,14 +62,6 @@ def main():
         )
 
     parser.add_argument(
-        '-i', '--init',
-        action='store_true',
-        dest='initialize',
-        default=False,
-        help='initialize root on specified directory'
-        )
-
-    parser.add_argument(
         '-a', '--address',
         action='store',
         dest='ip',
@@ -87,11 +79,28 @@ def main():
         )
 
     parser.add_argument(
-        '-r', '--root',
+        '-i', '--init',
+        action='store_true',
+        dest='initialize',
+        default=False,
+        help='initialize models'
+        )
+
+    parser.add_argument(
+        '-d', '--dir',
         action='store',
         dest='root',
-        default=DEFAULT_ROOT,
-        help='load server on specified directory as root',
+        default=os.getcwd(),
+        help='specify root directory (use current directory as default) \
+            for creating node model',
+        )
+
+    parser.add_argument(
+        '-m', '--model',
+        action='store',
+        dest='model',
+        default=DEFAULT_NODE_MODEL,
+        help='load server on specified model file (node.owl)',
         )
 
     options = parser.parse_args()
@@ -112,7 +121,7 @@ def main():
     # which way to go ... start server or open cli or simply init then return?
     if options.initialize:
         # run the shell @ host
-        _init_root(options.root)
+        init_model(options.root, options.model)
 
     elif options.cli:
         # run the shell @ host
