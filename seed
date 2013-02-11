@@ -100,7 +100,7 @@ def main():
         action='store',
         dest='model',
         default=DEFAULT_NODE_MODEL,
-        help='load server on specified model file (node.owl)',
+        help='load server on specified model file (default: node.owl)',
         )
 
     options = parser.parse_args()
@@ -120,7 +120,7 @@ def main():
 
     # which way to go ... start server or open cli or simply init then return?
     if options.initialize:
-        # run the shell @ host
+        # initialize models
         init_model(options.root, options.model)
 
     elif options.cli:

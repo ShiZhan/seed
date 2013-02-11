@@ -441,26 +441,6 @@ def write_model(object_list, model_file):
     model.close()
 
 
-def gen_node(root_directory, model_file):
-    """generate node model by importing specified root directory."""
-    root_directory = os.path.abspath(root_directory)
-
-    if not os.path.exists(root_directory):
-        _SEED_LOG.error('directory not exist')
-        return
-
-    _SEED_LOG.info('reading object list ...')
-
-    object_list = read_tree(root_directory)
-
-    _SEED_LOG.info('creating node model ...')
-
-    write_model(object_list, model_file)
-
-    _SEED_LOG.info('%d object individuals created in %s.' % \
-        (len(object_list), model_file))
-
-
 def init_model(root_directory, model_file):
     """
     initialize models:
@@ -493,5 +473,22 @@ def init_model(root_directory, model_file):
 
         gen_core()
 
-    gen_node(root_directory, model_file)
+    # generate node model by importing specified root directory
+
+    root_directory = os.path.abspath(root_directory)
+
+    if not os.path.exists(root_directory):
+        _SEED_LOG.error('directory not exist')
+        return
+
+    _SEED_LOG.info('reading object list ...')
+
+    object_list = read_tree(root_directory)
+
+    _SEED_LOG.info('creating node model ...')
+
+    write_model(object_list, model_file)
+
+    _SEED_LOG.info('%d object individuals created in %s.' % \
+        (len(object_list), model_file))
 
