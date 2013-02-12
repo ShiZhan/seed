@@ -3,7 +3,7 @@
 
 """model -- SEED model definition, constant, API"""
 
-import sys, os, time, socket
+import sys, os, time
 from string import Template
 from uuid import uuid1, getnode
 
@@ -11,7 +11,7 @@ from rdflib.graph import Graph
 from rdflib.term import URIRef, Literal, BNode
 from rdflib.namespace import Namespace, ClosedNamespace, RDF, RDFS, OWL, XSD
 
-from utils import _SEED_LOG, VERSION
+from utils import _SEED_LOG, VERSION, DEFAULT_HOST
 
 
 # BEGIN: model constants
@@ -360,11 +360,8 @@ T_FOOTER = """</rdf:RDF>"""
 
 def write_model(object_list, model_file):
     """write objects in list to model file"""
-    (hostname, aliaslist, ipaddrlist) = \
-        socket.gethostbyname_ex(socket.gethostname())
-    ip_address = ipaddrlist[0]
 
-    base_uri = 'http://' + ip_address + '/' + model_file
+    base_uri = 'http://' + DEFAULT_HOST + '/' + model_file
 
     created = time.strftime('%Y-%m-%d %H:%M:%S',
                 time.localtime(time.time())).encode('utf-8')

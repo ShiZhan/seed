@@ -65,8 +65,8 @@ class S3Handler(object):
 
         _SEED_LOG.info('Server model: %s' % self.base_uri)
 
-        self.version  = str(
-            self.model.value(subject=self.base_uri, predicate=OWL.versionInfo))
+        self.version = \
+            self.model.value(subject=self.base_uri, predicate=OWL.versionInfo)
 
         _SEED_LOG.info('Server version: %s' % self.version)
 
