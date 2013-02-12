@@ -24,7 +24,7 @@ import sys
 if float("%d.%d" %(sys.version_info[0], sys.version_info[1])) < 2.7:
     sys.stderr.write("WARNING: Python below 2.6 need argparse.\n")
 
-import re, os, argparse
+import re, argparse
 
 from shell import Shell
 from server import Server

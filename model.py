@@ -213,13 +213,13 @@ def safe_stat(path):
         return result
 
 
+_NODE_ID = getnode()
+
 def read_tree(directory):
     """read directory tree, gather metadata into object_list."""
     tree = os.walk(directory)
 
-    node_id = getnode()
-
-    root_id = str(uuid1(node_id))
+    root_id = str(uuid1(_NODE_ID))
     root_name = os.path.basename(directory)
 
     object_list = \
@@ -239,7 +239,7 @@ def read_tree(directory):
     for (dirpath, dirnames, filenames) in tree:
 
         for dirname in dirnames:
-            object_id = str(uuid1(node_id))
+            object_id = str(uuid1(_NODE_ID))
             object_path = os.path.join(dirpath, dirname)
 
             object_list[object_path] = \
@@ -260,7 +260,7 @@ def read_tree(directory):
                 sys.stdout.flush()
 
         for filename in filenames:
-            object_id = str(uuid1(node_id))
+            object_id = str(uuid1(_NODE_ID))
             object_path = os.path.join(dirpath, filename)
 
             object_list[object_path] = \
@@ -430,7 +430,7 @@ def write_model(object_list, model_file):
 
         print >> model, i_object_text
 
-    print '\n' # CR after flush
+    print '\r' # CR after flush
 
     print >> model, footer
 
@@ -488,3 +488,13 @@ def init_model(root_directory, model_file):
     SEED_LOG.info('%d object individuals created in %s.' % \
         (len(object_list), model_file))
 
+
+def create_individual(model, i_base_uri, i_type):
+    """declare individual and assign type"""
+    i_uri = i_base_uri + '#' + str(uuid1(_NODE_ID))
+    i_node = URIRef(i_uri)
+
+    model.add((i_node, RDF.type, OWL.NamedIndividual))
+    model.add((i_node, RDF.type, i_type))
+
+    return i_node
