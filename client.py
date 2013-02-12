@@ -11,8 +11,8 @@ from Pyro4 import config as PyroConfig
 
 from hashring import HashRing
 
-from log import _SEED_LOG
-from netutil import DEFAULT_HMAC_KEY, DEFAULT_HOST, DEFAULT_PORT, _node_uri
+from log import SEED_LOG
+from netutil import DEFAULT_HMAC_KEY, DEFAULT_HOST, DEFAULT_PORT, node_uri
 
 
 class Client(Proxy):
@@ -21,14 +21,14 @@ class Client(Proxy):
 
     def __init__(self, ip_address=DEFAULT_HOST, port=DEFAULT_PORT):
         PyroConfig.HMAC_KEY = DEFAULT_HMAC_KEY
-        Proxy.__init__(self, _node_uri(ip_address, port))
+        Proxy.__init__(self, node_uri(ip_address, port))
 
     # local functions
 
     def put(self, bucket, key, file_name):
         """put local file to remote bucket:key"""
 
-        _SEED_LOG.info('put %s %s %s' % (bucket, key, file_name))
+        SEED_LOG.info('put %s %s %s' % (bucket, key, file_name))
 
         # 1. write the file to local cache (use memory as many as possible)
         # 2. contact server to decide how to do striping and encoding
@@ -43,7 +43,7 @@ class Client(Proxy):
     def get(self, bucket, key):
         """get remote bucket:key to local file"""
 
-        _SEED_LOG.info('get %s %s' % (bucket, key))
+        SEED_LOG.info('get %s %s' % (bucket, key))
 
         # 1. contact server to decide where to get the chunks and do decoding
         #    in the form of a dict, which is then cached in client

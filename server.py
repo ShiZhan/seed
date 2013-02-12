@@ -18,7 +18,7 @@ from model import URIRef, Literal, BNode
 from model import RDF, RDFS, OWL, XSD
 from model import SEED_BASE
 
-from log import _SEED_LOG
+from log import SEED_LOG
 from netutil import DEFAULT_ID, DEFAULT_HMAC_KEY
 
 
@@ -34,12 +34,12 @@ class Server(Daemon):
 
         uri = self.register(S3Handler(model_file), DEFAULT_ID)
 
-        _SEED_LOG.info('Server URI: %s' % uri)
+        SEED_LOG.info('Server URI: %s' % uri)
 
     def run(self):
         """enter server loop"""
 
-        _SEED_LOG.info('Request loop ...')
+        SEED_LOG.info('Request loop ...')
 
         self.requestLoop()
 
@@ -57,21 +57,21 @@ class S3Handler(object):
 
         except Exception, e:
 
-            _SEED_LOG.error('Loading Exception: %s' % e)
+            SEED_LOG.error('Loading Exception: %s' % e)
 
-            _SEED_LOG.info('try "seed -i" to reinitialize model')
+            SEED_LOG.info('try "seed -i" to reinitialize model')
 
             raise e
 
         self._base_uri = \
             self._model.value(predicate=RDF.type, object=OWL.Ontology)
 
-        _SEED_LOG.info('Server model: %s' % self._base_uri)
+        SEED_LOG.info('Server model: %s' % self._base_uri)
 
         self._version = \
             self._model.value(subject=self._base_uri, predicate=OWL.versionInfo)
 
-        _SEED_LOG.info('Server version: %s' % self._version)
+        SEED_LOG.info('Server version: %s' % self._version)
 
     # s3-like functions
 

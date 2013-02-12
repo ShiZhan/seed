@@ -3,22 +3,22 @@
 
 """SEED log functions
 
-_SEED_LOG:    Global logger for internal use
-_init_logger: Configure global logger
+SEED_LOG:    Global logger for internal use
+init_logger: Configure global logger
 """
 
 import logging
 
 # create logger
 
-_SEED_LOG = logging.getLogger('SEED')
+SEED_LOG = logging.getLogger('SEED')
 
-def _init_logger():
+def init_logger():
     """configure global logger"""
 
     # set level
 
-    _SEED_LOG.setLevel(logging.DEBUG)
+    SEED_LOG.setLevel(logging.DEBUG)
 
     # create console handler and set level to debug
 
@@ -37,4 +37,4 @@ def _init_logger():
 
     # add console_handler to logger
 
-    _SEED_LOG.addHandler(console_handler)
+    SEED_LOG.addHandler(console_handler)

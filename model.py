@@ -11,7 +11,7 @@ from rdflib.graph import Graph
 from rdflib.term import URIRef, Literal, BNode
 from rdflib.namespace import Namespace, ClosedNamespace, RDF, RDFS, OWL, XSD
 
-from log import _SEED_LOG
+from log import SEED_LOG
 from util import VERSION
 from netutil import DEFAULT_HOST
 
@@ -95,7 +95,7 @@ def set_property(model, (sub, pre, obj),
 def gen_core():
     """generate SEED core model, the base import of all SEED node models."""
 
-    _SEED_LOG.info('creating core model ...')
+    SEED_LOG.info('creating core model ...')
 
     core = Graph()
 
@@ -196,7 +196,7 @@ def gen_core():
     # Serialize the store as RDF/XML to file.
     core.serialize(DEFAULT_CORE_MODEL)
 
-    _SEED_LOG.info("produced %d triples in %s." % \
+    SEED_LOG.info("produced %d triples in %s." % \
         (len(core), DEFAULT_CORE_MODEL))
 
 
@@ -445,27 +445,27 @@ def init_model(root_directory, model_file):
     3. generate node model file based on the content of root_directory.
     """
     if os.path.exists(DEFAULT_CORE_MODEL):
-        _SEED_LOG.info('load core model')
+        SEED_LOG.info('load core model')
 
         core_model = Graph()
         core_model.load(DEFAULT_CORE_MODEL)
 
         version = core_model.value(URIRef(SEED_BASE), OWL.versionInfo)
 
-        _SEED_LOG.info('core model version: [%s]' % version)
+        SEED_LOG.info('core model version: [%s]' % version)
 
         if not version == VERSION:
-            _SEED_LOG.error(
+            SEED_LOG.error(
                 'incompatible to program version [%s], need to regenerate.' \
                 % VERSION)
 
             gen_core()
 
         else:
-            _SEED_LOG.info('version compatible')
+            SEED_LOG.info('version compatible')
 
     else:
-        _SEED_LOG.error('core model does not exist, need to generate.')
+        SEED_LOG.error('core model does not exist, need to generate.')
 
         gen_core()
 
@@ -474,17 +474,17 @@ def init_model(root_directory, model_file):
     root_directory = os.path.abspath(root_directory)
 
     if not os.path.exists(root_directory):
-        _SEED_LOG.error('directory not exist')
+        SEED_LOG.error('directory not exist')
         return
 
-    _SEED_LOG.info('reading object list ...')
+    SEED_LOG.info('reading object list ...')
 
     object_list = read_tree(root_directory)
 
-    _SEED_LOG.info('creating node model ...')
+    SEED_LOG.info('creating node model ...')
 
     write_model(object_list, model_file)
 
-    _SEED_LOG.info('%d object individuals created in %s.' % \
+    SEED_LOG.info('%d object individuals created in %s.' % \
         (len(object_list), model_file))
 

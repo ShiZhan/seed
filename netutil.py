@@ -7,7 +7,7 @@ DEFAULT_HOST: Get ip address from host configuration
 DEFAULT_PORT: Default port
 DEFAULT_ID:   ID for personalize RPC connection
 DEFAULT_HMAC_KEY: Key for RPC connection without name server 
-_node_uri:    Generate node URI for Pyro4 object using ip, port and DEFAULT_ID
+node_uri: Generate node URI for Pyro4 object using ip, port and DEFAULT_ID
 is_valid_ipv4_address, is_valid_ipv6_address: Verify IP address
 """
 
@@ -25,7 +25,7 @@ DEFAULT_PORT = 10001
 DEFAULT_ID = 'SEED'
 DEFAULT_HMAC_KEY = 'SEED indentifier'
 
-def _node_uri(ip_address, port, node_id=DEFAULT_ID):
+def node_uri(ip_address, port, node_id=DEFAULT_ID):
     """Use ip address, port and (optional) node id to generate Pyro URI,
     create connection without Pyro4 name server"""
 

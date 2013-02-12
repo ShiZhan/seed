@@ -29,13 +29,14 @@ import re, os, argparse
 from shell import Shell
 from server import Server
 from model import DEFAULT_NODE_MODEL, init_model
-from log import _SEED_LOG, _init_logger
-from util import VERSION
+from log import SEED_LOG, init_logger
+from util import VERSION, DEFAULT_ROOT
 from netutil import DEFAULT_HOST
 
 def main():
     """SEED main program"""
-    _init_logger()
+
+    init_logger()
 
     parser = argparse.ArgumentParser(
         description='Storage based on "Extemporal Ensemble" Devices'
@@ -91,7 +92,7 @@ def main():
         '-d', '--dir',
         action='store',
         dest='root_dir',
-        default=os.getcwd(),
+        default=DEFAULT_ROOT,
         help='specify root directory (use current directory as default) \
             for creating node model',
         )
@@ -127,14 +128,14 @@ def main():
 
     elif options.cli:
         # run the shell @ host
-        _SEED_LOG.info('Opening command line interface on ip %s port %d ...' %
+        SEED_LOG.info('Opening command line interface on ip %s port %d ...' %
                        (options.ip, options.port))
 
         Shell(options.ip, options.port).cmdloop()
 
     elif options.server:
         # run the server on specified ip, port and root directory
-        _SEED_LOG.info('Serving on ip %s port %d with model file %s ...' %
+        SEED_LOG.info('Serving on ip %s port %d with model file %s ...' %
                        (options.ip, options.port, options.model_file))
 
         Server(options.ip, options.port, options.model_file).run()

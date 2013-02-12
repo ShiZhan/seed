@@ -36,5 +36,9 @@ def _version():
 
     return version
 
+
 # program version
 VERSION = _version()
+
+# default root
+DEFAULT_ROOT = os.getcwd()
