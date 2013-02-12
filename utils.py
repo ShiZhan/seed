@@ -10,9 +10,10 @@ Initialize: Initialize root directory and '.seed' bucket for storing meta data
 NodeURI:    Generate node URI for Pyro4 object using ip, port and DefaultID
 """
 
+import logging
 import os
 import time
-import logging
+import socket
 
 # create logger
 
@@ -78,30 +79,6 @@ def _version():
 VERSION = _version()
 
 
-# default root directory
-
-DEFAULT_ROOT = os.path.abspath(os.path.join(os.getcwd(), 'storage'))
-
-
-def _init_root(root):
-    """init SEED root"""
-
-    seed_meta_path = os.path.join(root, '.seed')
-    if os.path.exists(seed_meta_path):
-        _SEED_LOG.warn('already initialized.')
-    else:
-
-        os.makedirs(seed_meta_path)
-
-        # setup/update version in self.directory+'/.seed/version'
-
-        version_file_name = seed_meta_path + '/version'
-        with open(version_file_name, 'w') as version_file:
-            version_file.write(VERSION)
-
-    return
-
-
 DEFAULT_HOST = '127.0.0.1'
 DEFAULT_PORT = 10001
 
@@ -115,4 +92,24 @@ def _node_uri(ip_address, port, node_id=DEFAULT_ID):
 
     return 'PYRO:' + node_id + '@' + ip_address + ':' + str(port)
 
+def is_valid_ipv4_address(ip_address):
+    try:
+        addr= socket.inet_pton(socket.AF_INET, ip_address)
+    except AttributeError: # no inet_pton here, sorry
+        try:
+            addr= socket.inet_aton(ip_address)
+        except socket.error:
+            return False
+        return ip_address.count('.') == 3
+    except socket.error: # not a valid address
+        return False
+
+    return True
+
+def is_valid_ipv6_address(ip_address):
+    try:
+        addr= socket.inet_pton(socket.AF_INET6, ip_address)
+    except socket.error: # not a valid address
+        return False
+    return True
 

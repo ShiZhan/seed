@@ -11,7 +11,10 @@ from rdflib.graph import Graph
 from rdflib.term import URIRef, Literal, BNode
 from rdflib.namespace import Namespace, ClosedNamespace, RDF, RDFS, OWL, XSD
 
-from utils import _SEED_LOG, _init_logger, VERSION
+from utils import _SEED_LOG, VERSION
+
+
+# BEGIN: model constants
 
 # http://dublincore.org/documents/dc-rdf/
 DC_URI      = 'http://purl.org/dc/elements/1.1/'
@@ -36,6 +39,24 @@ SEED = ClosedNamespace(
 
 DEFAULT_CORE_MODEL = 'seed.owl'
 DEFAULT_NODE_MODEL = 'node.owl'
+
+LICENSE = \
+"""
+Copyright 2013 Shi.Zhan.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0.
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing
+permissions and limitations under the License.
+"""
+
+# END: model constants
 
 
 def set_property(model, (sub, pre, obj),
@@ -103,17 +124,7 @@ def gen_core():
                             time.localtime(time.time())).encode('utf-8'),
                         datatype=XSD.dateTimeStamp)
             ))
-    core.add((core.base, TERMS.license, Literal('Copyright 2013 Shi.Zhan.'
-        ' Licensed under the Apache License, Version 2.0 (the "License");'
-        ' you may not use this file except in compliance with the License.'
-        ' You may obtain a copy of the License at\n\n'
-        '   http://www.apache.org/licenses/LICENSE-2.0.\n\n'
-        ' Unless required by applicable law or agreed to in writing,'
-        ' software distributed under the License is distributed on'
-        ' an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,'
-        ' either express or implied. See the License for the specific language'
-        ' governing permissions and limitations under the License.',
-        datatype=XSD.string)))
+    core.add((core.base, TERMS.license, Literal(LICENSE, datatype=XSD.string)))
 
     # use program version as model version, recording the origin of model.
     core.add((core.base, OWL.versionInfo,
@@ -183,7 +194,8 @@ def gen_core():
     # Serialize the store as RDF/XML to file.
     core.serialize(DEFAULT_CORE_MODEL)
 
-    _SEED_LOG.info("produced %d triples in %s." % (len(core), DEFAULT_CORE_MODEL))
+    _SEED_LOG.info("produced %d triples in %s." % \
+        (len(core), DEFAULT_CORE_MODEL))
 
 
 def safe_stat(path):
@@ -285,6 +297,7 @@ def xml_escape(text):
 
 
 # BEGIN: model template
+
 T_HEADER = Template(
 """<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE rdf:RDF [
@@ -345,24 +358,6 @@ T_FOOTER = """</rdf:RDF>"""
 
 # END: model template
 
-# BEGIN: model constants
-LICENSE = \
-"""
-Copyright 2013 Shi.Zhan.
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0.
-
-Unless required by applicable law or agreed to in writing,
-software distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing
-permissions and limitations under the License.
-"""
-# END: model constants
-
 def write_model(object_list, model_file):
     """write objects in list to model file"""
     (hostname, aliaslist, ipaddrlist) = \
@@ -403,6 +398,7 @@ def write_model(object_list, model_file):
                 "Generating progress: %d%%\r" % int(100*progress/object_total))
             sys.stdout.flush()
 
+        # build clause for object property 'contain'
         i_object_contain = ''
 
         if not len(i_object['contain']) == 0:
@@ -410,6 +406,7 @@ def write_model(object_list, model_file):
                 i_object_contain += T_CONTAIN.substitute(
                     base_uri=base_uri, object_id=subobject_id)
 
+        # build clause for data properties, with 'contain', fill in individual
         (mode, ino, dev, nlink, uid, gid, size, atime, mtime, ctime) \
             = i_object['stat']
 
@@ -466,7 +463,7 @@ def init_model(root_directory, model_file):
             gen_core()
 
         else:
-            _SEED_LOG.info('version compatible, proceed to node model creation.')
+            _SEED_LOG.info('version compatible')
 
     else:
         _SEED_LOG.error('core model does not exist, need to generate.')

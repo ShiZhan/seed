@@ -24,8 +24,7 @@ import sys
 if float("%d.%d" %(sys.version_info[0], sys.version_info[1])) < 2.7:
     sys.stderr.write("WARNING: Python below 2.6 need argparse.\n")
 
-import re, os
-import argparse
+import re, os, argparse
 
 from shell import Shell
 from server import Server
@@ -79,7 +78,7 @@ def main():
         )
 
     parser.add_argument(
-        '-i', '--init',
+        '-i', '--initialize',
         action='store_true',
         dest='initialize',
         default=False,
@@ -89,7 +88,7 @@ def main():
     parser.add_argument(
         '-d', '--dir',
         action='store',
-        dest='root',
+        dest='root_dir',
         default=os.getcwd(),
         help='specify root directory (use current directory as default) \
             for creating node model',
@@ -98,7 +97,7 @@ def main():
     parser.add_argument(
         '-m', '--model',
         action='store',
-        dest='model',
+        dest='model_file',
         default=DEFAULT_NODE_MODEL,
         help='load server on specified model file (default: node.owl)',
         )
@@ -116,24 +115,27 @@ def main():
     if not (valid_ip and valid_port):
         print "invalid parameter, "\
               "should be as '-a 127.0.0.1 -p 10001 (between 1000 and 65535)'."
+
         exit(1)
 
     # which way to go ... start server or open cli or simply init then return?
     if options.initialize:
         # initialize models
-        init_model(options.root, options.model)
+        init_model(options.root_dir, options.model_file)
 
     elif options.cli:
         # run the shell @ host
         _SEED_LOG.info('Opening command line interface on ip %s port %d ...' %
                        (options.ip, options.port))
+
         Shell(options.ip, options.port).cmdloop()
 
     elif options.server:
         # run the server on specified ip, port and root directory
-        _SEED_LOG.info('Serving on ip %s port %d root %s ...' %
-                       (options.ip, options.port, options.root))
-        Server(options.ip, options.port, options.root).run()
+        _SEED_LOG.info('Serving on ip %s port %d with model file %s ...' %
+                       (options.ip, options.port, options.model_file))
+
+        Server(options.ip, options.port, options.model_file).run()
 
     else:
         print "either start server (-S) or enter CLI (-C), "\

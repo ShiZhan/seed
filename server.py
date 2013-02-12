@@ -13,27 +13,33 @@ from datetime import datetime
 from Pyro4.core import Daemon
 from Pyro4 import config as PyroConfig
 
-from utils import _init_root, _SEED_LOG
-from utils import DEFAULT_ID, DEFAULT_HMAC_KEY
+from model import Graph
+from model import URIRef, Literal, BNode
+from model import RDF, RDFS, OWL, XSD
+from model import SEED_BASE
+
+from utils import _SEED_LOG, DEFAULT_ID, DEFAULT_HMAC_KEY
 
 
 class Server(Daemon):
 
     """XML RPC Server for SEED"""
 
-    def __init__(self, ip_address, port, root_directory):
+    def __init__(self, ip_address, port, model_file):
         PyroConfig.HMAC_KEY = DEFAULT_HMAC_KEY
         Daemon.__init__(self, host=ip_address, port=port)
 
         # register(Obj, ID) 2nd parameter 'ID' cannot be empty
 
-        uri = self.register(S3Handler(root_directory), DEFAULT_ID)
-        _SEED_LOG.info('URI: %s' % uri)
+        uri = self.register(S3Handler(model_file), DEFAULT_ID)
+
+        _SEED_LOG.info('Server URI: %s' % uri)
 
     def run(self):
         """enter server loop"""
 
         _SEED_LOG.info('Request loop ...')
+
         self.requestLoop()
 
 
@@ -41,11 +47,28 @@ class S3Handler(object):
 
     """SEED handler class for remote invoking"""
 
-    def __init__(self, root_directory):
-        self.directory = os.path.abspath(root_directory)
-        if not os.path.exists(os.path.join(self.directory, '.seed')):
-            _SEED_LOG.info('root not initiailized, prepare now...')
-            _init_root(self.directory)
+    def __init__(self, model_file):
+        # try to load node model
+        self.model = Graph()
+
+        try:
+            self.model.load(model_file)
+        except Exception, e:
+            _SEED_LOG.error('Loading Exception: %s' % e)
+
+            _SEED_LOG.info('try "seed -i" to reinitialize model')
+
+            raise e
+
+        self.base_uri = \
+            self.model.value(predicate=RDF.type, object=OWL.Ontology)
+
+        _SEED_LOG.info('Server model: %s' % self.base_uri)
+
+        self.version  = str(
+            self.model.value(subject=self.base_uri, predicate=OWL.versionInfo))
+
+        _SEED_LOG.info('Server version: %s' % self.version)
 
     # s3-like functions
 
@@ -139,14 +162,10 @@ class S3Handler(object):
     # system functions
 
     def version(self):
-        path = os.path.abspath(os.path.join(self.directory, '.seed/version'))
-        if not path.startswith(self.directory) or not os.path.isfile(path):
-            response = 'error while getting version info'
-        else:
-            response = open(path).read()
-
-        return response
+        """show server version"""
+        return self.version
 
     def status(self):
-        return 'not implemented'
+        """show server status"""
+        return 'OK'
 

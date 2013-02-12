@@ -29,10 +29,8 @@ class Shell(Cmd):
         Cmd.__init__(self)
         self.prompt = '[' + ip_address + ':' + str(port) + ']>> '
         self.client = Client(ip_address=ip_address, port=port)
-        if 200 == self.client.check_bucket_exists('.seed'):
-            print 'remote node initialized'
-        else:
-            print 'remote node not initialized'
+        result = self.client.status()
+        print 'server report: %s' % result
 
     # def __del__(self):
     #     self.client.__del__()
