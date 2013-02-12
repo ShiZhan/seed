@@ -32,7 +32,7 @@ SEED = ClosedNamespace(
     uri = URIRef(SEED_URI),
     terms =
         [
-            "Object", "Bucket", "SimpleObject", "CompositeObject",
+            "Object", "Bucket", "SimpleObject", "CompositeObject", "Root",
             "contain", "stripe", "replicate", "redundancy",
             "name", "origin",
             "mode", "ctime", "mtime", "atime", "length", "size", "uid", "gid"
@@ -144,6 +144,8 @@ def gen_core():
     core.add((SEED.SimpleObject, RDFS.subClassOf, SEED.Object))
     core.add((SEED.CompositeObject, RDF.type, OWL.Class))
     core.add((SEED.CompositeObject, RDFS.subClassOf, SEED.SimpleObject))
+    core.add((SEED.Root, RDF.type, OWL.Class))
+    core.add((SEED.Root, RDFS.subClassOf, SEED.Bucket))
 
     core.add((SEED.Bucket, OWL.disjointWith, SEED.SimpleObject))
 
@@ -228,7 +230,7 @@ def read_tree(directory):
                 {
                     'id':   root_id,
                     'name': root_name,
-                    'type': 'Bucket',
+                    'type': 'Root',
                     'contain': [],
                     'stat': safe_stat(directory)
                 }

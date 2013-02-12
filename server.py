@@ -15,7 +15,7 @@ from Pyro4 import config as PyroConfig
 
 from model import Graph
 from model import URIRef, Literal, BNode
-from model import RDF, RDFS, OWL, XSD
+from model import RDF, RDFS, OWL, XSD, SEED
 from model import SEED_BASE
 
 from log import SEED_LOG
@@ -72,6 +72,11 @@ class S3Handler(object):
             self._model.value(subject=self._base_uri, predicate=OWL.versionInfo)
 
         SEED_LOG.info('Server version: %s' % self._version)
+
+        self._cwd = \
+            self._model.value(predicate=RDF.type, object=SEED.Root)
+
+        SEED_LOG.info('Server root: %s' % self._cwd)
 
     # s3-like functions
 
