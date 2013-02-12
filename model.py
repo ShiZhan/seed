@@ -11,7 +11,9 @@ from rdflib.graph import Graph
 from rdflib.term import URIRef, Literal, BNode
 from rdflib.namespace import Namespace, ClosedNamespace, RDF, RDFS, OWL, XSD
 
-from utils import _SEED_LOG, VERSION, DEFAULT_HOST
+from log import _SEED_LOG
+from util import VERSION
+from netutil import DEFAULT_HOST
 
 
 # BEGIN: model constants

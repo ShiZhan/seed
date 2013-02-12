@@ -29,7 +29,9 @@ import re, os, argparse
 from shell import Shell
 from server import Server
 from model import DEFAULT_NODE_MODEL, init_model
-from utils import _SEED_LOG, _init_logger, VERSION
+from log import _SEED_LOG, _init_logger
+from util import VERSION
+from netutil import DEFAULT_HOST
 
 def main():
     """SEED main program"""
@@ -64,7 +66,7 @@ def main():
         '-a', '--address',
         action='store',
         dest='ip',
-        default='127.0.0.1',
+        default=DEFAULT_HOST,
         help='connect/create server on specified ip address',
         )
 

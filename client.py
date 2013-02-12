@@ -11,8 +11,8 @@ from Pyro4 import config as PyroConfig
 
 from hashring import HashRing
 
-from utils import _SEED_LOG, _node_uri
-from utils import DEFAULT_HMAC_KEY, DEFAULT_HOST, DEFAULT_PORT
+from log import _SEED_LOG
+from netutil import DEFAULT_HMAC_KEY, DEFAULT_HOST, DEFAULT_PORT, _node_uri
 
 
 class Client(Proxy):

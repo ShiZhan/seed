@@ -18,7 +18,8 @@ from model import URIRef, Literal, BNode
 from model import RDF, RDFS, OWL, XSD
 from model import SEED_BASE
 
-from utils import _SEED_LOG, DEFAULT_ID, DEFAULT_HMAC_KEY
+from log import _SEED_LOG
+from netutil import DEFAULT_ID, DEFAULT_HMAC_KEY
 
 
 class Server(Daemon):
@@ -49,26 +50,28 @@ class S3Handler(object):
 
     def __init__(self, model_file):
         # try to load node model
-        self.model = Graph()
+        self._model = Graph()
 
         try:
-            self.model.load(model_file)
+            self._model.load(model_file)
+
         except Exception, e:
+
             _SEED_LOG.error('Loading Exception: %s' % e)
 
             _SEED_LOG.info('try "seed -i" to reinitialize model')
 
             raise e
 
-        self.base_uri = \
-            self.model.value(predicate=RDF.type, object=OWL.Ontology)
+        self._base_uri = \
+            self._model.value(predicate=RDF.type, object=OWL.Ontology)
 
-        _SEED_LOG.info('Server model: %s' % self.base_uri)
+        _SEED_LOG.info('Server model: %s' % self._base_uri)
 
-        self.version = \
-            self.model.value(subject=self.base_uri, predicate=OWL.versionInfo)
+        self._version = \
+            self._model.value(subject=self._base_uri, predicate=OWL.versionInfo)
 
-        _SEED_LOG.info('Server version: %s' % self.version)
+        _SEED_LOG.info('Server version: %s' % self._version)
 
     # s3-like functions
 
@@ -163,7 +166,7 @@ class S3Handler(object):
 
     def version(self):
         """show server version"""
-        return self.version
+        return self._version
 
     def status(self):
         """show server status"""
