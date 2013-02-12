@@ -3,7 +3,8 @@
 
 """SEED program utility helper classes and functions
 
-VERSION:      Check code version from local repository
+VERSION:     Get code version from local repository
+WORKING_DIR: Current working directory
 """
 
 import os
@@ -41,4 +42,4 @@ def _version():
 VERSION = _version()
 
 # default root
-DEFAULT_ROOT = os.getcwd()
+WORKING_DIR = os.getcwd()

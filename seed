@@ -30,7 +30,7 @@ from shell import Shell
 from server import Server
 from model import DEFAULT_NODE_MODEL, init_model
 from log import SEED_LOG, init_logger
-from util import VERSION, DEFAULT_ROOT
+from util import VERSION, WORKING_DIR
 from netutil import DEFAULT_HOST
 
 def main():
@@ -92,7 +92,7 @@ def main():
         '-d', '--dir',
         action='store',
         dest='root_dir',
-        default=DEFAULT_ROOT,
+        default=WORKING_DIR,
         help='specify root directory (use current directory as default) \
             for creating node model',
         )
