@@ -80,24 +80,16 @@ class S3Handler(object):
 
     # s3-like functions
 
-    def list_all_my_buckets(self):
-        names = os.listdir(self.directory)
-        buckets = []
-        for name in names:
-            path = os.path.join(self.directory, name)
-            info = os.stat(path)
-            buckets.append('Name: ' + name + ' CreationDate: '
-                           + datetime.utcfromtimestamp(info.st_ctime).ctime())
-        return '\n'.join(buckets)
-
-    def check_bucket_exists(self, bucket):
-        path = os.path.abspath(os.path.join(self.directory, bucket))
-        if not path.startswith(self.directory) or not os.path.isdir(path):
-            response = 404
-        else:
-            response = 200
-
-        return response
+    def open_bucket(self, bucket):
+        # names = os.listdir(self.directory)
+        # buckets = []
+        # for name in names:
+        #     path = os.path.join(self.directory, name)
+        #     info = os.stat(path)
+        #     buckets.append('Name: ' + name + ' CreationDate: '
+        #                    + datetime.utcfromtimestamp(info.st_ctime).ctime())
+        # return '\n'.join(buckets)
+        return
 
     def create_bucket(self, bucket):
         path = os.path.abspath(os.path.join(self.directory, bucket))
@@ -121,23 +113,26 @@ class S3Handler(object):
 
         return response
 
-    def list_bucket(self, bucket):
+    def list_bucket(self, bucket=''):
+        object_names = []
+        # if not bucket == '':
+        #     if not head(bucket) == 404:
+
         path = os.path.abspath(os.path.join(self.directory, bucket))
         if not path.startswith(self.directory) or not os.path.isdir(path):
             return ''
-        object_names = []
         for (root, dirs, files) in os.walk(path):
             for file_name in files:
                 object_names.append(os.path.join(root, file_name))
 
         return '\n'.join(object_names)
 
-    def head(self, bucket, key):
-        path = os.path.abspath(os.path.join(self.directory, bucket, key))
-        if not path.startswith(self.directory) or not os.path.isfile(path):
-            response = 404
-        else:
-            response = 200
+    def head(self, bucket, key=''):
+        # path = os.path.abspath(os.path.join(self.directory, bucket, key))
+        # if not path.startswith(self.directory) or not os.path.isfile(path):
+        #     response = 404
+        # else:
+        #     response = 200
 
         return response
 

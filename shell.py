@@ -52,7 +52,7 @@ class Shell(Cmd):
         """list objects"""
 
         if '' == line:
-            print self.client.list_all_my_buckets()
+            print self.client.list_bucket()
         else:
             parameters = line.split()
             if 1 == len(parameters):
