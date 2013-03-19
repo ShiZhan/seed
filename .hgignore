@@ -1,6 +1,0 @@
-syntax: glob
-*.pyc
-storage/
-test_data/
-catalog-v001.xml
-*.owl
